@@ -19,13 +19,13 @@ class LoginController extends GetxController {
   void onInit() {
     emailEditController = TextEditingController();
     passwordEditController = TextEditingController();
-    checkuser();
+    // checkuser();
     super.onInit();
   }
 
   checkuser() async {
-    var user = ShredPref.geteuser();
-    if (user != null) {
+    var token = ShredPref.gettoken();
+    if (token != null) {
       Get.offAllNamed(GetRoutes.home);
     }
   }
@@ -61,18 +61,21 @@ class LoginController extends GetxController {
   // }
 
   login() async {
-    var response = await http.post(Uri.parse(baseUrl + 'login'), body: {
-      "email": emailEditController.text,
-      "password": passwordEditController.text,
-    });
+    UserLoginModel loginModel = UserLoginModel(
+        email: emailEditController.text, password: passwordEditController.text);
+    var response = await http.post(Uri.parse('$baseUrl/api/app/login'),
+        body: jsonEncode(loginModel),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        });
     var res = await jsonDecode(response.body);
-    if (res['sucsses']) {
-      customsnackbar("signup sucsses", res['message'], "sucess");
+    if (response.statusCode == 200) {
       //اسم اليوزر بالجيسون يلي بين قوسين القصد
       UserLoginModel user = userLoginModelFromJson(res['user']);
       await ShredPref.storeuser(jsonEncode(user));
-
-      Get.offAllNamed(GetRoutes.home);
+      customsnackbar("signup sucsses", res['message'], "sucess")
+          .then(Get.offAllNamed(GetRoutes.home));
     } else {
       customsnackbar("signup Error", res['message'], "error");
     }

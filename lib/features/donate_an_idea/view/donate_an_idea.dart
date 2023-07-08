@@ -1,12 +1,13 @@
-import 'package:alnamaa_charity/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/widget/text_form_field.dart';
+import '../controller/donate_an_idea_controller.dart';
 
 class DonateAnIdea extends StatelessWidget {
   DonateAnIdea({super.key});
   final formKey = GlobalKey<FormState>();
+  final DonateAnIdeaController cont = Get.put(DonateAnIdeaController());
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,8 @@ class DonateAnIdea extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
             toolbarHeight: 80,
-            actions: [
-              const CircleAvatar(
+            actions: const [
+              CircleAvatar(
                 child: Text("H"),
               ),
             ],
@@ -36,9 +37,8 @@ class DonateAnIdea extends StatelessWidget {
                   Icons.backspace_outlined,
                   color: Colors.cyan[600],
                 ))),
-        body: Container(
-          height: MediaQuery.sizeOf(context).height,
-          child: Form(
+        body: GetBuilder<DonateAnIdeaController>(builder: (controller) {
+          return Form(
             key: formKey,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -49,8 +49,9 @@ class DonateAnIdea extends StatelessWidget {
                     "شاركنا بعض الأفكار ",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const TextFormFieldWidget(
+                  TextFormFieldWidget(
                     hint: "عنوان الفكرة  ",
+                    controller: controller.ideatitleEditController,
                     label: "",
                     keyboaredtype: TextInputType.number,
                   ),
@@ -61,17 +62,20 @@ class DonateAnIdea extends StatelessWidget {
                       }
                       return null;
                     },
+                    controller: controller.ideaEditController,
                     hint: "ادخل الفكرة مع بعض الشرح ... ",
                     label: "",
                     keyboaredtype: TextInputType.multiline,
                     maxlines: 15,
                   ),
-                  const TextFormFieldWidget(
+                  TextFormFieldWidget(
+                    controller: controller.costEditController,
                     hint: "الكلفة التقديرية المتوقعة",
                     label: "",
                     keyboaredtype: TextInputType.number,
                   ),
-                  const TextFormFieldWidget(
+                  TextFormFieldWidget(
+                    controller: controller.profitEditController,
                     hint: "العوائد التقديرية المتوقعة",
                     label: "",
                     keyboaredtype: TextInputType.number,
@@ -86,8 +90,7 @@ class DonateAnIdea extends StatelessWidget {
                                 backgroundColor: Colors.cyan[600]),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                customsnackbar(
-                                    "", "شكراُ على المشاركة", "success");
+                                controller.donateanidea();
                               }
                             },
                             child: const Text("إرسال")),
@@ -107,8 +110,8 @@ class DonateAnIdea extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

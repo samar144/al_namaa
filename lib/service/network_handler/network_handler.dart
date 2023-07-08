@@ -23,7 +23,7 @@ class NetworkHandler {
   }
 
   static Uri buildurl(String endpoint) {
-    String host = baseurl;
+    String host = baseUrl;
     final apipath = host + endpoint;
     return Uri.parse(apipath);
   }

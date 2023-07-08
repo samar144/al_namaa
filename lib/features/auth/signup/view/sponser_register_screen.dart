@@ -262,7 +262,7 @@ class SponserRegisterScreen extends StatelessWidget {
                     name: " إنشاء حساب",
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        registercontroller.signup();
+                        registercontroller.checksignup();
                       }
                     },
                   )

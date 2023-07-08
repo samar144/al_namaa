@@ -6,7 +6,8 @@ class ShredPref {
     prefs.setString("user", user);
   }
 
-  static Future<dynamic> geteuser() async {
+  // static Future<dynamic> geteuser() async {
+  static geteuser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("user");
   }

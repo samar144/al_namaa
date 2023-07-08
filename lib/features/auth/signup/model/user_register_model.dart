@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-UserRegisterModel userRegisterModelFromJson(String str) =>
-    UserRegisterModel.fromJson(json.decode(str));
+UserModel UserModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-String userRegisterModelToJson(UserRegisterModel data) =>
-    json.encode(data.toJson());
+String UserModelToJson(UserModel data) => json.encode(data.toJson());
 
-class UserRegisterModel {
+class UserModel {
+  int? id;
   String email;
   String password;
   String firstname;
@@ -19,12 +18,15 @@ class UserRegisterModel {
   String? study;
   String? city;
   String? birthday;
+  // int? role;
 
-  UserRegisterModel({
+  UserModel({
     required this.email,
     required this.password,
     required this.firstname,
+    this.id,
     required this.lastname,
+    // this.role=5,
     this.fathername,
     this.mothername,
     required this.mobilenumber,
@@ -35,9 +37,9 @@ class UserRegisterModel {
     this.birthday,
   });
 
-  factory UserRegisterModel.fromJson(Map<String, dynamic> json) =>
-      UserRegisterModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         email: json["email"],
+        id: json['id'],
         password: json["password"],
         firstname: json["firstname"],
         lastname: json["lastname"],
@@ -49,10 +51,12 @@ class UserRegisterModel {
         study: json["study"],
         city: json["city"],
         birthday: json["birthday"],
+        // role: json['role']
       );
 
   Map<String, dynamic> toJson() => {
         "email": email,
+        "id": id,
         "password": password,
         "firstname": firstname,
         "lastname": lastname,
@@ -64,72 +68,6 @@ class UserRegisterModel {
         "study": study,
         "city": city,
         "birthday": birthday,
+        // "role":role
       };
 }
-
-// To parse this JSON data, do
-//
-//     final userRegisterModel = userRegisterModelFromJson(jsonString);
-
-// import 'dart:convert';
-
-// List<UserRegisterModel> userRegisterModelFromJson(String str) =>
-//     List<UserRegisterModel>.from(
-//         json.decode(str).map((x) => UserRegisterModel.fromJson(x)));
-
-// String userRegisterModelToJson(List<UserRegisterModel> data) =>
-//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-// class UserRegisterModel {
-//   int id;
-//   String name;
-//   String email;
-//   Gender gender;
-//   Status status;
-
-//   UserRegisterModel({
-//     required this.id,
-//     required this.name,
-//     required this.email,
-//     required this.gender,
-//     required this.status,
-//   });
-
-//   factory UserRegisterModel.fromJson(Map<String, dynamic> json) =>
-//       UserRegisterModel(
-//         id: json["id"],
-//         name: json["name"],
-//         email: json["email"],
-//         gender: genderValues.map[json["gender"]]!,
-//         status: statusValues.map[json["status"]]!,
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "name": name,
-//         "email": email,
-//         "gender": genderValues.reverse[gender],
-//         "status": statusValues.reverse[status],
-//       };
-// }
-
-// enum Gender { MALE, FEMALE }
-
-// final genderValues = EnumValues({"female": Gender.FEMALE, "male": Gender.MALE});
-
-// enum Status { ACTIVE, INACTIVE }
-
-// final statusValues =
-//     EnumValues({"active": Status.ACTIVE, "inactive": Status.INACTIVE});
-
-// class EnumValues<T> {
-//   Map<String, T> map;
-//   late Map<T, String> reverseMap;
-
-//   EnumValues(this.map);
-
-//   Map<T, String> get reverse {
-//     reverseMap = map.map((k, v) => MapEntry(v, k));
-//     return reverseMap;
-//   }
-// }

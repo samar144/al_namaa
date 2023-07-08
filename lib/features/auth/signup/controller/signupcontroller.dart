@@ -62,35 +62,8 @@ class UserRegisterController extends GetxController {
         asyncFunction: () => signup(), loadingWidget: const LoadingWidget());
   }
 
-  // void register() async {
-  //   UserRegisterModel registerModel = UserRegisterModel(
-  //     email: emailEditController.text,
-  //     password: passwordEditController.text,
-  //     birthday: birthdayEditController.text,
-  //     firstname: firstnameEditController.text,
-  //     city: cityEditController.text,
-  //     fathername: fathernameEditController.text,
-  //     job: jobEditController.text,
-  //     lastname: lastnameEditController.text,
-  //     mobilenumber: mobilephoneEditController.text,
-  //     mothername: mothernameEditController.text,
-  //     study: studyEditController.text,
-  //     telenumber: telephoneEditController.text,
-  //   );
-  //   var response = await NetworkHandler.post(
-  //       userRegisterModelToJson(registerModel), "login/signup");
-  //   var res = jsonDecode(response);
-  //   if (res['sucsses']) {
-  //   customsnackbar("signup sucsses", res['message'], "sucess");
-  //   Get.offAllNamed(GetRoutes.login);
-  // } else {
-  //   customsnackbar("signup Error", res['message'], "error");
-  // }
-  // }
-
-  //header not include
   signup() async {
-    UserRegisterModel user = UserRegisterModel(
+    UserModel user = UserModel(
       email: emailEditController.text,
       password: passwordEditController.text,
       birthday: birthdayEditController.text,
@@ -106,7 +79,7 @@ class UserRegisterController extends GetxController {
     );
     http.Response response = await http.post(
         Uri.parse('$baseUrl/api/app/register'),
-        body: userRegisterModelToJson(user),
+        body: UserModelToJson(user),
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
