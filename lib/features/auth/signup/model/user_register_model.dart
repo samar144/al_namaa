@@ -11,28 +11,28 @@ class UserRegisterModel {
   String password;
   String firstname;
   String lastname;
-  String fathername;
-  String mothername;
+  String? fathername;
+  String? mothername;
   String mobilenumber;
-  String telenumber;
-  String job;
-  String study;
-  String city;
-  String birthday;
+  String? telenumber;
+  String? job;
+  String? study;
+  String? city;
+  String? birthday;
 
   UserRegisterModel({
     required this.email,
     required this.password,
     required this.firstname,
     required this.lastname,
-    required this.fathername,
-    required this.mothername,
+    this.fathername,
+    this.mothername,
     required this.mobilenumber,
-    required this.telenumber,
-    required this.job,
-    required this.study,
-    required this.city,
-    required this.birthday,
+    this.telenumber,
+    this.job,
+    this.study,
+    this.city,
+    this.birthday,
   });
 
   factory UserRegisterModel.fromJson(Map<String, dynamic> json) =>

@@ -6,8 +6,10 @@ import '../../../../core/widget/loading_widget.dart';
 import '../../../../routes.dart';
 import '../../../../utils/baseurl.dart';
 import '../../../../utils/custom_snackbar.dart';
+import '../model/user_register_model.dart';
 
 class UserRegisterController extends GetxController {
+  final date = DateTime.now().obs;
   late TextEditingController emailEditController,
       passwordEditController,
       firstnameEditController,
@@ -88,24 +90,31 @@ class UserRegisterController extends GetxController {
 
   //header not include
   signup() async {
-    var response = await http.post(Uri.parse(baseurl + 'signup'), body: {
-      "email": emailEditController.text,
-      "password": passwordEditController.text,
-      "birthday": birthdayEditController.text,
-      "firstname": firstnameEditController.text,
-      "city": cityEditController.text,
-      "fathername": fathernameEditController.text,
-      "job": jobEditController.text,
-      "lastname": lastnameEditController.text,
-      "mobilenumber": mobilephoneEditController.text,
-      "mothername": mothernameEditController.text,
-      "study": studyEditController.text,
-      "telenumber": telephoneEditController.text,
-    });
+    UserRegisterModel user = UserRegisterModel(
+      email: emailEditController.text,
+      password: passwordEditController.text,
+      birthday: birthdayEditController.text,
+      firstname: firstnameEditController.text,
+      city: cityEditController.text,
+      fathername: fathernameEditController.text,
+      job: jobEditController.text,
+      lastname: lastnameEditController.text,
+      mobilenumber: mobilephoneEditController.text,
+      mothername: mothernameEditController.text,
+      study: studyEditController.text,
+      telenumber: telephoneEditController.text,
+    );
+    http.Response response = await http.post(
+        Uri.parse('$baseUrl/api/app/register'),
+        body: userRegisterModelToJson(user),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        });
     var res = await jsonDecode(response.body);
-    if (res['sucsses']) {
-      customsnackbar("signup sucsses", res['message'], "sucess");
-      Get.offAllNamed(GetRoutes.login);
+    if (response.statusCode == 201) {
+      customsnackbar("signup sucsses", res['message'], "sucess")
+          .then(Get.offAllNamed(GetRoutes.login));
     } else {
       customsnackbar("signup Error", res['message'], "error");
     }

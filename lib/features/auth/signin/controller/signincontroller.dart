@@ -61,7 +61,7 @@ class LoginController extends GetxController {
   // }
 
   login() async {
-    var response = await http.post(Uri.parse(baseurl + 'login'), body: {
+    var response = await http.post(Uri.parse(baseUrl + 'login'), body: {
       "email": emailEditController.text,
       "password": passwordEditController.text,
     });

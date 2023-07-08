@@ -5,6 +5,7 @@ class TextFormFieldWidget extends StatelessWidget {
     super.key,
     this.label,
     this.hint,
+    this.onTap,
     this.icon,
     this.keyboaredtype,
     this.controller,
@@ -14,6 +15,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final String? label;
   final String? hint;
   final int? maxlines;
+  final Function()? onTap;
 
   final Icon? icon;
   final TextEditingController? controller;
@@ -39,6 +41,7 @@ class TextFormFieldWidget extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             child: TextFormField(
               maxLines: maxlines,
+              onTap: onTap,
               textAlign: TextAlign.start,
               validator: validator,
               controller: controller,

@@ -4,7 +4,7 @@ import 'package:alnamaa_charity/core/widget/text_form_field.dart';
 import 'package:alnamaa_charity/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import '../../../../extra/regex.dart';
 import '../../../../core/widget/button.dart';
 import '../../../../core/widget/text_form_field_pass_word.dart';
@@ -129,10 +129,38 @@ class UserRegisterScreen extends StatelessWidget {
                               ),
                               Expanded(
                                   child: TextFormFieldWidget(
-                                label: "تاريخ الميلاد",
-                                controller: controller.birthdayEditController,
-                                keyboaredtype: TextInputType.datetime,
-                              )),
+                                      label: "تاريخ الميلاد",
+                                      validator: (val) {
+                                        if (val!.isEmpty) {
+                                          return "مطلوب";
+                                        }
+                                        return null;
+                                      },
+                                      controller: registercontroller
+                                          .birthdayEditController,
+                                      onTap: () async {
+                                        // Show the date picker dialog and update the value of _date
+                                        DateTime? pickedDate = await DatePicker
+                                            .showSimpleDatePicker(
+                                          context,
+                                          initialDate:
+                                              registercontroller.date.value,
+                                          firstDate: DateTime(1900),
+                                          lastDate: DateTime(2100),
+                                          dateFormat: "dd-MMMM-yyyy",
+                                          locale: DateTimePickerLocale.en_us,
+                                          looping: true,
+                                        );
+                                        if (pickedDate != null) {
+                                          registercontroller.date.value =
+                                              pickedDate;
+                                          registercontroller
+                                                  .birthdayEditController.text =
+                                              pickedDate
+                                                  .toString()
+                                                  .substring(0, 10);
+                                        }
+                                      })),
                             ],
                           ),
                         ),
