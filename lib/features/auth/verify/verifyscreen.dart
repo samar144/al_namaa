@@ -1,6 +1,7 @@
 import 'package:alnamaa_charity/features/auth/signin/controller/signincontroller.dart';
 import 'package:alnamaa_charity/core/widget/alnamaa_logo.dart';
 import 'package:alnamaa_charity/core/widget/text_form_field.dart';
+import 'package:alnamaa_charity/features/auth/signup/controller/usersignupcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,7 @@ import '../../../../core/widget/button.dart';
 
 class VerifyScreen extends StatelessWidget {
   VerifyScreen({super.key});
-  final LoginController controller = Get.put(LoginController());
+  final UserSignUpController controller = Get.put(UserSignUpController());
   final formKey = GlobalKey<FormState>();
 
   @override

@@ -35,7 +35,6 @@ class UserSignUpController extends GetxController {
   // final List<String> city = [];
   // final List<String> state = [];
   // final List<String> street = [];
-
   final RxString selectedcountry = 'syria'.obs;
   final RxString selectedstate = 'damascus'.obs;
   final RxString selectedcity = 'mazah'.obs;
@@ -45,7 +44,7 @@ class UserSignUpController extends GetxController {
       cpasswordEditController,
       firstnameEditController,
       lastnameEditController,
-      // verifyEditController,
+      verifyEditController,
       fathernameEditController,
       mothernameEditController,
       phonenumberEditController,
@@ -65,7 +64,7 @@ class UserSignUpController extends GetxController {
     emailEditController = TextEditingController();
     cpasswordEditController = TextEditingController();
     stateEditController = TextEditingController();
-    // verifyEditController = TextEditingController();
+    verifyEditController = TextEditingController();
     streetEditController = TextEditingController();
     countryEditController = TextEditingController();
     passwordEditController = TextEditingController();
@@ -173,12 +172,29 @@ class UserSignUpController extends GetxController {
           "Accept": "application/json"
         });
     var res = await jsonDecode(response.body);
-    // print(res);
-    if (res["message"] == "the email is available") {
-      await customsnackbar("signup sucsses", res['message'], "sucess");
+    if (res["success"] == true) {
+      var token = res["data"]["token"];
+      await customsnackbar("sucsses", res['message'], "sucess");
+      Get.offNamed(GetRoutes.verify, arguments: token);
+    } else {
+      customsnackbar(" Error", res['message'], "error");
+    }
+  }
+
+  verifyemail() async {
+    var response = await http.get(
+        Uri.parse('$baseUrl/api/account/verify/${verifyEditController.text}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer ${Get.arguments}"
+        });
+    var res = await jsonDecode(response.body);
+    if (res["success"] == true) {
+      customsnackbar("", res['message'], "sucess");
       Get.offAllNamed(GetRoutes.login);
     } else {
-      customsnackbar("signup Error", res['message'], "error");
+      customsnackbar(res['message'], res['data'], "error");
     }
   }
 }
