@@ -45,8 +45,8 @@ class _TextFormFieldPasswordWidgetState
                 if (val!.isEmpty) {
                   return 'يرجى ادخال كلمة المرور';
                 }
-                if (val.length < 6) {
-                  return 'ستة محارف على الأقل';
+                if (val.length < 9) {
+                  return 'تسعة محارف على الأقل';
                 }
                 return null;
               },

@@ -8,10 +8,18 @@ import '../../../../utils/baseurl.dart';
 import '../../../../utils/custom_snackbar.dart';
 import '../model/user_register_model.dart';
 
-class SponsorSignUpController extends GetxController {
+class UserSignUpController extends GetxController {
   final date = DateTime.now().obs;
   final List<String> country = ['syria'];
-  final List<String> city = ['mazah'];
+  final List<String> city = [
+    "mazah",
+    "masaken barzeh",
+    "almojtahed",
+    "abaseen",
+    "dwelaa",
+    "atman",
+    "mesyaf"
+  ];
   final List<String> state = [
     "damascus",
     "damascus countryside",
@@ -19,7 +27,10 @@ class SponsorSignUpController extends GetxController {
     "hamah",
     "tartous"
   ];
-  final List<String> street = ["shekh"];
+  final List<String> street = [
+    "shekh",
+    "banorama",
+  ];
   // dynamic country;
   // final List<String> city = [];
   // final List<String> state = [];
@@ -34,6 +45,7 @@ class SponsorSignUpController extends GetxController {
       cpasswordEditController,
       firstnameEditController,
       lastnameEditController,
+      // verifyEditController,
       fathernameEditController,
       mothernameEditController,
       phonenumberEditController,
@@ -53,6 +65,7 @@ class SponsorSignUpController extends GetxController {
     emailEditController = TextEditingController();
     cpasswordEditController = TextEditingController();
     stateEditController = TextEditingController();
+    // verifyEditController = TextEditingController();
     streetEditController = TextEditingController();
     countryEditController = TextEditingController();
     passwordEditController = TextEditingController();
@@ -76,6 +89,7 @@ class SponsorSignUpController extends GetxController {
     passwordEditController.dispose();
     firstnameEditController.dispose();
     lastnameEditController.dispose();
+    // verifyEditController.dispose();
     fathernameEditController.dispose();
     mothernameEditController.dispose();
     phonenumberEditController.dispose();
@@ -150,7 +164,7 @@ class SponsorSignUpController extends GetxController {
         mother_name: mothernameEditController.text,
         study: studyEditController.text,
         tele_number: telephoneEditController.text,
-        role: 4);
+        role: 6);
     http.Response response = await http.post(
         Uri.parse('$baseUrl/api/app/register'),
         body: userModelToJson(user),

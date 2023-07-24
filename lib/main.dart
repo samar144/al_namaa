@@ -3,6 +3,7 @@ import 'package:alnamaa_charity/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'features/auth/signin/view/user_sign_in_screen.dart';
 import 'features/auth/signup/view/sponser_register_screen.dart';
 import 'features/auth/signup/view/user_register_screen.dart';
 import 'features/donate_an_idea/view/donate_an_idea.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(backgroundColor: Colors.cyan[600]),
         useMaterial3: true,
       ),
-      home: SponserHomePage(),
+      home: UserSignInrScreen(),
     );
   }
 }

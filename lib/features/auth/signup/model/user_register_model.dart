@@ -1,73 +1,99 @@
 import 'dart:convert';
 
-UserModel UserModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-String UserModelToJson(UserModel data) => json.encode(data.toJson());
+String userModelToJson(UserModel data) => json.encode(data.toJson());
 
 class UserModel {
   int? id;
-  String email;
-  String password;
-  String firstname;
-  String lastname;
-  String? fathername;
-  String? mothername;
-  String mobilenumber;
-  String? telenumber;
+  String? email;
+  String? name;
+  String? password;
+  String? first_name;
+  String? last_name;
+  String? father_name;
+  String? mother_name;
+  String? phone_number;
+  String? tele_number;
   String? job;
   String? study;
   String? city;
-  String? birthday;
-  // int? role;
+  var birth;
+  String? token;
+  String? street;
+
+  String? country;
+
+  String? state;
+
+  String? cpassword;
+  int? role;
 
   UserModel({
-    required this.email,
-    required this.password,
-    required this.firstname,
+    this.email,
+    this.password,
+    this.first_name,
     this.id,
-    required this.lastname,
-    // this.role=5,
-    this.fathername,
-    this.mothername,
-    required this.mobilenumber,
-    this.telenumber,
+    this.token,
+    this.name,
+    this.street,
+    this.country,
+    this.cpassword,
+    this.state,
+    this.last_name,
+    this.role = 4,
+    this.father_name,
+    this.mother_name,
+    this.phone_number,
+    this.tele_number,
     this.job,
     this.study,
     this.city,
-    this.birthday,
+    this.birth,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        email: json["email"],
-        id: json['id'],
-        password: json["password"],
-        firstname: json["firstname"],
-        lastname: json["lastname"],
-        fathername: json["fathername"],
-        mothername: json["mothername"],
-        mobilenumber: json["mobilenumber"],
-        telenumber: json["telenumber"],
-        job: json["job"],
-        study: json["study"],
-        city: json["city"],
-        birthday: json["birthday"],
-        // role: json['role']
-      );
+      email: json["email"],
+      id: json['id'],
+      password: json["password"],
+      cpassword: json["c_password"],
+      first_name: json["first_name"],
+      last_name: json["last_name"],
+      father_name: json["father_name"],
+      mother_name: json["mother_name"],
+      phone_number: json["phone_number"],
+      tele_number: json["telenumber"],
+      job: json["job"],
+      study: json["study"],
+      city: json["city"],
+      street: json["street"],
+      state: json["state"],
+      country: json["country"],
+      birth: json["birth"],
+      role: json['role'],
+      token: json['token'],
+      name: json['name']);
 
   Map<String, dynamic> toJson() => {
         "email": email,
         "id": id,
         "password": password,
-        "firstname": firstname,
-        "lastname": lastname,
-        "fathername": fathername,
-        "mothername": mothername,
-        "mobilenumber": mobilenumber,
-        "telenumber": telenumber,
+        "c_password": cpassword,
+        "street": street,
+        "state": state,
+        "country": country,
+        "first_name": first_name,
+        "last_name": last_name,
+        "father_name": father_name,
+        "mother_name": mother_name,
+        "phone_number": phone_number,
+        "telenumber": tele_number,
         "job": job,
         "study": study,
         "city": city,
-        "birthday": birthday,
-        // "role":role
+        "birth": birth,
+        "role": role,
+        "token": token,
+        "name": name,
       };
 }

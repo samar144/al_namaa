@@ -1,3 +1,4 @@
+import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +45,7 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(Icons.exit_to_app),
               title: const Text('تسجيل الخروج'),
               onTap: () {
-                // box.write('loggedIn', false);
+                ShredPref.removeuser();
                 Get.offAllNamed(GetRoutes.login);
               },
             ),

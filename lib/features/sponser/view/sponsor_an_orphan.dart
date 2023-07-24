@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/date_picker.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:get/get.dart';
 
 import '../../../core/widget/button.dart';
@@ -8,7 +10,6 @@ import '../controller/sponser_an_orohan_controller.dart';
 class SponserAnOrphane extends StatelessWidget {
   SponserAnOrphane({super.key});
   final formKey = GlobalKey<FormState>();
-  final List<String> items = ['شهري ', 'سنوي', 'ربع سنوي', 'نصف سنوي'];
   final SponserAnOrphaneontroller controller = Get.find();
 // /  final TextEditingController _dateController = TextEditingController();
 
@@ -143,14 +144,14 @@ class SponserAnOrphane extends StatelessWidget {
                     Obx(
                       () => DropdownButtonFormField<String>(
                         value: controller.selectedItem.value,
-                        items: items.map((String value) {
+                        items: controller.items.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
                           );
                         }).toList(),
                         onChanged: (String? value) {
-                          // controller.paymentWaycontroller = value!;
+                          controller.paymentWaycontroller.text = value!;
                         },
                         decoration: InputDecoration(
                           labelText: ' طريقة الدفع ',
@@ -174,28 +175,65 @@ class SponserAnOrphane extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: TextFormFieldWidget(
-                              label: "   تاريخ البدء ",
-                              validator: (val) {
-                                if (val!.isEmpty) {
-                                  return "مطلوب";
-                                }
-                                return null;
-                              },
-                              keyboaredtype: TextInputType.datetime,
-                            ),
-                          ),
+                              child: TextFormFieldWidget(
+                                  label: "تاريخ الميلاد",
+                                  validator: (val) {
+                                    if (val!.isEmpty) {
+                                      return "مطلوب";
+                                    }
+                                    return null;
+                                  },
+                                  controller: controller.startDatecontroller,
+                                  onTap: () async {
+                                    // Show the date picker dialog and update the value of _date
+                                    DateTime? pickedDate =
+                                        await DatePicker.showSimpleDatePicker(
+                                      context,
+                                      initialDate: controller.date.value,
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2100),
+                                      dateFormat: "dd-MM-yyyy",
+                                      locale: DateTimePickerLocale.en_us,
+                                      looping: true,
+                                    );
+                                    if (pickedDate != null) {
+                                      controller.date.value = pickedDate;
+                                      controller.startDatecontroller.text =
+                                          pickedDate
+                                              .toString()
+                                              .substring(0, 10);
+                                    }
+                                  })),
                           Expanded(
                               child: TextFormFieldWidget(
-                            label: " تاريخ الانتهاء",
-                            validator: (val) {
-                              if (val!.isEmpty) {
-                                return "مطلوب";
-                              }
-                              return null;
-                            },
-                            keyboaredtype: TextInputType.datetime,
-                          )),
+                                  label: "تاريخ الميلاد",
+                                  validator: (val) {
+                                    if (val!.isEmpty) {
+                                      return "مطلوب";
+                                    }
+                                    return null;
+                                  },
+                                  controller: controller.endDatecontroller,
+                                  onTap: () async {
+                                    // Show the date picker dialog and update the value of _date
+                                    DateTime? pickedDate =
+                                        await DatePicker.showSimpleDatePicker(
+                                      context,
+                                      initialDate: controller.date.value,
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2100),
+                                      dateFormat: "dd-MM-yyyy",
+                                      locale: DateTimePickerLocale.en_us,
+                                      looping: true,
+                                    );
+                                    if (pickedDate != null) {
+                                      controller.date.value = pickedDate;
+                                      controller.endDatecontroller.text =
+                                          pickedDate
+                                              .toString()
+                                              .substring(0, 10);
+                                    }
+                                  })),
                         ],
                       ),
                     ),

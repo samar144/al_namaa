@@ -3,10 +3,13 @@ import 'package:alnamaa_charity/pages/dashboared/dashboared_binding.dart';
 import 'package:alnamaa_charity/pages/dashboared/dashboared_page.dart';
 import 'package:get/get.dart';
 
+import 'core/page/introduction_screen.dart';
+import 'features/auth/signin/view/resetpassword.dart';
 import 'features/auth/signin/view/user_sign_in_screen.dart';
 import 'features/auth/signup/view/choose_screen.dart';
 import 'features/auth/signup/view/sponser_register_screen.dart';
 import 'features/auth/signup/view/user_register_screen.dart';
+import 'features/auth/verify/verifyscreen.dart';
 import 'features/donate_an_idea/view/donate_an_idea.dart';
 import 'features/sponser/view/my_orphanes.dart';
 import 'features/sponser/view/sponser_home_screen.dart';
@@ -24,6 +27,9 @@ class GetRoutes {
   static const String donateidea = "/donateidea";
   static const String contactwithus = "/contactwithus";
   static const String sponseranorphan = "/sponseranorphan";
+  static const String introscreen = "/introscreen";
+  static const String resetpassword = "/resetpassword";
+  static const String verify = "/verify";
 
   static List<GetPage> route = [
     GetPage(
@@ -31,10 +37,13 @@ class GetRoutes {
       page: () => UserSignInrScreen(),
     ),
     GetPage(name: GetRoutes.signup, page: () => UserRegisterScreen()),
+    GetPage(name: GetRoutes.verify, page: () => VerifyScreen()),
+    GetPage(name: GetRoutes.introscreen, page: () => const IntroScreen()),
     GetPage(name: GetRoutes.choosescreen, page: () => const ChooseScreen()),
     GetPage(name: GetRoutes.sponsersignup, page: () => SponserRegisterScreen()),
     GetPage(name: GetRoutes.sponserhomepage, page: () => SponserHomePage()),
-    GetPage(name: GetRoutes.myorohanes, page: () => MyOrphanes()),
+    GetPage(name: GetRoutes.myorohanes, page: () => const MyOrphanes()),
+    GetPage(name: GetRoutes.resetpassword, page: () => ResetPassword()),
     GetPage(name: GetRoutes.donateidea, page: () => DonateAnIdea()),
     GetPage(name: GetRoutes.contactwithus, page: () => ContactWithUs()),
     GetPage(

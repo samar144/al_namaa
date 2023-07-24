@@ -3,6 +3,7 @@ import 'package:alnamaa_charity/extra/regex.dart';
 import 'package:alnamaa_charity/core/widget/alnamaa_logo.dart';
 import 'package:alnamaa_charity/core/widget/text_form_field.dart';
 import 'package:alnamaa_charity/routes.dart';
+import 'package:alnamaa_charity/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +45,9 @@ class UserSignInrScreen extends StatelessWidget {
                               TextFormFieldWidget(
                                 validator: (val) {
                                   if (!emailRegex.hasMatch(loginController
-                                      .emailEditController.text)) {
+                                          .emailEditController.text) &&
+                                      loginController.emailEditController.text
+                                          .isNotEmpty) {
                                     return "example@example.com";
                                   }
                                   return null;
@@ -69,7 +72,18 @@ class UserSignInrScreen extends StatelessWidget {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Get.offNamed(GetRoutes.choosescreen);
+                                        if (emailRegex.hasMatch(loginController
+                                                .emailEditController.text) &&
+                                            loginController.emailEditController
+                                                .text.isNotEmpty) {
+                                          loginController.forgetpassword();
+                                          Get.toNamed(GetRoutes.resetpassword);
+                                        } else {
+                                          customsnackbar(
+                                              "تنبيه",
+                                              "الرجاء ملئ حقل الايميل",
+                                              "error");
+                                        }
                                       },
                                       child: RichText(
                                         text: const TextSpan(

@@ -1,3 +1,4 @@
+import 'package:alnamaa_charity/core/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,29 +12,11 @@ class ContactWithUs extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(
-            toolbarHeight: 80,
-            actions: [
-              const CircleAvatar(
-                child: Text("H"),
-              ),
-            ],
-            backgroundColor: Colors.white,
-            elevation: 2,
-            title: Text(
-              "تواصل معنا",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.cyan[600]),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: Icon(
-                  Icons.backspace_outlined,
-                  color: Colors.cyan[600],
-                ))),
+        appBar: CustomAppBar("تواصل معنا", const [
+          CircleAvatar(
+            child: Text("H"),
+          )
+        ]),
         body: Form(
           key: formKey,
           child: Padding(

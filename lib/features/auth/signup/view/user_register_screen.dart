@@ -8,10 +8,11 @@ import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import '../../../../extra/regex.dart';
 import '../../../../core/widget/button.dart';
 import '../../../../core/widget/text_form_field_pass_word.dart';
+import '../controller/usersignupcontroller.dart';
 
 class UserRegisterScreen extends StatelessWidget {
-  final UserRegisterController registercontroller =
-      Get.put(UserRegisterController());
+  final UserSignUpController registercontroller =
+      Get.put(UserSignUpController());
   final formKey = GlobalKey<FormState>();
 
   UserRegisterScreen({super.key});
@@ -23,13 +24,13 @@ class UserRegisterScreen extends StatelessWidget {
       child: Scaffold(
         body: SafeArea(
           child: ListView(children: [
-            GetBuilder<UserRegisterController>(builder: (controller) {
+            GetBuilder<UserSignUpController>(builder: (registercontroller) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Logo(
-                    height: 200.0,
-                    width: 200.0,
+                    height: 210.0,
+                    width: 210.0,
                   ),
                   Form(
                     autovalidateMode: AutovalidateMode.always,
@@ -43,8 +44,8 @@ class UserRegisterScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: TextFormFieldWidget(
-                                  controller:
-                                      controller.firstnameEditController,
+                                  controller: registercontroller
+                                      .firstnameEditController,
                                   label: "الاسم الاول",
                                   validator: (val) {
                                     if (val!.isEmpty) {
@@ -63,48 +64,33 @@ class UserRegisterScreen extends StatelessWidget {
                                   }
                                   return null;
                                 },
-                                controller: controller.lastnameEditController,
+                                controller:
+                                    registercontroller.lastnameEditController,
                               )),
                               Expanded(
                                 child: TextFormFieldWidget(
                                   label: "اسم الأب",
-                                  controller:
-                                      controller.fathernameEditController,
-                                ),
-                              ),
-                              Expanded(
-                                  child: TextFormFieldWidget(
-                                label: "اسم الأم",
-                                controller: controller.mothernameEditController,
-                              )),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 110,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: TextFormFieldWidget(
-                                  controller:
-                                      controller.mobilephoneEditController,
-                                  label: "رقم الموبايل",
                                   validator: (val) {
                                     if (val!.isEmpty) {
                                       return "مطلوب";
                                     }
                                     return null;
                                   },
-                                  keyboaredtype: TextInputType.phone,
-                                  icon: Icon(Icons.phone_android),
+                                  controller: registercontroller
+                                      .fathernameEditController,
                                 ),
                               ),
                               Expanded(
                                   child: TextFormFieldWidget(
-                                label: "رقم الأرضي",
-                                controller: controller.telephoneEditController,
-                                keyboaredtype: TextInputType.phone,
-                                icon: Icon(Icons.phone),
+                                label: "اسم الأم",
+                                validator: (val) {
+                                  if (val!.isEmpty) {
+                                    return "مطلوب";
+                                  }
+                                  return null;
+                                },
+                                controller:
+                                    registercontroller.mothernameEditController,
                               )),
                             ],
                           ),
@@ -115,16 +101,209 @@ class UserRegisterScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: TextFormFieldWidget(
-                                  label: "المدينة",
-                                  controller: controller.cityEditController,
+                                    label: "رقم الموبايل",
+                                    validator: (val) {
+                                      if (val!.isEmpty) {
+                                        return "مطلوب";
+                                      }
+                                      return null;
+                                    },
+                                    keyboaredtype: TextInputType.phone,
+                                    icon: const Icon(Icons.phone_android),
+                                    controller: registercontroller
+                                        .phonenumberEditController),
+                              ),
+                              Expanded(
+                                  child: TextFormFieldWidget(
+                                label: "رقم الأرضي",
+                                // validator: (val) {
+                                //   if (val!.isEmpty) {
+                                //     return "مطلوب";
+                                //   }
+                                //   return null;
+                                // },
+                                controller:
+                                    registercontroller.telephoneEditController,
+                                keyboaredtype: TextInputType.phone,
+                                icon: const Icon(Icons.phone),
+                              )),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Obx(
+                                () => DropdownButtonFormField<String>(
+                                  value:
+                                      registercontroller.selectedcountry.value,
+                                  items: registercontroller.country
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    registercontroller
+                                        .countryEditController.text = value!;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'الدولة ',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            // color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                  ),
                                 ),
                               ),
-                              const Expanded(
-                                  child: TextFormFieldWidget(label: "العمل")),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Obx(
+                                () => DropdownButtonFormField<String>(
+                                  value: registercontroller.selectedstate.value,
+                                  items: registercontroller.state
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    registercontroller
+                                        .stateEditController.text = value!;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'المحافظة',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            // color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Obx(
+                                () => DropdownButtonFormField<String>(
+                                  value: registercontroller.selectedcity.value,
+                                  items: registercontroller.city
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    registercontroller.cityEditController.text =
+                                        value!;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'المدينة',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            // color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Obx(
+                                () => DropdownButtonFormField<String>(
+                                  value:
+                                      registercontroller.selectedstreet.value,
+                                  items: registercontroller.street
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    registercontroller
+                                        .streetEditController.text = value!;
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'الشارع',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            // color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xff1ea1a7),
+                                            width: 1)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 110,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextFormFieldWidget(
+                                  label: "العمل",
+                                  // validator: (val) {
+                                  //   if (val!.isEmpty) {
+                                  //     return "مطلوب";
+                                  //   }
+                                  //   return null;
+                                  // },
+                                  controller:
+                                      registercontroller.jobEditController,
+                                ),
+                              ),
                               Expanded(
                                 child: TextFormFieldWidget(
                                   label: "الدراسة",
-                                  controller: controller.studyEditController,
+                                  // validator: (val) {
+                                  //   if (val!.isEmpty) {
+                                  //     return "مطلوب";
+                                  //   }
+                                  //   return null;
+                                  // },
+                                  controller:
+                                      registercontroller.studyEditController,
                                 ),
                               ),
                               Expanded(
@@ -147,7 +326,7 @@ class UserRegisterScreen extends StatelessWidget {
                                               registercontroller.date.value,
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2100),
-                                          dateFormat: "dd-MMMM-yyyy",
+                                          dateFormat: "dd-MM-yyyy",
                                           locale: DateTimePickerLocale.en_us,
                                           looping: true,
                                         );
@@ -167,7 +346,7 @@ class UserRegisterScreen extends StatelessWidget {
                         TextFormFieldWidget(
                           validator: (val) {
                             if (!emailRegex.hasMatch(
-                                controller.emailEditController.text)) {
+                                registercontroller.emailEditController.text)) {
                               return "example@example.com";
                             }
                             return null;
@@ -176,7 +355,7 @@ class UserRegisterScreen extends StatelessWidget {
                           hint: "ادخل الايميل ",
                           icon: const Icon(Icons.email),
                           keyboaredtype: TextInputType.emailAddress,
-                          controller: controller.emailEditController,
+                          controller: registercontroller.emailEditController,
                         ),
                         TextFormFieldPasswordWidget(
                           label: "كلمة السر",
@@ -189,7 +368,7 @@ class UserRegisterScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.offNamed(GetRoutes.login);
+                      Get.toNamed(GetRoutes.login);
                     },
                     child: RichText(
                       text: const TextSpan(
@@ -215,10 +394,10 @@ class UserRegisterScreen extends StatelessWidget {
                     ),
                   ),
                   CustomButton(
-                    name: "إنشاء حساب",
+                    name: " إنشاء حساب",
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        controller.checksignup();
+                        registercontroller.checksignup();
                       }
                     },
                   )
