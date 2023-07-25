@@ -13,6 +13,7 @@ import '../../../../core/widget/text_form_field_pass_word.dart';
 class UserSignInrScreen extends StatelessWidget {
   UserSignInrScreen({super.key});
   final LoginController loginController = Get.put(LoginController());
+  // final LoginController loginController = Get.find();
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -108,7 +109,7 @@ class UserSignInrScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.offNamed(GetRoutes.choosescreen);
+                            Get.toNamed(GetRoutes.choosescreen);
                           },
                           child: RichText(
                             text: const TextSpan(

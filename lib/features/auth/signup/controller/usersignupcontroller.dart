@@ -10,6 +10,8 @@ import '../model/user_register_model.dart';
 
 class UserSignUpController extends GetxController {
   final date = DateTime.now().obs;
+  // bool isEmailConfirmed = false;
+
   final List<String> country = ['syria'];
   final List<String> city = [
     "mazah",
@@ -191,6 +193,8 @@ class UserSignUpController extends GetxController {
         });
     var res = await jsonDecode(response.body);
     if (res["success"] == true) {
+      // isEmailConfirmed = true;
+
       customsnackbar("", res['message'], "sucess");
       Get.offAllNamed(GetRoutes.login);
     } else {

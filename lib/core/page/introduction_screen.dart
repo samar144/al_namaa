@@ -1,6 +1,10 @@
 import 'package:alnamaa_charity/core/widget/button.dart';
+import 'package:alnamaa_charity/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -32,7 +36,9 @@ class IntroScreen extends StatelessWidget {
               bodyTextStyle: TextStyle(color: Color(0xff35abb0))),
           footer: CustomButton(
             name: "يا مرحباً فلنبدأ",
-            onPressed: () {},
+            onPressed: () {
+              Get.offAllNamed(GetRoutes.login);
+            },
           ),
           body:
               "انضم الى مجتمعنا من المتبرعين والكفلاء الذين يساهمون في تحسين حياة الايتام والاطفال المحتاجين")
@@ -41,6 +47,9 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setBool('showedIntroduction', true);
+    });
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(

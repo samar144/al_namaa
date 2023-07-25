@@ -11,6 +11,7 @@ import '../../../../core/widget/text_form_field_pass_word.dart';
 import '../controller/usersignupcontroller.dart';
 
 class UserRegisterScreen extends StatelessWidget {
+  // final UserSignUpController registercontroller = Get.find();
   final UserSignUpController registercontroller =
       Get.put(UserSignUpController());
   final formKey = GlobalKey<FormState>();
@@ -147,6 +148,7 @@ class UserRegisterScreen extends StatelessWidget {
                                       child: Text(value),
                                     );
                                   }).toList(),
+                                  isExpanded: true,
                                   onChanged: (String? value) {
                                     registercontroller
                                         .countryEditController.text = value!;
@@ -181,6 +183,7 @@ class UserRegisterScreen extends StatelessWidget {
                                       child: Text(value),
                                     );
                                   }).toList(),
+                                  isExpanded: true,
                                   onChanged: (String? value) {
                                     registercontroller
                                         .stateEditController.text = value!;
@@ -219,6 +222,7 @@ class UserRegisterScreen extends StatelessWidget {
                                       child: Text(value),
                                     );
                                   }).toList(),
+                                  isExpanded: true,
                                   onChanged: (String? value) {
                                     registercontroller.cityEditController.text =
                                         value!;
@@ -250,10 +254,11 @@ class UserRegisterScreen extends StatelessWidget {
                                   items: registercontroller.street
                                       .map((String value) {
                                     return DropdownMenuItem<String>(
-                                      value: value,
+                                      // value: value,
                                       child: Text(value),
                                     );
                                   }).toList(),
+                                  isExpanded: true,
                                   onChanged: (String? value) {
                                     registercontroller
                                         .streetEditController.text = value!;
