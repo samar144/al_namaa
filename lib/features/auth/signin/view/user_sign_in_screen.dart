@@ -12,7 +12,8 @@ import '../../../../core/widget/text_form_field_pass_word.dart';
 
 class UserSignInrScreen extends StatelessWidget {
   UserSignInrScreen({super.key});
-  final LoginController loginController = Get.put(LoginController());
+  final LoginController loginController =
+      Get.put(LoginController(), permanent: true);
   // final LoginController loginController = Get.find();
   final formKey = GlobalKey<FormState>();
 
@@ -47,8 +48,8 @@ class UserSignInrScreen extends StatelessWidget {
                                 validator: (val) {
                                   if (!emailRegex.hasMatch(loginController
                                           .emailEditController.text) &&
-                                      loginController.emailEditController.text
-                                          .isNotEmpty) {
+                                      loginController
+                                          .emailEditController.text.isEmpty) {
                                     return "example@example.com";
                                   }
                                   return null;

@@ -1,9 +1,9 @@
 import 'dart:convert';
-
+import 'package:alnamaa_charity/features/auth/signup/model/user_register_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/baseurl.dart';
 import '../../../routes.dart';
+import '../../../utils/baseurl.dart';
 import '../../../utils/custom_snackbar.dart';
 import '../model/guarantees.dart';
 import 'package:http/http.dart' as http;
@@ -17,36 +17,34 @@ class SponserAnOrphaneontroller extends GetxController {
     paymentWaycontroller = TextEditingController();
     startDatecontroller = TextEditingController();
     endDatecontroller = TextEditingController();
+    notecontroller = TextEditingController();
     alternativeNamecontroller = TextEditingController();
     alternativePhonecontroller = TextEditingController();
     alternativeTelecontroller = TextEditingController();
     alternativeAddresscontroller = TextEditingController();
     orderStatuscontroller = TextEditingController();
     approverIdcontroller = TextEditingController();
-    datecontroller = TextEditingController();
-
     super.onInit();
   }
 
   @override
   void onClose() {
     amountcontroller.dispose();
-    sponserIdcontroller.dispose();
-    orphanIdcontroller.dispose();
-    paymentWaycontroller.dispose();
-    datecontroller.dispose();
-    startDatecontroller.dispose();
-    endDatecontroller.dispose();
-    alternativeNamecontroller.dispose();
-    alternativePhonecontroller.dispose();
-    alternativeTelecontroller.dispose();
-    alternativeAddresscontroller.dispose();
-    orderStatuscontroller.dispose();
+    // sponserIdcontroller.dispose();
+    // orphanIdcontroller.dispose();
+    // paymentWaycontroller.dispose();
+    // startDatecontroller.dispose();
+    // endDatecontroller.dispose();
+    // alternativeNamecontroller.dispose();
+    // alternativePhonecontroller.dispose();
+    // alternativeTelecontroller.dispose();
+    // alternativeAddresscontroller.dispose();
+    // orderStatuscontroller.dispose();
     super.onClose();
   }
 
   final date = DateTime.now().obs;
-
+  // UserModel user = Get.arguments;
   final RxString selectedItem = "سنوي".obs;
   final List<String> items = [
     "سنوي",
@@ -56,7 +54,6 @@ class SponserAnOrphaneontroller extends GetxController {
   ];
 
   late TextEditingController amountcontroller,
-      datecontroller,
       sponserIdcontroller,
       orphanIdcontroller,
       paymentWaycontroller,
@@ -67,50 +64,60 @@ class SponserAnOrphaneontroller extends GetxController {
       alternativeTelecontroller,
       alternativeAddresscontroller,
       orderStatuscontroller,
+      notecontroller,
       approverIdcontroller;
 
-// Define a Future function to show the date picker.
-  // Future<void> selectDate(BuildContext context) async {
-  //   final DateTime? picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(2023, 1),
-  //     lastDate: DateTime(2101),
-  //   );
-  //   if (picked != null) {
-  //     datecontroller.text = picked
-  //         .toString(); // Update the TextController with the selected date.
-  //   }
-  // }
-
-  signup() async {
-    Guarantees guarantees = Guarantees(
-      alternativeAddress: "",
-      alternativeName: "",
-      alternativePhone: "",
-      alternativeTele: "",
-      amount: "",
-      approverId: "",
-      endDate: "",
-      orderStatus: "",
-      orphanId: "",
-      paymentWay: "",
-      sponserId: "",
-      startDate: "",
-    );
-    http.Response response = await http.post(
-        Uri.parse('$baseUrl/api/app/register'),
-        body: guaranteesToJson(guarantees),
-        headers: {
+  createsponsorshiporder(int id, token) async {
+    // Guarantees guarantees = Guarantees(
+    //   sponsor_id: id,
+    //   payment_way: "ربع سنوي",
+    //   amount: 8000000,
+    //   start_date: "2023-8-1",
+    //   end_date: "2026-8-1",
+    //   alternative_name: "alternativeNamecontro hgs",
+    //   alternative_phone: "0009090999",
+    //   alternative_tele: "3536647",
+    //   note: "notecontroller.text",
+    //   alternative_address: "damascus",
+    // );
+    http.Response response =
+        await http.post(Uri.parse('$baseUrl/api/app/sponsorships'),
+            // body: guaranteesToJson(guarantees),
+            body: jsonEncode({
+              "sponsor_id": id,
+              "payment_way": paymentWaycontroller.text,
+              "note": notecontroller.text,
+              "amount": amountcontroller.text,
+              "start_date": startDatecontroller.text,
+              "end_date": endDatecontroller.text,
+              "alternative_name": alternativeNamecontroller.text,
+              "alternative_phone": alternativePhonecontroller.text,
+              "alternative_tele": alternativeTelecontroller.text,
+              "alternative_address": alternativeAddresscontroller.text
+              // "order_status": 0,
+              // "approver_id": 1
+            }),
+            headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Accept": "application/json",
+          "Authorization": "Bearer $token"
         });
     var res = await jsonDecode(response.body);
-    // print(res);
-    if (res["message"] == "the email is available") {
+    if (response.statusCode == 200) {
       await customsnackbar("", res['message'], "sucess");
+      alternativeAddresscontroller.clear();
+      alternativeNamecontroller.clear();
+      alternativePhonecontroller.clear();
+      alternativeTelecontroller.clear();
+      amountcontroller.clear();
+      paymentWaycontroller.clear();
+      startDatecontroller.clear();
+      endDatecontroller.clear();
+      notecontroller.clear();
     } else {
-      customsnackbar("", res['message'], "error");
+      res['errors'].forEach((field, error) {
+        customsnackbar("", '$field: ${error[0]}', "error");
+      });
     }
   }
 }

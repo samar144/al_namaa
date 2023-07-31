@@ -62,7 +62,7 @@ class UserSignUpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getcountry();
+    // getcountry();
     emailEditController = TextEditingController();
     cpasswordEditController = TextEditingController();
     stateEditController = TextEditingController();
@@ -85,23 +85,23 @@ class UserSignUpController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    emailEditController.dispose();
-    cpasswordEditController.dispose();
-    passwordEditController.dispose();
-    firstnameEditController.dispose();
-    lastnameEditController.dispose();
-    // verifyEditController.dispose();
-    fathernameEditController.dispose();
-    mothernameEditController.dispose();
-    phonenumberEditController.dispose();
-    telephoneEditController.dispose();
-    birthdayEditController.dispose();
-    jobEditController.dispose();
-    cityEditController.dispose();
-    streetEditController.dispose();
-    stateEditController.dispose();
-    countryEditController.dispose();
-    studyEditController.dispose();
+    // emailEditController.dispose();
+    // cpasswordEditController.dispose();
+    // passwordEditController.dispose();
+    // firstnameEditController.dispose();
+    // lastnameEditController.dispose();
+    // // verifyEditController.dispose();
+    // fathernameEditController.dispose();
+    // mothernameEditController.dispose();
+    // phonenumberEditController.dispose();
+    // telephoneEditController.dispose();
+    // birthdayEditController.dispose();
+    // jobEditController.dispose();
+    // cityEditController.dispose();
+    // streetEditController.dispose();
+    // stateEditController.dispose();
+    // countryEditController.dispose();
+    // studyEditController.dispose();
   }
 
   getcountry() async {

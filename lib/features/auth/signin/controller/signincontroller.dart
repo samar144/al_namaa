@@ -49,10 +49,10 @@ class LoginController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    emailEditController.dispose();
-    passwordEditController.dispose();
-    cpasswordEditController.dispose();
-    tokenEditController.dispose();
+    // emailEditController.dispose();
+    // passwordEditController.dispose();
+    // cpasswordEditController.dispose();
+    // tokenEditController.dispose();
   }
 
   login() async {
@@ -71,11 +71,19 @@ class LoginController extends GetxController {
       //اسم اليوزر بالجيسون يلي بين قوسين القصد
       // UserLoginModel user = UserLoginModel(
       //     name: res['data']['name'], token: res['data']['token']);
-      UserModel user =
-          UserModel(name: res['data']['name'], token: res['data']['token']);
+      UserModel user = UserModel(
+          name: res['data']['name'],
+          token: res['data']['token'],
+          id: res["data"]["user_id"],
+          email: emailEditController.text!);
       await ShredPref.storeuser(jsonEncode(user));
-      customsnackbar("signup sucsses", res['message'], "sucess");
-      Get.offAllNamed(GetRoutes.sponserhomepage);
+      customsnackbar("sucsses", res['message'], "sucess");
+
+      if (res["data"]["role"][0] == "Sponsor") {
+        Get.offAllNamed(GetRoutes.sponserhomepage, arguments: user);
+      } else if (res["data"]["role"][0] == "NormalUser") {
+        // Get.offAllNamed(GetRoutes.sponserhomepage);
+      } else {}
     } else {
       customsnackbar("signup Error", res['message'], "error");
     }

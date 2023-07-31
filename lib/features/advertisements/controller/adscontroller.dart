@@ -4,7 +4,7 @@ import 'package:alnamaa_charity/features/advertisements/model/advertisement_mode
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../core/baseurl.dart';
+import '../../../utils/baseurl.dart';
 import '../../../utils/custom_snackbar.dart';
 
 class AdsController extends GetxController {

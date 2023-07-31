@@ -54,15 +54,19 @@ class IntroScreen extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         body: SafeArea(
-          child: IntroductionScreen(
-            next: const Text("التالي"),
-            // showNextButton: false,
-            showDoneButton: false,
-            back: const Text("رجوع"),
-            showBackButton: true,
-            pages: getpages(),
-            globalBackgroundColor: Colors.white,
-            allowImplicitScrolling: true,
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            child: IntroductionScreen(
+              next: const Text("التالي"),
+              // showNextButton: false,
+              showDoneButton: false,
+              back: const Text("رجوع"),
+              showBackButton: true,
+              pages: getpages(),
+              globalBackgroundColor: Colors.white,
+              allowImplicitScrolling: true,
+            ),
           ),
         ),
       ),

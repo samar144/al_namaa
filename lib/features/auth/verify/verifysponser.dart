@@ -1,16 +1,17 @@
 import 'package:alnamaa_charity/features/auth/signin/controller/signincontroller.dart';
 import 'package:alnamaa_charity/core/widget/alnamaa_logo.dart';
 import 'package:alnamaa_charity/core/widget/text_form_field.dart';
+import 'package:alnamaa_charity/features/auth/signup/controller/signupcontroller.dart';
 import 'package:alnamaa_charity/features/auth/signup/controller/usersignupcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/widget/button.dart';
 
-class VerifyScreen extends StatelessWidget {
-  VerifyScreen({super.key});
-  final UserSignUpController controller = Get.put(UserSignUpController());
-  final formKey2 = GlobalKey<FormState>();
+class VerifyScreenSponser extends StatelessWidget {
+  VerifyScreenSponser({super.key});
+  final SponsorSignUpController controller = Get.put(SponsorSignUpController());
+  final formKey3 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +36,13 @@ class VerifyScreen extends StatelessWidget {
                     " تأكيد الحساب",
                     style: TextStyle(color: Color(0xff1ea1a7), fontSize: 18),
                   ),
-                  GetBuilder<UserSignUpController>(builder: (loginController) {
+                  GetBuilder<SponsorSignUpController>(
+                      builder: (loginController) {
                     return Column(
                       children: [
                         Form(
                           autovalidateMode: AutovalidateMode.always,
-                          key: formKey2,
+                          key: formKey3,
                           child: Column(
                             children: [
                               TextFormFieldWidget(
@@ -61,7 +63,7 @@ class VerifyScreen extends StatelessWidget {
                         CustomButton(
                           name: "ارسال",
                           onPressed: () {
-                            if (formKey2.currentState!.validate()) {
+                            if (formKey3.currentState!.validate()) {
                               controller.verifyemail();
                             }
                           },
