@@ -14,7 +14,8 @@ class Logo extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(120.0),
-            image: DecorationImage(image: AssetImage("images/1.png"))),
+            image: const DecorationImage(
+                image: AssetImage("assets/images/1.png"))),
       ),
     );
   }

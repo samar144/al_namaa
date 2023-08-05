@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:alnamaa_charity/features/auth/signup/model/user_register_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../routes.dart';
 import '../../../utils/baseurl.dart';
 import '../../../utils/custom_snackbar.dart';
@@ -24,6 +25,7 @@ class SponserAnOrphaneontroller extends GetxController {
     alternativeAddresscontroller = TextEditingController();
     orderStatuscontroller = TextEditingController();
     approverIdcontroller = TextEditingController();
+    // getUser();
     super.onInit();
   }
 
@@ -44,7 +46,8 @@ class SponserAnOrphaneontroller extends GetxController {
   }
 
   final date = DateTime.now().obs;
-  // UserModel user = Get.arguments;
+  late String orderId;
+  UserModel user = Get.arguments;
   final RxString selectedItem = "سنوي".obs;
   final List<String> items = [
     "سنوي",
@@ -52,6 +55,17 @@ class SponserAnOrphaneontroller extends GetxController {
     "ربع سنوي",
     "نصف سنوي",
   ];
+  // UserModel user = getUser() as UserModel;
+
+  // static Future<UserModel?> getUser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? userJson = prefs.getString('user');
+  //   if (userJson != null) {
+  //     Map<String, dynamic> userMap = jsonDecode(userJson);
+  //     return UserModel.fromJson(userMap);
+  //   }
+  //   return null;
+  // }
 
   late TextEditingController amountcontroller,
       sponserIdcontroller,
@@ -103,7 +117,9 @@ class SponserAnOrphaneontroller extends GetxController {
           "Authorization": "Bearer $token"
         });
     var res = await jsonDecode(response.body);
+
     if (response.statusCode == 200) {
+      orderId = res["data"]["id"];
       await customsnackbar("", res['message'], "sucess");
       alternativeAddresscontroller.clear();
       alternativeNamecontroller.clear();

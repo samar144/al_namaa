@@ -76,7 +76,7 @@ class LoginController extends GetxController {
           token: res['data']['token'],
           id: res["data"]["user_id"],
           email: emailEditController.text!);
-      await ShredPref.storeuser(jsonEncode(user));
+      await ShredPref.saveUser(user);
       customsnackbar("sucsses", res['message'], "sucess");
 
       if (res["data"]["role"][0] == "Sponsor") {

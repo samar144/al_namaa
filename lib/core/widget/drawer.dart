@@ -45,7 +45,7 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(Icons.exit_to_app),
               title: const Text('تسجيل الخروج'),
               onTap: () {
-                ShredPref.removeuser();
+                // ShredPref.removeuser();
                 Get.offAllNamed(GetRoutes.login);
               },
             ),

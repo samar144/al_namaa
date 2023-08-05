@@ -1,5 +1,6 @@
 import 'package:alnamaa_charity/core/widget/customicon.dart';
 import 'package:alnamaa_charity/features/auth/signup/model/user_register_model.dart';
+import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -12,7 +13,7 @@ class SponserHomePage extends StatelessWidget {
   SponserHomePage({super.key});
   final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
   final HomeController controller = Get.put(HomeController(), permanent: true);
-  final UserModel user = Get.arguments;
+  UserModel user = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +61,19 @@ class SponserHomePage extends StatelessWidget {
               const Divider(),
               CustomListTile(
                 icon: const Icon(Icons.people_outline),
-                describtion: 'طلبات الكفالة',
+                describtion: '  طلبات الكفالة المقبولة',
                 onTap: () {
-                  Get.toNamed(GetRoutes.getsponsororder);
+                  Get.toNamed(GetRoutes.getacceptedsponsororder,
+                      arguments: user);
+                },
+              ),
+              const Divider(),
+              CustomListTile(
+                icon: const Icon(Icons.people_outline),
+                describtion: '  طلبات كفالة قيد المعالجة',
+                onTap: () {
+                  Get.toNamed(GetRoutes.getawaitingsponsororder,
+                      arguments: user);
                 },
               ),
               const Divider(),
@@ -234,7 +245,8 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(GetRoutes.myorohanes);
+                                  Get.toNamed(GetRoutes.myorohanes,
+                                      arguments: user);
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),

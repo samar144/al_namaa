@@ -6,9 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'binding/binding.dart';
 import 'core/page/introduction_screen.dart';
+import 'features/advertisements/view/advertismenthome.dart';
 import 'features/auth/signin/view/user_sign_in_screen.dart';
 import 'features/auth/signup/view/sponser_register_screen.dart';
 import 'features/auth/signup/view/user_register_screen.dart';
+import 'features/comments_reply/view/commentpage.dart';
+import 'features/comments_reply/view/comment.dart';
 import 'features/donate_an_idea/view/donate_an_idea.dart';
 import 'features/sponser/view/my_orphanes.dart';
 import 'features/sponser/view/sponser_home_screen.dart';

@@ -16,7 +16,7 @@ class UserSignInrScreen extends StatelessWidget {
       Get.put(LoginController(), permanent: true);
   // final LoginController loginController = Get.find();
   final formKey = GlobalKey<FormState>();
-
+  Future<void> fu() async {}
   @override
   Widget build(BuildContext context) {
     return Directionality(

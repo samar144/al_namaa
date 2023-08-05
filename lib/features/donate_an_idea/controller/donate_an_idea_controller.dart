@@ -37,11 +37,11 @@ class DonateAnIdeaController extends GetxController {
   }
 
   donateanidea() async {
-    var usr = ShredPref.geteuser();
-    UserLoginModel user = UserLoginModel.fromJson(jsonDecode(usr));
+    var usr = await ShredPref.getUser();
+    // UserLoginModel user = UserLoginModel.fromJson((usr));
 
     IdeaModel idea = IdeaModel(
-        userId: user.id.toString(),
+        userId: usr!.id.toString(),
         idea: ideaEditController.text,
         cost: costEditController.text,
         ideatitle: ideatitleEditController.text,

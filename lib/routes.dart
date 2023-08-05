@@ -1,5 +1,4 @@
 import 'package:alnamaa_charity/features/contact_with_us/view/contact_with_us_screen.dart';
-import 'package:alnamaa_charity/features/sponser/view/getsponsororder.dart';
 import 'package:alnamaa_charity/pages/dashboared/dashboared_binding.dart';
 import 'package:alnamaa_charity/pages/dashboared/dashboared_page.dart';
 import 'package:get/get.dart';
@@ -13,6 +12,8 @@ import 'features/auth/signup/view/user_register_screen.dart';
 import 'features/auth/verify/verifyscreen.dart';
 import 'features/auth/verify/verifysponser.dart';
 import 'features/donate_an_idea/view/donate_an_idea.dart';
+import 'features/sponser/view/getacceptedsponsororder.dart';
+import 'features/sponser/view/getwaitingsponsororder.dart';
 import 'features/sponser/view/my_orphanes.dart';
 import 'features/sponser/view/sponser_home_screen.dart';
 import 'features/sponser/view/sponsor_an_orphan.dart';
@@ -33,7 +34,8 @@ class GetRoutes {
   static const String resetpassword = "/resetpassword";
   static const String verifysponser = "/verifysponser";
   static const String verify = "/verify";
-  static const String getsponsororder = "/getsponsororder";
+  static const String getacceptedsponsororder = "/getacceptedsponsororder";
+  static const String getawaitingsponsororder = "/getawaitingsponsororder";
 
   static List<GetPage> route = [
     GetPage(
@@ -42,8 +44,13 @@ class GetRoutes {
     ),
     GetPage(name: GetRoutes.signup, page: () => UserRegisterScreen()),
     GetPage(name: GetRoutes.verify, page: () => VerifyScreen()),
-    GetPage(name: GetRoutes.getsponsororder, page: () => GetSponsorOrders()),
+    GetPage(
+        name: GetRoutes.getacceptedsponsororder,
+        page: () => GetAcceptedSponsorOrders()),
     GetPage(name: GetRoutes.verifysponser, page: () => VerifyScreenSponser()),
+    GetPage(
+        name: GetRoutes.getawaitingsponsororder,
+        page: () => GetWaitingSponsorOrders()),
     GetPage(name: GetRoutes.introscreen, page: () => const IntroScreen()),
     GetPage(name: GetRoutes.choosescreen, page: () => const ChooseScreen()),
     GetPage(name: GetRoutes.sponsersignup, page: () => SponserRegisterScreen()),
