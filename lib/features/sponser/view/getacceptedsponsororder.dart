@@ -7,7 +7,6 @@ import '../controller/sponser_home_controller.dart';
 class GetAcceptedSponsorOrders extends StatelessWidget {
   GetAcceptedSponsorOrders({super.key});
   final HomeController controller = Get.put(HomeController());
-  // UserModel user = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -67,47 +66,7 @@ class GetAcceptedSponsorOrders extends StatelessWidget {
                         );
                       }));
                 });
-              })
-          // Container(
-          //   decoration: BoxDecoration(color: Colors.amberAccent),
-          //   child: Text("طلبات قيد الانتظار "),
-          // ),
-          // ListView.separated(
-          //     shrinkWrap: true,
-          //     itemCount: controller.acceptancesponserorders.length,
-          //     separatorBuilder: (context, index) => const SizedBox(
-          //           height: 10,
-          //         ),
-          //     itemBuilder: (context, i) {
-          //       return Padding(
-          //         padding: EdgeInsets.all(8.0),
-          //         child: Container(
-          //           decoration: BoxDecoration(color: Colors.orange),
-          //           child: Column(
-          //             children: [
-          //               Text(
-          //                 con.waitingsponserorders[i]["payment_way"]
-          //                     .toString(),
-          //               ),
-          //               Text(
-          //                 con.waitingsponserorders[i]["sponsor_id"]
-          //                     .toString(),
-          //               ),
-          //               Text(
-          //                 con.waitingsponserorders[i]["alternative_name"]
-          //                     .toString(),
-          //               ),
-          //               Text(
-          //                 con.waitingsponserorders[i]["end_date"]
-          //                     .toString(),
-          //               )
-          //             ],
-          //           ),
-          //         ),
-          //       );
-          //     }),
-
-          ),
+              })),
     );
   }
 }

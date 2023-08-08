@@ -7,13 +7,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../../../core/widget/custom_list_tile.dart';
 import '../../../core/widget/drawer.dart';
 import '../../../routes.dart';
+import '../../../utils/shared_pref/getstorage.dart';
 import '../controller/sponser_home_controller.dart';
 
 class SponserHomePage extends StatelessWidget {
   SponserHomePage({super.key});
   final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
-  final HomeController controller = Get.put(HomeController(), permanent: true);
-  UserModel user = Get.arguments;
+  final HomeController controller = Get.put(HomeController());
+  // UserModel user = GetStorageUtils().getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +44,14 @@ class SponserHomePage extends StatelessWidget {
             onPressed: () {
               scaffoldKey1.currentState!.openDrawer();
             },
-            icon: CircleAvatar(child: Text(user.name!.substring(0, 1))),
+            icon: CircleAvatar(
+                child: Text(controller.user.name!.substring(0, 1))),
           ),
         ),
         drawer: MyDrawer(
-            name: user.name!,
+            name: controller.user.name!,
             image: "images/1.png",
-            email: user.email!,
+            email: controller.user!.email!,
             listTile: [
               CustomListTile(
                 icon: const Icon(Icons.person),
@@ -64,7 +66,7 @@ class SponserHomePage extends StatelessWidget {
                 describtion: '  طلبات الكفالة المقبولة',
                 onTap: () {
                   Get.toNamed(GetRoutes.getacceptedsponsororder,
-                      arguments: user);
+                      arguments: controller.user);
                 },
               ),
               const Divider(),
@@ -73,7 +75,7 @@ class SponserHomePage extends StatelessWidget {
                 describtion: '  طلبات كفالة قيد المعالجة',
                 onTap: () {
                   Get.toNamed(GetRoutes.getawaitingsponsororder,
-                      arguments: user);
+                      arguments: controller.user);
                 },
               ),
               const Divider(),
@@ -220,8 +222,9 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(GetRoutes.sponseranorphan,
-                                      arguments: user);
+                                  Get.toNamed(
+                                    GetRoutes.sponseranorphan,
+                                  );
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),
@@ -245,8 +248,9 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(GetRoutes.myorohanes,
-                                      arguments: user);
+                                  Get.toNamed(
+                                    GetRoutes.myorphanes,
+                                  );
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),

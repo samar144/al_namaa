@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../routes.dart';
 import '../../../utils/baseurl.dart';
 import '../../../utils/custom_snackbar.dart';
+import '../../../utils/shared_pref/getstorage.dart';
 import '../model/guarantees.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,8 +47,7 @@ class SponserAnOrphaneontroller extends GetxController {
   }
 
   final date = DateTime.now().obs;
-  late String orderId;
-  UserModel user = Get.arguments;
+  UserModel? user = GetStorageUtils().getUser();
   final RxString selectedItem = "سنوي".obs;
   final List<String> items = [
     "سنوي",
@@ -81,7 +81,7 @@ class SponserAnOrphaneontroller extends GetxController {
       notecontroller,
       approverIdcontroller;
 
-  createsponsorshiporder(int id, token) async {
+  createsponsorshiporder(var id, token) async {
     // Guarantees guarantees = Guarantees(
     //   sponsor_id: id,
     //   payment_way: "ربع سنوي",
@@ -119,7 +119,6 @@ class SponserAnOrphaneontroller extends GetxController {
     var res = await jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      orderId = res["data"]["id"];
       await customsnackbar("", res['message'], "sucess");
       alternativeAddresscontroller.clear();
       alternativeNamecontroller.clear();

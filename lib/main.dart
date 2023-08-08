@@ -1,4 +1,6 @@
+import 'package:alnamaa_charity/features/auth/signup/model/user_register_model.dart';
 import 'package:alnamaa_charity/routes.dart';
+import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +17,12 @@ import 'features/comments_reply/view/comment.dart';
 import 'features/donate_an_idea/view/donate_an_idea.dart';
 import 'features/sponser/view/my_orphanes.dart';
 import 'features/sponser/view/sponser_home_screen.dart';
+import 'package:get_storage/get_storage.dart';
+
 import 'features/sponser/view/sponsor_an_orphan.dart';
 
-void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
-
+void main() async {
+  // await GetStorage.init();
   runApp(const MyApp());
 }
 

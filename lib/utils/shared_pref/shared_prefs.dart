@@ -5,21 +5,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/auth/signup/model/user_register_model.dart';
 
 class ShredPref {
-  static Future<void> saveUser(UserModel user) async {
+  static Future<void> saveUserModel(UserModel userModel) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userJson = jsonEncode(user);
-    // String userJson = jsonEncode(user.toJson());
-    await prefs.setString('user', userJson);
+    String userModelJson = userModelToJson(userModel);
+    await prefs.setString('userModel', userModelJson);
   }
 
-  static Future<UserModel?> getUser() async {
+  static Future<UserModel?> getUserModelFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userJson = prefs.getString('user');
-    if (userJson != null) {
-      Map<String, dynamic> userMap = jsonDecode(userJson);
-      return UserModel.fromJson(userMap);
+    String? userModelJson = prefs.getString('userModel');
+    if (userModelJson != null) {
+      return userModelFromJson(userModelJson);
     }
     return null;
+  }
+
+  static Future<void> removeUserModel() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('userModel');
   }
   // static Future<void> storeuser(user) async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -6,14 +6,18 @@ import 'package:get/get.dart';
 
 import '../../../core/widget/button.dart';
 import '../../../core/widget/text_form_field.dart';
+import '../../../utils/shared_pref/getstorage.dart';
 import '../controller/sponser_an_orohan_controller.dart';
 
 class SponserAnOrphane extends StatelessWidget {
+  UserModel? user = GetStorageUtils().getUser();
+
   SponserAnOrphane({super.key});
   var formKey7 = GlobalKey<FormState>();
+  // UserModel user = Get.arguments;
+
   final SponserAnOrphaneontroller controller =
       Get.put(SponserAnOrphaneontroller());
-  final UserModel user = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -278,7 +282,8 @@ class SponserAnOrphane extends StatelessWidget {
                       onPressed: () async {
                         if (formKey7.currentState!.validate()) {
                           controller.createsponsorshiporder(
-                              user.id!, user.token.toString());
+                              user!.user_id!.toString(),
+                              user!.token.toString());
                           // Get.back();
                         }
                       })

@@ -25,26 +25,46 @@ class AdvertisementController extends GetxController {
   //   }
   // }
 
-  final _advertisements = RxList<dynamic>([]);
-  List get advertisements => _advertisements.toList();
-  Future<void> fetchAdvertisements() async {
-    // String token = user.token!;
-    var response = await http
-        .get(Uri.parse('$baseUrl/api/app/sponsorships/orphan'), headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      // "Authorization": "Bearer $token"
-    });
-    var res = await jsonDecode(response.body);
-
-    if (response.statusCode == 200) {
-      final List data = [];
-      for (var item in res["data"]) {
-        data.add(item);
+  final _advertisements = RxList<dynamic>([
+    {
+      {
+        "id": "id",
+        "title": "title",
+        "body": "body",
+        "image": "image",
+        "hint": "hint",
+      },
+      {
+        "id": "id",
+        "title": "title",
+        "body": "body",
+        "image": "image",
+        "hint": "hint",
       }
-      _advertisements.value = data;
-    } else {
-      throw Exception("Failed to fetch data");
     }
-  }
+  ]);
+  List get advertisements => _advertisements.toList();
+
+  // final _advertisements = RxList<dynamic>([]);
+  // List get advertisements => _advertisements.toList();
+  // Future<void> fetchAdvertisements() async {
+  //   // String token = user.token!;
+  //   var response = await http
+  //       .get(Uri.parse('$baseUrl/api/app/sponsorships/orphan'), headers: {
+  //     "Content-Type": "application/json",
+  //     "Accept": "application/json",
+  //     // "Authorization": "Bearer $token"
+  //   });
+  //   var res = await jsonDecode(response.body);
+
+  //   if (response.statusCode == 200) {
+  //     final List data = [];
+  //     for (var item in res["data"]) {
+  //       data.add(item);
+  //     }
+  //     _advertisements.value = data;
+  //   } else {
+  //     throw Exception("Failed to fetch data");
+  //   }
+  // }
 }

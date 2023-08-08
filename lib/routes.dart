@@ -26,7 +26,7 @@ class GetRoutes {
   static const String sponsersignup = "/sponsersignup";
   static const String dashboared = "/dashboared";
   static const String sponserhomepage = "/sponserhomepage";
-  static const String myorohanes = "/myorphanes";
+  static const String myorphanes = "/myorphanes";
   static const String donateidea = "/donateidea";
   static const String contactwithus = "/contactwithus";
   static const String sponseranorphan = "/sponseranorphan";
@@ -54,18 +54,21 @@ class GetRoutes {
     GetPage(name: GetRoutes.introscreen, page: () => const IntroScreen()),
     GetPage(name: GetRoutes.choosescreen, page: () => const ChooseScreen()),
     GetPage(name: GetRoutes.sponsersignup, page: () => SponserRegisterScreen()),
-    GetPage(name: GetRoutes.sponserhomepage, page: () => SponserHomePage()),
-    GetPage(name: GetRoutes.myorohanes, page: () => MyOrphanes()),
+    GetPage(
+      name: GetRoutes.sponserhomepage,
+      page: () => SponserHomePage(),
+    ),
+    GetPage(name: GetRoutes.myorphanes, page: () => MyOrphanes()),
     GetPage(name: GetRoutes.resetpassword, page: () => ResetPassword()),
     GetPage(name: GetRoutes.donateidea, page: () => DonateAnIdea()),
     GetPage(name: GetRoutes.contactwithus, page: () => ContactWithUs()),
     GetPage(
-        name: GetRoutes.sponseranorphan,
-        page: () => SponserAnOrphane(),
-        binding: DashBoaredBinding()),
-    GetPage(
-      name: GetRoutes.dashboared,
-      page: () => DashboaredHomePage(),
-    )
+      name: GetRoutes.sponseranorphan,
+      page: () => SponserAnOrphane(),
+    ),
+    // GetPage(
+    //   name: GetRoutes.dashboared,
+    //   page: () => DashboaredHomePage(),
+    // )
   ];
 }

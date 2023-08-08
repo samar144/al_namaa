@@ -3,16 +3,59 @@ import 'package:alnamaa_charity/features/comments_reply/view/replypage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/widget/text_form_field.dart';
 import '../../advertisements/model/advertisement_model.dart';
 import '../controller/CommentController.dart';
 import '../controller/replycontroller.dart';
 
 class CommentPage extends StatelessWidget {
+  CommentPage({required this.advertisement, super.key});
+
   final AdvertismentModel advertisement;
   final CommentController commentController = Get.find();
   final ReplyController replyController = Get.find();
-
-  CommentPage({required this.advertisement});
+  RxList<Commentmodel> objectList = [
+    Commentmodel(
+      id: "1",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+    Commentmodel(
+      id: "2",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+    Commentmodel(
+      id: "3",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+    Commentmodel(
+      id: "4",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+    Commentmodel(
+      id: "5",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+    Commentmodel(
+      id: "6",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+    Commentmodel(
+      id: "7",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+    Commentmodel(
+      id: "8",
+      body:
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    ),
+  ].obs;
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +69,35 @@ class CommentPage extends StatelessWidget {
           ),
           // Display comments
           Expanded(
-            child: Obx(
-              () => ListView.builder(
-                itemCount: commentController.comments.length,
-                itemBuilder: (context, index) {
-                  Commentmodel comment = commentController.comments[index];
-                  return Column(
-                    children: [
-                      ListTile(
-                        title: Text(comment.userId.toString()),
-                        subtitle: Text(comment.body!),
-                      ),
-                      ElevatedButton(
-                        child: Text('View Replies'),
-                        onPressed: () {
-                          // Fetch replies for the selected comment
-                          replyController.fetchReplies(comment.id);
+            child:
+                // Obx(
+                //   () =>
+                ListView.builder(
+              // itemCount: commentController.comments.length,
+              itemCount: objectList.length,
+              itemBuilder: (context, index) {
+                Commentmodel comment = objectList[index];
+                return Column(
+                  children: [
+                    ListTile(
+                      title: Text(comment.id.toString()),
+                      subtitle: Text(comment.body!),
+                    ),
+                    ElevatedButton(
+                      child: Text('View Replies'),
+                      onPressed: () {
+                        // Fetch replies for the selected comment
+                        // replyController.fetchReplies(comment.id);
 
-                          // Open the replies page
-                          Get.to(ReplyPage(comment: comment));
-                        },
-                      ),
-                    ],
-                  );
-                },
-              ),
+                        // // Open the replies page
+                        Get.to(ReplyPage(comment: comment));
+                      },
+                    ),
+                  ],
+                );
+              },
             ),
+            // ),
           ),
           // Add comment
           Padding(
@@ -59,11 +105,69 @@ class CommentPage extends StatelessWidget {
             child: ElevatedButton(
               child: Text('Add Comment'),
               onPressed: () {
-                // showDialog(
-                //   // Add comment dialog
-                //   // Collect comment content and author information
-                //   // Call commentController.addComment() to add the new comment
-                // );
+                showDialog(
+                    useSafeArea: true,
+                    context: context,
+                    builder: (context) => Dialog(
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width - 100,
+                            height: MediaQuery.of(context).size.height / 3,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text("اضافة تعليق"),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(Icons.warning_outlined),
+                                      Text("الرجاء ذكر السبب "),
+                                    ],
+                                  ),
+                                  TextFormFieldWidget(
+                                    label: "",
+                                    controller:
+                                        commentController.contentController,
+                                    maxlines: 5,
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.cyan),
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: const Text("رجوع")),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          objectList.add(Commentmodel(
+                                              id: "9",
+                                              body: commentController
+                                                  .contentController.text));
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red),
+                                        child: const Text("تأكيد"),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ));
+                // Add comment dialog
+                // Collect comment content and author information
+                // Call commentController.addComment() to add the new comment
               },
             ),
           ),
