@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'account_controller.dart';
 
 class AccountPage extends GetView<AccountController> {
-  AccountPage({super.key});
+  AccountPage({key});
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

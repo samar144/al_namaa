@@ -1,10 +1,9 @@
 import 'dart:convert';
-
+import 'package:alnamaa_charity/utils/app_constants.dart';
 import 'package:alnamaa_charity/features/advertisements/model/advertisement_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../core/baseurl.dart';
 import '../../../utils/custom_snackbar.dart';
 
 class AdsController extends GetxController {
@@ -12,7 +11,7 @@ class AdsController extends GetxController {
 
   fetchmytodos() async {
     var response = await http.get(
-      Uri.parse("$baseUrl/home"),
+      Uri.parse(AppConstants.BASE_URL + "/home"),
     );
     var res = await jsonDecode(response.body);
 

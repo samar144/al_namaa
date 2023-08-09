@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:alnamaa_charity/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../../core/widget/loading_widget.dart';
 import '../../../../routes.dart';
-import '../../../../utils/baseurl.dart';
 import '../../../../utils/custom_snackbar.dart';
 import '../model/user_register_model.dart';
 
@@ -105,11 +105,12 @@ class UserSignUpController extends GetxController {
   }
 
   getcountry() async {
-    http.Response response = await http
-        .get(Uri.parse('$baseUrl/api/address/country'), headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    });
+    http.Response response = await http.get(
+        Uri.parse(AppConstants.BASE_URL + '/api/address/country'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        });
     var res = await jsonDecode(response.body);
 
     return res["data"];
@@ -167,7 +168,7 @@ class UserSignUpController extends GetxController {
         tele_number: telephoneEditController.text,
         role: 6);
     http.Response response = await http.post(
-        Uri.parse('$baseUrl/api/app/register'),
+        Uri.parse(AppConstants.BASE_URL + '/api/app/register'),
         body: userModelToJson(user),
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +186,8 @@ class UserSignUpController extends GetxController {
 
   verifyemail() async {
     var response = await http.get(
-        Uri.parse('$baseUrl/api/account/verify/${verifyEditController.text}'),
+        Uri.parse(AppConstants.BASE_URL +
+            '/api/account/verify/${verifyEditController.text}'),
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChooseScreen extends StatelessWidget {
-  const ChooseScreen({super.key});
+  const ChooseScreen({key});
 
   @override
   Widget build(BuildContext context) {

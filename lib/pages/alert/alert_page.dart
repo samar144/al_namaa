@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AlertPage extends GetView<AlertController> {
-  const AlertPage({super.key});
+  const AlertPage({key});
 
   @override
   Widget build(BuildContext context) {

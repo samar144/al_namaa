@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../../../core/widget/button.dart';
 
 class VerifyScreen extends StatelessWidget {
-  VerifyScreen({super.key});
+  VerifyScreen({key});
   final UserSignUpController controller = Get.put(UserSignUpController());
   final formKey = GlobalKey<FormState>();
 

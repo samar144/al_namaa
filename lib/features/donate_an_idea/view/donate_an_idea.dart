@@ -5,7 +5,7 @@ import '../../../core/widget/text_form_field.dart';
 import '../controller/donate_an_idea_controller.dart';
 
 class DonateAnIdea extends StatelessWidget {
-  DonateAnIdea({super.key});
+  DonateAnIdea({key});
   final formKey = GlobalKey<FormState>();
   final DonateAnIdeaController cont = Get.put(DonateAnIdeaController());
 

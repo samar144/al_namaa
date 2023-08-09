@@ -5,7 +5,7 @@ class CustomIcon extends StatelessWidget {
   final double width;
   final double height;
   const CustomIcon({
-    super.key,
+    key,
     required this.image,
     required this.width,
     required this.height,

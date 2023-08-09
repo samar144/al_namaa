@@ -1,20 +1,49 @@
-import 'package:alnamaa_charity/utils/baseurl.dart';
+import 'package:alnamaa_charity/utils/app_constants.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class NetworkHandler {
+class NetworkHandler extends GetConnect implements GetxService {
+  late String token;
+  final String appBaseUrl;
+  late Map<String, String> _mainHeaders;
+
+  @override
+  // ignore: overridden_fields
+  // allowAutoSignedCert = true;
+  NetworkHandler({required this.appBaseUrl}) {
+    baseUrl = appBaseUrl;
+    timeout = const Duration(seconds: 30);
+    token = AppConstants.TOKEN;
+    _mainHeaders = {
+      'Content-type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    };
+  }
+  Future<Response> getData(
+    String uri,
+  ) async {
+    try {
+      Response response = await get(uri);
+      return response;
+    } catch (e) {
+      return Response(statusCode: 1, statusText: e.toString());
+    }
+  }
+
+  //////////////////////////
   static final client = http.Client();
   // static const storage = FlutterSecureStorage();
 
-  static post(var body, String endpoint) async {
+  static post1(var body, String endpoint) async {
     var response = await client.post(buildurl(endpoint),
         body: body, headers: {"Content_type": "application/json"});
     return response.body;
   }
 
-  static Future<dynamic> get(String endpoint, String? token) async {
+  static Future<dynamic> get1(String endpoint, String? token) async {
     var response = await client.get(buildurl(endpoint), headers: {
       "Content_type": "application/json",
       "Authoraization": "Bearer $token"
@@ -23,7 +52,7 @@ class NetworkHandler {
   }
 
   static Uri buildurl(String endpoint) {
-    String host = baseUrl;
+    String host = AppConstants.BASE_URL;
     final apipath = host + endpoint;
     return Uri.parse(apipath);
   }

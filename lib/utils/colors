@@ -1,0 +1,13 @@
+//import 'package:flutter/cupertino.dart';
+import 'dart:ui';
+
+class AppColors {
+  static final Color containerColor = const Color(0xFFcffdff);
+  static final Color mainColor = const Color(0xFF1ea1a7);
+  static final Color iconColor1 = const Color(0xFF26c6da );
+  static final Color iconColor2 = const Color(0xFFffe082 );
+  static final Color whiteColor = const Color(0xFFfcfcfc);
+  static final Color greyColor = const Color(0xFFef5350 );
+  static final Color mainBlackColor = const Color(0xFFf48fb1);
+  static final Color dividerColor = const Color(0xFF6f9193);
+}

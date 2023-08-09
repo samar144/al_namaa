@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:alnamaa_charity/core/baseurl.dart';
+import 'package:alnamaa_charity/utils/app_constants.dart';
 import 'package:alnamaa_charity/features/donate_an_idea/model/idea_model.dart';
 import 'package:alnamaa_charity/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +47,7 @@ class DonateAnIdeaController extends GetxController {
         ideatitle: ideatitleEditController.text,
         profit: profitEditController.text);
     http.Response response = await http.post(
-        Uri.parse("$baseUrl/api/donateanidea"),
+        Uri.parse(AppConstants.BASE_URL + "/api/donateanidea"),
         body: jsonEncode(idea),
         headers: {
           "Content-Type": "application/json",

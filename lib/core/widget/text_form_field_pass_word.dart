@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class TextFormFieldPasswordWidget extends StatefulWidget {
   const TextFormFieldPasswordWidget({
-    super.key,
+    key,
     this.label,
     this.hint,
     this.icon,

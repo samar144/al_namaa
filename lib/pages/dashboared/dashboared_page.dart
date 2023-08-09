@@ -9,7 +9,7 @@ import '../news_page/news_page.dart';
 import 'dashboared_controller.dart';
 
 class DashboaredHomePage extends StatelessWidget {
-  DashboaredHomePage({super.key});
+  DashboaredHomePage({key});
   final void dashcontroller =
       Get.lazyPut<DashBoaredController>(() => DashBoaredController());
 

@@ -6,10 +6,10 @@ import 'package:http/http.dart' as http;
 import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:alnamaa_charity/utils/app_constants.dart';
 import '../../../../core/widget/loading_widget.dart';
 import '../../../../routes.dart';
-import '../../../../utils/baseurl.dart';
+
 import '../../../../utils/custom_snackbar.dart';
 import '../../signup/model/user_register_model.dart';
 import '../model/user_login_model.dart';
@@ -60,7 +60,8 @@ class LoginController extends GetxController {
     //     email: emailEditController.text, password: passwordEditController.text);
     UserModel loginModel = UserModel(
         email: emailEditController.text, password: passwordEditController.text);
-    var response = await http.post(Uri.parse('$baseUrl/api/login'),
+    var response = await http.post(
+        Uri.parse(AppConstants.BASE_URL + '/api/login'),
         body: jsonEncode(loginModel),
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +84,8 @@ class LoginController extends GetxController {
 
   forgetpassword() async {
     UserModel loginModel = UserModel(email: emailEditController.text);
-    var response = await http.post(Uri.parse('$baseUrl/api/forget/password'),
+    var response = await http.post(
+        Uri.parse(AppConstants.BASE_URL + '/api/forget/password'),
         body: jsonEncode(loginModel),
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +100,8 @@ class LoginController extends GetxController {
   }
 
   resetpassword() async {
-    var response = await http.post(Uri.parse('$baseUrl/api/reset/password'),
+    var response = await http.post(
+        Uri.parse(AppConstants.BASE_URL + '/api/reset/password'),
         body: jsonEncode({
           "email": emailEditController.text,
           "password": passwordEditController.text,

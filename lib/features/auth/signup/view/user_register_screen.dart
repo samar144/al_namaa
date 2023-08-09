@@ -16,7 +16,7 @@ class UserRegisterScreen extends StatelessWidget {
       Get.put(UserSignUpController());
   final formKey = GlobalKey<FormState>();
 
-  UserRegisterScreen({super.key});
+  UserRegisterScreen({key});
 
   @override
   Widget build(BuildContext context) {

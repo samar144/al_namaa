@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../core/widget/text_form_field.dart';
 
 class ContactWithUs extends StatelessWidget {
-  ContactWithUs({super.key});
+  ContactWithUs({key});
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import '../../../routes.dart';
 import '../controller/sponser_an_orohan_controller.dart';
 
 class SponserHomePage extends StatelessWidget {
-  SponserHomePage({super.key});
+  SponserHomePage({key});
   final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
   // final SponserAnOrphaneontroller controller =
   //     Get.put(SponserAnOrphaneontroller());
@@ -46,14 +46,14 @@ class SponserHomePage extends StatelessWidget {
         ),
         drawer: MyDrawer(
             name: "Hasan",
-            image: "images/1.png",
+            image: "assets/images/1.png",
             email: "hasan@gmail.com",
             listTile: [
               CustomListTile(
                 icon: const Icon(Icons.person),
                 describtion: "الملف الشخصي",
                 onTap: () {
-                  Get.back();
+                  Navigator.pushNamed(context, "/profile");
                 },
               ),
               const Divider(),
@@ -194,7 +194,7 @@ class SponserHomePage extends StatelessWidget {
                                     color: const Color.fromARGB(
                                         255, 241, 214, 246)),
                                 child: const CustomIcon(
-                                    image: "icons/hand.png",
+                                    image: "assets/icons/hand.png",
                                     width: 80.0,
                                     height: 80.0),
                               ),
@@ -217,7 +217,7 @@ class SponserHomePage extends StatelessWidget {
                                       color: const Color.fromARGB(
                                           255, 196, 232, 235)),
                                   child: const CustomIcon(
-                                      image: "icons/give-love.png",
+                                      image: "assets/icons/give-love.png",
                                       width: 80.0,
                                       height: 80.0),
                                 ),
@@ -241,7 +241,7 @@ class SponserHomePage extends StatelessWidget {
                                       color: const Color.fromARGB(
                                           255, 196, 229, 243)),
                                   child: const CustomIcon(
-                                      image: "icons/adoption.png",
+                                      image: "assets/icons/adoption.png",
                                       width: 80.0,
                                       height: 80.0),
                                 ),
@@ -265,7 +265,7 @@ class SponserHomePage extends StatelessWidget {
                                       color: const Color.fromARGB(
                                           255, 250, 239, 229)),
                                   child: const CustomIcon(
-                                      image: "icons/chat.png",
+                                      image: "assets/icons/chat.png",
                                       width: 80.0,
                                       height: 80.0),
                                 ),
@@ -316,7 +316,7 @@ class SponserHomePage extends StatelessWidget {
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "images/schoolchild-sitting-desk-living-room-holding-school-book.jpg"))),
+                                        "assets/images/schoolchild-sitting-desk-living-room-holding-school-book.jpg"))),
                             child: const Center(
                               child: Text(
                                 "دورة صناعة الصابون",
@@ -334,7 +334,7 @@ class SponserHomePage extends StatelessWidget {
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "images/classmates-working-together.jpg"))),
+                                        "assets/images/classmates-working-together.jpg"))),
                             child: const Center(
                               child: Text(
                                 "دورة الحاسوب ",
@@ -352,7 +352,7 @@ class SponserHomePage extends StatelessWidget {
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "images/children-group-drawing.jpg"))),
+                                        "assets/images/children-group-drawing.jpg"))),
                             child: const Center(
                               child: Text(
                                 "دورة صناعة الشمع ",
@@ -370,7 +370,7 @@ class SponserHomePage extends StatelessWidget {
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "images/little-kids-using-laptops-school.jpg"))),
+                                        "assets/images/little-kids-using-laptops-school.jpg"))),
                             child: const Center(
                               child: Text(
                                 "دورة الللغة العربية ",
@@ -388,7 +388,7 @@ class SponserHomePage extends StatelessWidget {
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "images/close-up-classmates-playing-with-laptop.jpg"))),
+                                        "assets/images/close-up-classmates-playing-with-laptop.jpg"))),
                             child: const Center(
                               child: Text(
                                 "دورة الرياضيات ",

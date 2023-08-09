@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../../core/widget/loading_widget.dart';
 import '../../../../routes.dart';
-import '../../../../utils/baseurl.dart';
+import '../../../../utils/app_constants.dart';
 import '../../../../utils/custom_snackbar.dart';
 import '../model/user_register_model.dart';
+import 'package:alnamaa_charity/utils/app_constants.dart';
 
 class SponsorSignUpController extends GetxController {
   final date = DateTime.now().obs;
@@ -90,11 +91,12 @@ class SponsorSignUpController extends GetxController {
   }
 
   getcountry() async {
-    http.Response response = await http
-        .get(Uri.parse('$baseUrl/api/address/country'), headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    });
+    http.Response response = await http.get(
+        Uri.parse(AppConstants.BASE_URL + '/api/address/country'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        });
     var res = await jsonDecode(response.body);
 
     return res["data"];
@@ -152,7 +154,7 @@ class SponsorSignUpController extends GetxController {
         tele_number: telephoneEditController.text,
         role: 4);
     http.Response response = await http.post(
-        Uri.parse('$baseUrl/api/app/register'),
+        Uri.parse(AppConstants.BASE_URL + '/api/app/register'),
         body: userModelToJson(user),
         headers: {
           "Content-Type": "application/json",

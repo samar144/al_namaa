@@ -15,7 +15,7 @@ class SponserRegisterScreen extends StatelessWidget {
   // final SponsorSignUpController registercontroller = Get.find();
   final formKey = GlobalKey<FormState>();
 
-  SponserRegisterScreen({super.key});
+  SponserRegisterScreen({key});
 
   @override
   Widget build(BuildContext context) {

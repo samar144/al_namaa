@@ -8,7 +8,7 @@ import '../../../core/widget/text_form_field.dart';
 import '../controller/sponser_an_orohan_controller.dart';
 
 class SponserAnOrphane extends StatelessWidget {
-  SponserAnOrphane({super.key});
+  SponserAnOrphane({key});
   final formKey = GlobalKey<FormState>();
   final SponserAnOrphaneontroller controller = Get.find();
 // /  final TextEditingController _dateController = TextEditingController();

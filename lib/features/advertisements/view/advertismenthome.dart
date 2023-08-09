@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controller/adscontroller.dart';
 
 class AdsHome extends StatelessWidget {
-  AdsHome({super.key});
+  AdsHome({key});
   final AdsController controller = Get.put(AdsController());
 
   @override

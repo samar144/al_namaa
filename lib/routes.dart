@@ -1,3 +1,4 @@
+import 'package:alnamaa_charity/features/Profile/main_profile.dart';
 import 'package:alnamaa_charity/features/contact_with_us/view/contact_with_us_screen.dart';
 import 'package:alnamaa_charity/pages/dashboared/dashboared_binding.dart';
 import 'package:alnamaa_charity/pages/dashboared/dashboared_page.dart';
@@ -30,22 +31,63 @@ class GetRoutes {
   static const String introscreen = "/introscreen";
   static const String resetpassword = "/resetpassword";
   static const String verify = "/verify";
+  static const String profile = "/profile";
 
   static List<GetPage> route = [
     GetPage(
       name: GetRoutes.login,
       page: () => UserSignInrScreen(),
     ),
-    GetPage(name: GetRoutes.signup, page: () => UserRegisterScreen()),
-    GetPage(name: GetRoutes.verify, page: () => VerifyScreen()),
-    GetPage(name: GetRoutes.introscreen, page: () => const IntroScreen()),
-    GetPage(name: GetRoutes.choosescreen, page: () => const ChooseScreen()),
-    GetPage(name: GetRoutes.sponsersignup, page: () => SponserRegisterScreen()),
-    GetPage(name: GetRoutes.sponserhomepage, page: () => SponserHomePage()),
-    GetPage(name: GetRoutes.myorohanes, page: () => const MyOrphanes()),
-    GetPage(name: GetRoutes.resetpassword, page: () => ResetPassword()),
-    GetPage(name: GetRoutes.donateidea, page: () => DonateAnIdea()),
-    GetPage(name: GetRoutes.contactwithus, page: () => ContactWithUs()),
+    GetPage(
+      name: GetRoutes.signup,
+      page: () => UserRegisterScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.verify,
+      page: () => VerifyScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.introscreen,
+      page: () => const IntroScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.choosescreen,
+      page: () => const ChooseScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.sponsersignup,
+      page: () => SponserRegisterScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.sponserhomepage,
+      page: () => SponserHomePage(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.myorohanes,
+      page: () => const MyOrphanes(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.resetpassword,
+      page: () => ResetPassword(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.donateidea,
+      page: () => DonateAnIdea(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.contactwithus,
+      page: () => ContactWithUs(),
+      transition: Transition.fadeIn,
+    ),
     GetPage(
         name: GetRoutes.sponseranorphan,
         page: () => SponserAnOrphane(),
@@ -53,6 +95,12 @@ class GetRoutes {
     GetPage(
       name: GetRoutes.dashboared,
       page: () => DashboaredHomePage(),
-    )
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: profile,
+      page: () => MainProfile(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

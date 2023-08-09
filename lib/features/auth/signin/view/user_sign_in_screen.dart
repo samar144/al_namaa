@@ -11,7 +11,7 @@ import '../../../../core/widget/button.dart';
 import '../../../../core/widget/text_form_field_pass_word.dart';
 
 class UserSignInrScreen extends StatelessWidget {
-  UserSignInrScreen({super.key});
+  UserSignInrScreen({key});
   final LoginController loginController = Get.put(LoginController());
   // final LoginController loginController = Get.find();
   final formKey = GlobalKey<FormState>();
