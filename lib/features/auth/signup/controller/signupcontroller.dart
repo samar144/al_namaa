@@ -45,12 +45,13 @@ class SponsorSignUpController extends GetxController {
       stateEditController,
       streetEditController,
       countryEditController,
-      studyEditController;
+      studyEditController,
+      verifyEditController;
 
   @override
   void onInit() {
     super.onInit();
-    getcountry();
+    // getcountry();
     emailEditController = TextEditingController();
     cpasswordEditController = TextEditingController();
     stateEditController = TextEditingController();
@@ -67,27 +68,28 @@ class SponsorSignUpController extends GetxController {
     jobEditController = TextEditingController();
     cityEditController = TextEditingController();
     studyEditController = TextEditingController();
+    verifyEditController = TextEditingController();
   }
 
   @override
   void onClose() {
     super.onClose();
-    emailEditController.dispose();
-    cpasswordEditController.dispose();
-    passwordEditController.dispose();
-    firstnameEditController.dispose();
-    lastnameEditController.dispose();
-    fathernameEditController.dispose();
-    mothernameEditController.dispose();
-    phonenumberEditController.dispose();
-    telephoneEditController.dispose();
-    birthdayEditController.dispose();
-    jobEditController.dispose();
-    cityEditController.dispose();
-    streetEditController.dispose();
-    stateEditController.dispose();
-    countryEditController.dispose();
-    studyEditController.dispose();
+    // emailEditController.dispose();
+    // cpasswordEditController.dispose();
+    // passwordEditController.dispose();
+    // firstnameEditController.dispose();
+    // lastnameEditController.dispose();
+    // fathernameEditController.dispose();
+    // mothernameEditController.dispose();
+    // phonenumberEditController.dispose();
+    // telephoneEditController.dispose();
+    // birthdayEditController.dispose();
+    // jobEditController.dispose();
+    // cityEditController.dispose();
+    // streetEditController.dispose();
+    // stateEditController.dispose();
+    // countryEditController.dispose();
+    // studyEditController.dispose();
   }
 
   getcountry() async {
@@ -162,11 +164,32 @@ class SponsorSignUpController extends GetxController {
         });
     var res = await jsonDecode(response.body);
     // print(res);
-    if (res["message"] == "the email is available") {
-      await customsnackbar("signup sucsses", res['message'], "sucess");
+    if (res["success"] == true) {
+      var token = res["data"]["token"];
+      await customsnackbar("sucsses", res['message'], "sucess");
+      Get.toNamed(GetRoutes.verifysponser, arguments: token);
+    } else {
+      customsnackbar(" Error", res['message'], "error");
+    }
+  }
+
+  verifyemail() async {
+    var response = await http.get(
+        Uri.parse(AppConstants.BASE_URL +
+            '/api/account/verify/${verifyEditController.text}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer ${Get.arguments}"
+        });
+    var res = await jsonDecode(response.body);
+    if (res["success"] == true) {
+      // isEmailConfirmed = true;
+
+      customsnackbar("", res['message'], "sucess");
       Get.offAllNamed(GetRoutes.login);
     } else {
-      customsnackbar("signup Error", res['message'], "error");
+      customsnackbar(res['message'], res['data'], "error");
     }
   }
 }

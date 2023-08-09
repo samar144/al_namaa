@@ -14,7 +14,7 @@ class UserRegisterScreen extends StatelessWidget {
   // final UserSignUpController registercontroller = Get.find();
   final UserSignUpController registercontroller =
       Get.put(UserSignUpController());
-  final formKey = GlobalKey<FormState>();
+  final formKey5 = GlobalKey<FormState>();
 
   UserRegisterScreen({key});
 
@@ -35,7 +35,7 @@ class UserRegisterScreen extends StatelessWidget {
                   ),
                   Form(
                     autovalidateMode: AutovalidateMode.always,
-                    key: formKey,
+                    key: formKey5,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -134,78 +134,73 @@ class UserRegisterScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Obx(
-                                () => DropdownButtonFormField<String>(
-                                  value:
-                                      registercontroller.selectedcountry.value,
-                                  items: registercontroller.country
-                                      .map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  isExpanded: true,
-                                  onChanged: (String? value) {
-                                    registercontroller
-                                        .countryEditController.text = value!;
-                                  },
-                                  decoration: InputDecoration(
-                                    labelText: 'الدولة ',
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: const BorderSide(
-                                            // color: Color(0xff1ea1a7),
-                                            width: 1)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xff1ea1a7),
-                                            width: 1)),
-                                  ),
+                        Row(children: [
+                          Expanded(
+                            child: Obx(
+                              () => DropdownButtonFormField<String>(
+                                value: registercontroller.selectedcountry.value,
+                                items: registercontroller.country
+                                    .map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                isExpanded: true,
+                                onChanged: (String? value) {
+                                  registercontroller
+                                      .countryEditController.text = value!;
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'الدولة ',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          // color: Color(0xff1ea1a7),
+                                          width: 1)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xff1ea1a7), width: 1)),
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              child: Obx(
-                                () => DropdownButtonFormField<String>(
-                                  value: registercontroller.selectedstate.value,
-                                  items: registercontroller.state
-                                      .map((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  isExpanded: true,
-                                  onChanged: (String? value) {
-                                    registercontroller
-                                        .stateEditController.text = value!;
-                                  },
-                                  decoration: InputDecoration(
-                                    labelText: 'المحافظة',
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: const BorderSide(
-                                            // color: Color(0xff1ea1a7),
-                                            width: 1)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                        borderSide: const BorderSide(
-                                            color: Color(0xff1ea1a7),
-                                            width: 1)),
-                                  ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Expanded(
+                            child: Obx(
+                              () => DropdownButtonFormField<String>(
+                                value: registercontroller.selectedstate.value,
+                                items: registercontroller.state
+                                    .map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                isExpanded: true,
+                                onChanged: (String? value) {
+                                  registercontroller.stateEditController.text =
+                                      value!;
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'المحافظة',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          // color: Color(0xff1ea1a7),
+                                          width: 1)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      borderSide: const BorderSide(
+                                          color: Color(0xff1ea1a7), width: 1)),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ]),
                         const SizedBox(
                           height: 20,
                         ),
@@ -254,7 +249,7 @@ class UserRegisterScreen extends StatelessWidget {
                                   items: registercontroller.street
                                       .map((String value) {
                                     return DropdownMenuItem<String>(
-                                      // value: value,
+                                      value: value,
                                       child: Text(value),
                                     );
                                   }).toList(),
@@ -280,6 +275,9 @@ class UserRegisterScreen extends StatelessWidget {
                               ),
                             ),
                           ],
+                        ),
+                        const SizedBox(
+                          height: 20,
                         ),
                         SizedBox(
                           height: 110,
@@ -401,7 +399,7 @@ class UserRegisterScreen extends StatelessWidget {
                   CustomButton(
                     name: " إنشاء حساب",
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
+                      if (formKey5.currentState!.validate()) {
                         registercontroller.checksignup();
                       }
                     },

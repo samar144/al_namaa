@@ -13,7 +13,7 @@ class SponserRegisterScreen extends StatelessWidget {
   final SponsorSignUpController registercontroller =
       Get.put(SponsorSignUpController());
   // final SponsorSignUpController registercontroller = Get.find();
-  final formKey = GlobalKey<FormState>();
+  final formKey4 = GlobalKey<FormState>();
 
   SponserRegisterScreen({key});
 
@@ -34,7 +34,7 @@ class SponserRegisterScreen extends StatelessWidget {
                     ),
                     Form(
                         autovalidateMode: AutovalidateMode.always,
-                        key: formKey,
+                        key: formKey4,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -133,14 +133,92 @@ class SponserRegisterScreen extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
+                            Row(children: [
+                              Expanded(
+                                child: Obx(
+                                  () => DropdownButtonFormField<String>(
+                                    value: registercontroller
+                                        .selectedcountry.value,
+                                    items: registercontroller.country
+                                        .map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    isExpanded: true,
+                                    onChanged: (String? value) {
+                                      registercontroller
+                                          .countryEditController.text = value!;
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'الدولة ',
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                              // color: Color(0xff1ea1a7),
+                                              width: 1)),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                              color: Color(0xff1ea1a7),
+                                              width: 1)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                child: Obx(
+                                  () => DropdownButtonFormField<String>(
+                                    value:
+                                        registercontroller.selectedstate.value,
+                                    items: registercontroller.state
+                                        .map((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    isExpanded: true,
+                                    onChanged: (String? value) {
+                                      registercontroller
+                                          .stateEditController.text = value!;
+                                    },
+                                    decoration: InputDecoration(
+                                      labelText: 'المحافظة',
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                              // color: Color(0xff1ea1a7),
+                                              width: 1)),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          borderSide: const BorderSide(
+                                              color: Color(0xff1ea1a7),
+                                              width: 1)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             Row(
                               children: [
                                 Expanded(
                                   child: Obx(
                                     () => DropdownButtonFormField<String>(
-                                      value: registercontroller
-                                          .selectedcountry.value,
-                                      items: registercontroller.country
+                                      value:
+                                          registercontroller.selectedcity.value,
+                                      items: registercontroller.city
                                           .map((String value) {
                                         return DropdownMenuItem<String>(
                                           value: value,
@@ -149,11 +227,11 @@ class SponserRegisterScreen extends StatelessWidget {
                                       }).toList(),
                                       isExpanded: true,
                                       onChanged: (String? value) {
-                                        registercontroller.countryEditController
-                                            .text = value!;
+                                        registercontroller
+                                            .cityEditController.text = value!;
                                       },
                                       decoration: InputDecoration(
-                                        labelText: 'الدولة ',
+                                        labelText: 'المدينة',
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20),
@@ -177,8 +255,8 @@ class SponserRegisterScreen extends StatelessWidget {
                                   child: Obx(
                                     () => DropdownButtonFormField<String>(
                                       value: registercontroller
-                                          .selectedstate.value,
-                                      items: registercontroller.state
+                                          .selectedstreet.value,
+                                      items: registercontroller.street
                                           .map((String value) {
                                         return DropdownMenuItem<String>(
                                           value: value,
@@ -188,10 +266,10 @@ class SponserRegisterScreen extends StatelessWidget {
                                       isExpanded: true,
                                       onChanged: (String? value) {
                                         registercontroller
-                                            .stateEditController.text = value!;
+                                            .streetEditController.text = value!;
                                       },
                                       decoration: InputDecoration(
-                                        labelText: 'المحافظة',
+                                        labelText: 'الشارع',
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20),
@@ -208,182 +286,102 @@ class SponserRegisterScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Obx(
-                                        () => DropdownButtonFormField<String>(
-                                          value: registercontroller
-                                              .selectedcity.value,
-                                          items: registercontroller.city
-                                              .map((String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                          isExpanded: true,
-                                          onChanged: (String? value) {
-                                            registercontroller
-                                                .cityEditController
-                                                .text = value!;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: 'المدينة',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                borderSide: const BorderSide(
-                                                    // color: Color(0xff1ea1a7),
-                                                    width: 1)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                borderSide: const BorderSide(
-                                                    color: Color(0xff1ea1a7),
-                                                    width: 1)),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Expanded(
-                                      child: Obx(
-                                        () => DropdownButtonFormField<String>(
-                                          value: registercontroller
-                                              .selectedstreet.value,
-                                          items: registercontroller.street
-                                              .map((String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                          isExpanded: true,
-                                          onChanged: (String? value) {
-                                            registercontroller
-                                                .streetEditController
-                                                .text = value!;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: 'الشارع',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                borderSide: const BorderSide(
-                                                    // color: Color(0xff1ea1a7),
-                                                    width: 1)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                borderSide: const BorderSide(
-                                                    color: Color(0xff1ea1a7),
-                                                    width: 1)),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 110,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: TextFormFieldWidget(
-                                          label: "العمل",
-                                          // validator: (val) {
-                                          //   if (val!.isEmpty) {
-                                          //     return "مطلوب";
-                                          //   }
-                                          //   return null;
-                                          // },
-                                          controller: registercontroller
-                                              .jobEditController,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: TextFormFieldWidget(
-                                          label: "الدراسة",
-                                          // validator: (val) {
-                                          //   if (val!.isEmpty) {
-                                          //     return "مطلوب";
-                                          //   }
-                                          //   return null;
-                                          // },
-                                          controller: registercontroller
-                                              .studyEditController,
-                                        ),
-                                      ),
-                                      Expanded(
-                                          child: TextFormFieldWidget(
-                                              label: "تاريخ الميلاد",
-                                              validator: (val) {
-                                                if (val!.isEmpty) {
-                                                  return "مطلوب";
-                                                }
-                                                return null;
-                                              },
-                                              controller: registercontroller
-                                                  .birthdayEditController,
-                                              onTap: () async {
-                                                // Show the date picker dialog and update the value of _date
-                                                DateTime? pickedDate =
-                                                    await DatePicker
-                                                        .showSimpleDatePicker(
-                                                  context,
-                                                  initialDate:
-                                                      registercontroller
-                                                          .date.value,
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  dateFormat: "dd-MM-yyyy",
-                                                  locale: DateTimePickerLocale
-                                                      .en_us,
-                                                  looping: true,
-                                                );
-                                                if (pickedDate != null) {
-                                                  registercontroller
-                                                      .date.value = pickedDate;
-                                                  registercontroller
-                                                          .birthdayEditController
-                                                          .text =
-                                                      pickedDate
-                                                          .toString()
-                                                          .substring(0, 10);
-                                                }
-                                              })),
-                                    ],
-                                  ),
-                                ),
-                                TextFormFieldWidget(
-                                  validator: (val) {
-                                    if (!emailRegex.hasMatch(registercontroller
-                                        .emailEditController.text)) {
-                                      return "example@example.com";
-                                    }
-                                    return null;
-                                  },
-                                  label: "الايميل :",
-                                  hint: "ادخل الايميل ",
-                                  icon: const Icon(Icons.email),
-                                  keyboaredtype: TextInputType.emailAddress,
-                                  controller:
-                                      registercontroller.emailEditController,
-                                ),
-                                TextFormFieldPasswordWidget(
-                                  label: "كلمة السر",
-                                  controller:
-                                      registercontroller.passwordEditController,
-                                  hint: "ادخل كلمة السر ",
-                                  icon: const Icon(Icons.password),
-                                ),
                               ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              height: 110,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: TextFormFieldWidget(
+                                      label: "العمل",
+                                      // validator: (val) {
+                                      //   if (val!.isEmpty) {
+                                      //     return "مطلوب";
+                                      //   }
+                                      //   return null;
+                                      // },
+                                      controller:
+                                          registercontroller.jobEditController,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: TextFormFieldWidget(
+                                      label: "الدراسة",
+                                      // validator: (val) {
+                                      //   if (val!.isEmpty) {
+                                      //     return "مطلوب";
+                                      //   }
+                                      //   return null;
+                                      // },
+                                      controller: registercontroller
+                                          .studyEditController,
+                                    ),
+                                  ),
+                                  Expanded(
+                                      child: TextFormFieldWidget(
+                                          label: "تاريخ الميلاد",
+                                          validator: (val) {
+                                            if (val!.isEmpty) {
+                                              return "مطلوب";
+                                            }
+                                            return null;
+                                          },
+                                          controller: registercontroller
+                                              .birthdayEditController,
+                                          onTap: () async {
+                                            // Show the date picker dialog and update the value of _date
+                                            DateTime? pickedDate =
+                                                await DatePicker
+                                                    .showSimpleDatePicker(
+                                              context,
+                                              initialDate:
+                                                  registercontroller.date.value,
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2100),
+                                              dateFormat: "dd-MM-yyyy",
+                                              locale:
+                                                  DateTimePickerLocale.en_us,
+                                              looping: true,
+                                            );
+                                            if (pickedDate != null) {
+                                              registercontroller.date.value =
+                                                  pickedDate;
+                                              registercontroller
+                                                      .birthdayEditController
+                                                      .text =
+                                                  pickedDate
+                                                      .toString()
+                                                      .substring(0, 10);
+                                            }
+                                          })),
+                                ],
+                              ),
+                            ),
+                            TextFormFieldWidget(
+                              validator: (val) {
+                                if (!emailRegex.hasMatch(registercontroller
+                                    .emailEditController.text)) {
+                                  return "example@example.com";
+                                }
+                                return null;
+                              },
+                              label: "الايميل :",
+                              hint: "ادخل الايميل ",
+                              icon: const Icon(Icons.email),
+                              keyboaredtype: TextInputType.emailAddress,
+                              controller:
+                                  registercontroller.emailEditController,
+                            ),
+                            TextFormFieldPasswordWidget(
+                              label: "كلمة السر",
+                              controller:
+                                  registercontroller.passwordEditController,
+                              hint: "ادخل كلمة السر ",
+                              icon: const Icon(Icons.password),
                             ),
                             GestureDetector(
                               onTap: () {
@@ -415,7 +413,7 @@ class SponserRegisterScreen extends StatelessWidget {
                             CustomButton(
                               name: " إنشاء حساب",
                               onPressed: () {
-                                if (formKey.currentState!.validate()) {
+                                if (formKey4.currentState!.validate()) {
                                   registercontroller.checksignup();
                                 }
                               },

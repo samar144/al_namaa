@@ -11,11 +11,13 @@ import '../../../../core/widget/button.dart';
 import '../../../../core/widget/text_form_field_pass_word.dart';
 
 class UserSignInrScreen extends StatelessWidget {
-  UserSignInrScreen({key});
-  final LoginController loginController = Get.put(LoginController());
+  //UserSignInrScreen({super.key});
+  final LoginController loginController =
+      Get.put(LoginController(), permanent: true);
+
   // final LoginController loginController = Get.find();
   final formKey = GlobalKey<FormState>();
-
+  Future<void> fu() async {}
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -47,8 +49,8 @@ class UserSignInrScreen extends StatelessWidget {
                                 validator: (val) {
                                   if (!emailRegex.hasMatch(loginController
                                           .emailEditController.text) &&
-                                      loginController.emailEditController.text
-                                          .isNotEmpty) {
+                                      loginController
+                                          .emailEditController.text.isEmpty) {
                                     return "example@example.com";
                                   }
                                   return null;

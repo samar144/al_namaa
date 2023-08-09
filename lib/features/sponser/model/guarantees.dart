@@ -10,61 +10,69 @@ Guarantees guaranteesFromJson(String str) =>
 String guaranteesToJson(Guarantees data) => json.encode(data.toJson());
 
 class Guarantees {
-  String? sponserId;
-  String? orphanId;
-  String? paymentWay;
-  String? amount;
-  String? startDate;
-  String? endDate;
-  String? alternativeName;
-  String? alternativePhone;
-  String? alternativeTele;
-  String? alternativeAddress;
-  String? orderStatus;
-  String? approverId;
+  int sponsor_id;
+  String? orphan_id;
+  String? payment_way;
+  int? amount;
+  int? id;
+  var start_date;
+  var end_date;
+  String? alternative_name;
+  String? alternative_phone;
+  String? alternative_tele;
+  String? alternative_address;
+  // String? orderStatus;
+  String? note;
+  // String? approverId;
 
   Guarantees({
-    this.sponserId,
-    this.orphanId,
-    this.paymentWay,
+    required this.sponsor_id,
+    this.orphan_id,
+    this.note,
+    this.id,
+    this.payment_way,
     this.amount,
-    this.startDate,
-    this.endDate,
-    this.alternativeName,
-    this.alternativePhone,
-    this.alternativeTele,
-    this.alternativeAddress,
-    this.orderStatus,
-    this.approverId,
+    this.start_date,
+    this.end_date,
+    this.alternative_name,
+    this.alternative_phone,
+    this.alternative_tele,
+    this.alternative_address,
+    // this.orderStatus,
+    // this.approverId,
   });
 
   factory Guarantees.fromJson(Map<String, dynamic> json) => Guarantees(
-        sponserId: json["sponser_id"],
-        orphanId: json["orphan_id"],
-        paymentWay: json["payment_way"],
+        sponsor_id: json["sponser_id"],
+        orphan_id: json["orphan_id"],
+        payment_way: json["payment_way"],
         amount: json["amount"],
-        startDate: json["start_date"],
-        endDate: json["end_date"],
-        alternativeName: json["alternative_name"],
-        alternativePhone: json["alternative_phone"],
-        alternativeTele: json["alternative_tele"],
-        alternativeAddress: json["alternative_address"],
-        orderStatus: json["order_status"],
-        approverId: json["approver_id"],
+        note: json["note"],
+        id: json["id"],
+        start_date: json["start_date"],
+        end_date: json["end_date"],
+        alternative_name: json["alternative_name"],
+        alternative_phone: json["alternative_phone"],
+        alternative_tele: json["alternative_tele"],
+        alternative_address: json["alternative_address"],
+        // orderStatus: json["order_status"],
+        // approverId: json["approver_id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "sponser_id": sponserId,
-        "orphan_id": orphanId,
-        "payment_way": paymentWay,
+        "sponser_id": sponsor_id,
+        "orphan_id": orphan_id,
+        "payment_way": payment_way,
+        "note": note,
+        "id": id,
         "amount": amount,
-        "start_date": startDate,
-        "end_date": endDate,
-        "alternative_name": alternativeName,
-        "alternative_phone": alternativePhone,
-        "alternative_tele": alternativeTele,
-        "alternative_address": alternativeAddress,
-        "order_status": orderStatus,
-        "approver_id": approverId
+        "start_date": start_date,
+        "end_date": end_date,
+        "alternative_name": alternative_name,
+        "alternative_phone": alternative_phone,
+        "alternative_tele": alternative_tele,
+        "alternative_address": alternative_address,
+        // "order_status": orderStatus,
+        // "approver_id": approverId
       };
 }

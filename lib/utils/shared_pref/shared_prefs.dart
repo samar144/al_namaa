@@ -1,21 +1,44 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../features/auth/signup/model/user_register_model.dart';
+
 class ShredPref {
-  static Future<void> storeuser(user) async {
+  static Future<void> saveUserModel(UserModel userModel) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("user", user);
+    String userModelJson = userModelToJson(userModel);
+    await prefs.setString('userModel', userModelJson);
   }
 
-  // static Future<dynamic> geteuser() async {
-  static geteuser() async {
+  static Future<UserModel?> getUserModelFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString("user");
+    String? userModelJson = prefs.getString('userModel');
+    if (userModelJson != null) {
+      return userModelFromJson(userModelJson);
+    }
+    return null;
   }
 
-  static removeuser() async {
+  static Future<void> removeUserModel() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.remove("user");
+    await prefs.remove('userModel');
   }
+  // static Future<void> storeuser(user) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setString("user", user);
+  // }
+
+  // // static Future<dynamic> geteuser() async {
+  // static geteuser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   return prefs.getString("user");
+  // }
+
+  // static removeuser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   return prefs.remove("user");
+  // }
 
   static Future<void> storetoken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -5,7 +5,7 @@ UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 String userModelToJson(UserModel data) => json.encode(data.toJson());
 
 class UserModel {
-  int? id;
+  var user_id;
   String? email;
   String? name;
   String? password;
@@ -33,7 +33,7 @@ class UserModel {
     this.email,
     this.password,
     this.first_name,
-    this.id,
+    this.user_id,
     this.token,
     this.name,
     this.street,
@@ -54,7 +54,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       email: json["email"],
-      id: json['id'],
+      user_id: json['user_id'],
       password: json["password"],
       cpassword: json["c_password"],
       first_name: json["first_name"],
@@ -76,7 +76,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() => {
         "email": email,
-        "id": id,
+        "user_id": user_id,
         "password": password,
         "c_password": cpassword,
         "street": street,

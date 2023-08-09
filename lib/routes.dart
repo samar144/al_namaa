@@ -11,7 +11,10 @@ import 'features/auth/signup/view/choose_screen.dart';
 import 'features/auth/signup/view/sponser_register_screen.dart';
 import 'features/auth/signup/view/user_register_screen.dart';
 import 'features/auth/verify/verifyscreen.dart';
+import 'features/auth/verify/verifysponser.dart';
 import 'features/donate_an_idea/view/donate_an_idea.dart';
+import 'features/sponser/view/getacceptedsponsororder.dart';
+import 'features/sponser/view/getwaitingsponsororder.dart';
 import 'features/sponser/view/my_orphanes.dart';
 import 'features/sponser/view/sponser_home_screen.dart';
 import 'features/sponser/view/sponsor_an_orphan.dart';
@@ -24,20 +27,25 @@ class GetRoutes {
   static const String sponsersignup = "/sponsersignup";
   static const String dashboared = "/dashboared";
   static const String sponserhomepage = "/sponserhomepage";
-  static const String myorohanes = "/myorphanes";
+  static const String myorphanes = "/myorphanes";
   static const String donateidea = "/donateidea";
   static const String contactwithus = "/contactwithus";
   static const String sponseranorphan = "/sponseranorphan";
   static const String introscreen = "/introscreen";
   static const String resetpassword = "/resetpassword";
+  static const String verifysponser = "/verifysponser";
   static const String verify = "/verify";
+
   static const String profile = "/profile";
+  static const String getacceptedsponsororder = "/getacceptedsponsororder";
+  static const String getawaitingsponsororder = "/getawaitingsponsororder";
 
   static List<GetPage> route = [
     GetPage(
       name: GetRoutes.login,
       page: () => UserSignInrScreen(),
     ),
+
     GetPage(
       name: GetRoutes.signup,
       page: () => UserRegisterScreen(),
@@ -69,8 +77,8 @@ class GetRoutes {
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: GetRoutes.myorohanes,
-      page: () => const MyOrphanes(),
+      name: GetRoutes.myorphanes,
+      page: () => MyOrphanes(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -102,5 +110,14 @@ class GetRoutes {
       page: () => MainProfile(),
       transition: Transition.fadeIn,
     ),
+///////////
+
+    GetPage(
+        name: GetRoutes.getacceptedsponsororder,
+        page: () => GetAcceptedSponsorOrders()),
+    GetPage(name: GetRoutes.verifysponser, page: () => VerifyScreenSponser()),
+    GetPage(
+        name: GetRoutes.getawaitingsponsororder,
+        page: () => GetWaitingSponsorOrders()),
   ];
 }

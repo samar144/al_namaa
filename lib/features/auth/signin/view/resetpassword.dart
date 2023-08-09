@@ -14,7 +14,7 @@ class ResetPassword extends StatelessWidget {
   ResetPassword({key});
   final LoginController loginController = Get.put(LoginController());
   // final LoginController loginController = Get.find();
-  final formKey = GlobalKey<FormState>();
+  final formKey1 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class ResetPassword extends StatelessWidget {
                       children: [
                         Form(
                           autovalidateMode: AutovalidateMode.always,
-                          key: formKey,
+                          key: formKey1,
                           child: Column(
                             children: [
                               TextFormFieldWidget(
@@ -94,7 +94,7 @@ class ResetPassword extends StatelessWidget {
                         CustomButton(
                           name: "ارسال",
                           onPressed: () {
-                            if (formKey.currentState!.validate() &&
+                            if (formKey1.currentState!.validate() &&
                                 loginController.passwordEditController.text ==
                                     loginController
                                         .cpasswordEditController.text) {

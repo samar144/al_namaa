@@ -5,8 +5,9 @@ import '../../../core/widget/text_form_field.dart';
 import '../controller/donate_an_idea_controller.dart';
 
 class DonateAnIdea extends StatelessWidget {
-  DonateAnIdea({key});
-  final formKey = GlobalKey<FormState>();
+  //DonateAnIdea({super.key});
+  final formKey8 = GlobalKey<FormState>();
+
   final DonateAnIdeaController cont = Get.put(DonateAnIdeaController());
 
   @override
@@ -39,7 +40,7 @@ class DonateAnIdea extends StatelessWidget {
                 ))),
         body: GetBuilder<DonateAnIdeaController>(builder: (controller) {
           return Form(
-            key: formKey,
+            key: formKey8,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -89,7 +90,7 @@ class DonateAnIdea extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.cyan[600]),
                             onPressed: () {
-                              if (formKey.currentState!.validate()) {
+                              if (formKey8.currentState!.validate()) {
                                 controller.donateanidea();
                               }
                             },

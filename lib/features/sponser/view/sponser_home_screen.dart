@@ -1,17 +1,20 @@
 import 'package:alnamaa_charity/core/widget/customicon.dart';
+import 'package:alnamaa_charity/features/auth/signup/model/user_register_model.dart';
+import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../../core/widget/custom_list_tile.dart';
 import '../../../core/widget/drawer.dart';
 import '../../../routes.dart';
-import '../controller/sponser_an_orohan_controller.dart';
+import '../../../utils/shared_pref/getstorage.dart';
+import '../controller/sponser_home_controller.dart';
 
 class SponserHomePage extends StatelessWidget {
   SponserHomePage({key});
   final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
-  // final SponserAnOrphaneontroller controller =
-  //     Get.put(SponserAnOrphaneontroller());
+  final HomeController controller = Get.put(HomeController());
+  // UserModel user = GetStorageUtils().getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +44,14 @@ class SponserHomePage extends StatelessWidget {
             onPressed: () {
               scaffoldKey1.currentState!.openDrawer();
             },
-            icon: const CircleAvatar(child: Text("H")),
+            icon: CircleAvatar(
+                child: Text(controller.user.name!.substring(0, 1))),
           ),
         ),
         drawer: MyDrawer(
-            name: "Hasan",
-            image: "assets/images/1.png",
-            email: "hasan@gmail.com",
+            name: controller.user.name!,
+            image: "images/1.png",
+            email: controller.user!.email!,
             listTile: [
               CustomListTile(
                 icon: const Icon(Icons.person),
@@ -59,9 +63,19 @@ class SponserHomePage extends StatelessWidget {
               const Divider(),
               CustomListTile(
                 icon: const Icon(Icons.people_outline),
-                describtion: 'المكفولين',
+                describtion: '  طلبات الكفالة المقبولة',
                 onTap: () {
-                  Get.back();
+                  Get.toNamed(GetRoutes.getacceptedsponsororder,
+                      arguments: controller.user);
+                },
+              ),
+              const Divider(),
+              CustomListTile(
+                icon: const Icon(Icons.people_outline),
+                describtion: '  طلبات كفالة قيد المعالجة',
+                onTap: () {
+                  Get.toNamed(GetRoutes.getawaitingsponsororder,
+                      arguments: controller.user);
                 },
               ),
               const Divider(),
@@ -208,7 +222,9 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(GetRoutes.sponseranorphan);
+                                  Get.toNamed(
+                                    GetRoutes.sponseranorphan,
+                                  );
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),
@@ -232,7 +248,9 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(GetRoutes.myorohanes);
+                                  Get.toNamed(
+                                    GetRoutes.myorphanes,
+                                  );
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),

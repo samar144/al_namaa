@@ -6,11 +6,15 @@ import 'package:http/http.dart' as http;
 import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:alnamaa_charity/utils/app_constants.dart';
+import 'package:get_storage/get_storage.dart';
+
 import '../../../../core/widget/loading_widget.dart';
 import '../../../../routes.dart';
 
 import '../../../../utils/custom_snackbar.dart';
+import '../../../../utils/shared_pref/getstorage.dart';
 import '../../signup/model/user_register_model.dart';
 import '../model/user_login_model.dart';
 
@@ -49,10 +53,10 @@ class LoginController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    emailEditController.dispose();
-    passwordEditController.dispose();
-    cpasswordEditController.dispose();
-    tokenEditController.dispose();
+    // emailEditController.dispose();
+    // passwordEditController.dispose();
+    // cpasswordEditController.dispose();
+    // tokenEditController.dispose();
   }
 
   login() async {
@@ -72,11 +76,21 @@ class LoginController extends GetxController {
       //اسم اليوزر بالجيسون يلي بين قوسين القصد
       // UserLoginModel user = UserLoginModel(
       //     name: res['data']['name'], token: res['data']['token']);
-      UserModel user =
-          UserModel(name: res['data']['name'], token: res['data']['token']);
-      await ShredPref.storeuser(jsonEncode(user));
-      customsnackbar("signup sucsses", res['message'], "sucess");
-      Get.offAllNamed(GetRoutes.sponserhomepage);
+
+      UserModel user = UserModel(
+          name: res['data']['name'],
+          token: res['data']['token'],
+          user_id: res["data"]["user_id"],
+          email: emailEditController.text!);
+      GetStorageUtils().saveUser(user);
+      customsnackbar("sucsses", res['message'], "sucess");
+      if (res["data"]["role"][0] == "Sponsor") {
+        Get.offAllNamed(
+          GetRoutes.sponserhomepage,
+        );
+      } else if (res["data"]["role"][0] == "NormalUser") {
+        // Get.offAllNamed(GetRoutes.sponserhomepage);
+      } else {}
     } else {
       customsnackbar("signup Error", res['message'], "error");
     }
