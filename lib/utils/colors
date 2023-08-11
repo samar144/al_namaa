@@ -10,4 +10,9 @@ class AppColors {
   static final Color greyColor = const Color(0xFFef5350 );
   static final Color mainBlackColor = const Color(0xFFf48fb1);
   static final Color dividerColor = const Color(0xFF6f9193);
+    static final Color conColor1 = const Color(0xFFffe082 );
+  static final Color conColor2 = const Color(0xFFDCB1E0);
+  static final Color conColor3 = const Color(0xFFECB1D1 );
+  static final Color conColor4 = const Color(0xFFB1E6EC);
+  static final Color conColor5 = const Color(0xFFEBECB1);
 }

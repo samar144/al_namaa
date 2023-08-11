@@ -12,6 +12,7 @@ Future<void> init() async {
   Get.lazyPut(() => LoginController(), fenix: true);
   Get.lazyPut(() => UserSignUpController(), fenix: true);
   Get.lazyPut(() => SponsorSignUpController(), fenix: true);
+  // Get.lazyPut(() => AllertController(), fenix: true);
   ///////////////////////
   // Get.lazyPut(() => ProfileRepo(networkHandler: Get.find()));
   // Get.lazyPut(() => ProfileController());

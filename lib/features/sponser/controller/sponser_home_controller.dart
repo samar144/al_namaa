@@ -99,13 +99,18 @@ class HomeController extends GetxController {
       "Authorization": "Bearer $token"
     });
     var res = await jsonDecode(response.body);
-
+    print("ddddddddddddd");
+    ;
     if (response.statusCode == 200) {
       final List data = [];
       for (var item in res["data"]) {
         data.add(item);
+        print("$baseUrl+${item["orphan"]["photo"].toString()}");
+        print(item["orphan"]["first_name"].toString());
       }
       _orphanforsponser.value = data;
+      print("dddddddddddddrrrrrrrrrrrrrrrrr");
+      print(res);
     } else {
       throw Exception("Failed to fetch data");
     }

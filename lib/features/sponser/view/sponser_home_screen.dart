@@ -57,7 +57,7 @@ class SponserHomePage extends StatelessWidget {
                 icon: const Icon(Icons.person),
                 describtion: "الملف الشخصي",
                 onTap: () {
-                  Navigator.pushNamed(context, "/profile");
+                  Get.toNamed(GetRoutes.dashboared);
                 },
               ),
               const Divider(),
