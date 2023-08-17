@@ -88,8 +88,9 @@ class LoginController extends GetxController {
         Get.offAllNamed(
           GetRoutes.sponserhomepage,
         );
-      } else if (res["data"]["role"][0] == "NormalUser") {
-        // Get.offAllNamed(GetRoutes.sponserhomepage);
+      } else if (res["data"]["role"][0] == "NormalUser" ||
+          res["data"]["role"][0] == "Orphan") {
+        Get.offAllNamed(GetRoutes.orphanhomepage);
       } else {}
     } else {
       customsnackbar("signup Error", res['message'], "error");

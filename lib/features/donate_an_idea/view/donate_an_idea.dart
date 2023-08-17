@@ -44,7 +44,7 @@ class DonateAnIdea extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     "شاركنا بعض الأفكار ",
@@ -67,7 +67,7 @@ class DonateAnIdea extends StatelessWidget {
                     hint: "ادخل الفكرة مع بعض الشرح ... ",
                     label: "",
                     keyboaredtype: TextInputType.multiline,
-                    maxlines: 15,
+                    maxlines: 6,
                   ),
                   TextFormFieldWidget(
                     controller: controller.costEditController,
@@ -87,27 +87,31 @@ class DonateAnIdea extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.cyan[600]),
-                            onPressed: () {
-                              if (formKey8.currentState!.validate()) {
-                                controller.donateanidea();
-                              }
-                            },
-                            child: const Text("إرسال")),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.cyan[600],
+                          ),
+                          onPressed: () {
+                            if (formKey8.currentState!.validate()) {
+                              controller.donateanidea();
+                            }
+                          },
+                          child: const Text("إرسال"),
+                        ),
                         const SizedBox(
                           width: 10.0,
                         ),
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red),
-                            child: const Text("إلغاء"),
-                            onPressed: () {
-                              Get.back();
-                            }),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
+                          child: const Text("إلغاء"),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

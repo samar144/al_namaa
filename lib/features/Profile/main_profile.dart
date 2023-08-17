@@ -39,7 +39,7 @@ class _MainProfileState extends State<MainProfile>
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (controller) {
       var token =
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMWJhYTlhMDJhNDMxNzJmNDI2NTA3ZTg4YTkyYTAzZTg3ZjI0MzMxNzFhNDg0ZmYwNjliNTcxZTNhN2FlZWRiNmU5NDY3OWMwN2RjMjE4NmEiLCJpYXQiOjE2OTE3MjYzNDUuOTI1NzA3LCJuYmYiOjE2OTE3MjYzNDUuOTI1NzEyLCJleHAiOjE3MjMzNDg3NDUuODU3MDYyLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.FVttJM9JB91fAg4gpshQKDGVgw7Ipe-H7J3uBSIaE9o5Gt4gw3mVcrRpX-eckIIqZ4w0-nXkOmoRxuv8_cpDux2DW3qszL_unN7j6sMKCGujbxx43FQxYEJpQxTv3Q79vZ6D-G_ic4FC7AIaZt2hIKulqxEnP1B_3BC9b9Q4tUaQwgnJzKaJ_5X9qwOi_b7OzcoTitmXjrHGr9UAK2chuVLdAswo2vb62vBV9KW5jOkO3G3TuMq7NPefed-LYqtHSi2q5-hW52TvMObpl5X3Mu22V5haBfui_InFbU-eA8dUgrjpeu7udKhCwo-GLvr2DwiAvFZNOohrTe904BprunfVWL7Sl6PQXI-flSZHhAHT4Md_R2dedgzwZWCjOtJqRCewt5eOS-2u7LqRqf1pWJce1pKe_9brRQBQQ9CWlPhdt6DUfbTXBeje7jvm3AAjIB9FASNXlvs00DUM6pbmdXEIgvuAtim2bbZLve-WXhVqnBesiEGPv17zuFcL6JkJfQXc-lyzGbSpU5yz8KBNb4XwcMxL4uWKYmQn58E6ekoITbq_-_t0xmC8ZdI7OdVq12uCgFIT3wQ--Y5o10tImGemidtLGj4NwQrSouUo2jQlKcowIofshaNwUakM0r6n5ePi7zkR38fHCom9A538AvzPY_BDcxoKte9My_tg2Ic";
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMWM5NDQ0MTE1Yjc2MDJjNTNlNWJkZDU1YTRmZjkzY2UyYTIwMDBlYjRjYTk5NDJmYmRkNTFhZjA5ZTdlNjJlMDQ4YTQ3ZmNkYWU4ZTk2MzYiLCJpYXQiOjE2OTIwODI5MjguOTczNTcxLCJuYmYiOjE2OTIwODI5MjguOTczNTc1LCJleHAiOjE3MjM3MDUzMjguOTE3OTUzLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KJGP4Vm_qM_VHrn9E9A8MuGpwD4UchkLFWTjsqh4yqhJzCRNOxlZ_-DAStWjZnPw4BbalieN0ebAm4U2pt23LeVFnyp9lMIFYpEu7VQkj5H3rgadUwuYxlcUXHKdp5KbvVyD8MzJgfrg2J21SGTc3HAjbr-LrdvGFeWD6R48Mufcm2k37WjGL8n-oFw6eEnS7gbJBnYKaYjpso4JwyGgh3_DiEbFtFIm-k1M2vzom1oEkqxbQtMYp0VDIazvAWZmfghMfvIWyQ5GJ6cesK3BQ_w1pfSyB5trCaMIjDVRJSP4nWPEvVz-5ZyoVmmGu7IvjlTCxkN8uXVQPKMkySPREZL-yGJbxq89aNFoK_J-Mqzb1cCFsq1F0vKitke124EEuo-Wb906weGEcoeMvn1NPAqebrxFXyOe4pKTzHpZJqVJDmRCpHIZZ4jhPmLBx0HRxG-Oxllqxn-GT0Uvjrnory6x6rM0hokJzGm6jR8LAz-qT33AJU0WKAVtAirPbzBJrmDfN-Z5U-dbAjMG0xbEEjhuo4UdE9pLTIeX6_jrKePSAG0n33oiD0xeIiPrykemx4GT7qfCCk5w-bVHqgwLymXoevw_nV3yqLLaLaZ14QjkrOZ_Ca3ZiHMPcKcznq9Vg9hawIcBEQLhbUcNLs1fthuMhhFeos0RcOZHe7s5DSc";
       return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -120,213 +120,157 @@ class _MainProfileState extends State<MainProfile>
           body: TabBarView(
             controller: _tabController,
             children: [
-              ListView(
-                children: [
-                  ListTile(
-                    leading: Icon(
-                      Icons.date_range_outlined,
-                      color: AppColors.iconColor1,
-                    ),
-                    title: Text("Birth"),
-                    subtitle: Text("${controller.prof.orphan!.birth!}"),
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.school_outlined,
-                      color: AppColors.iconColor2,
-                    ),
-                    title: Text('Study & Scool'),
-                    subtitle: Text(
-                        "${controller.prof.orphan!.study!} - ${controller.prof.orphan!.schoolName!} school "),
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.numbers_outlined,
-                      color: AppColors.mainBlackColor,
-                    ),
-                    title: Text('National Number'),
-                    subtitle:
-                        Text("${controller.prof.orphan!.nationalNumber!} "),
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.location_city_outlined,
-                      color: AppColors.greyColor,
-                    ),
-                    title: Text('Adress'),
-                    subtitle: Text(
-                        "${controller.prof.address!.country!} - ${controller.prof.address!.state!} - ${controller.prof.address!.city!}- ${controller.prof.address!.street!} "),
-                  ),
-                  Row(children: [
-                    Text(
-                      'my receipts',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          color: AppColors.mainColor),
-                    ),
-                  ]),
-                  SizedBox(
-                    height: 200,
-                    child:
-                        // ListView.builder(
-                        //   itemCount: controller.prof.receipt?.length ?? 0,
-                        //   itemBuilder: (BuildContext context, int index) {
-                        //     var rec_amount = controller.prof.receipt?[index];
-                        //     return ListTile(
-                        //       leading: Icon(
-                        //         Icons.timer_outlined,
-                        //         color: AppColors.iconColor1,
-                        //       ),
-                        //       title: Text(
-                        //         'my receipts',
-                        //       ),
-                        //       subtitle: Text(
-                        //           '${rec_amount?.amount ?? ''} / [${rec_amount?.fromDate ?? ''}] - [ ${rec_amount?.toDate ?? ''}]'),
-                        //     );
-                        //   },
-                        // ),
-                        ListView.builder(
-                      itemCount: controller.prof.receipt?.length ?? 0,
-                      itemBuilder: (BuildContext context, int index) {
-                        var rec_amount = controller.prof.receipt?[index];
-                        List<Color> colors = [
-                          AppColors.conColor1,
-                          AppColors.conColor2,
-                          AppColors.conColor3,
-                          AppColors.conColor4,
-                          AppColors.conColor5,
-                        ];
-
-                        return Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all(33),
-                              padding: EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    colors[index % colors.length],
-                                    AppColors.containerColor
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 7,
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 7,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: ListTile(
-                                leading: Icon(
-                                  Icons.timer_outlined,
-                                  color: AppColors.iconColor2,
-                                ),
-                                title: Text(
-                                  'my receipts',
-                                  style: TextStyle(
-                                    color: AppColors.whiteColor,
-                                  ),
-                                ),
-                                subtitle: Text(
-                                  '${rec_amount?.amount ?? ''} / [${rec_amount?.fromDate ?? ''}] - [ ${rec_amount?.toDate ?? ''}]',
-                                  style: TextStyle(
-                                    color: AppColors.mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 333,
-                              height: 333,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/photo_2023-08-10_00-35-19.jpg"),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
               ListView.builder(
-                itemCount: controller.prof.achievements?.length ?? 0,
+                itemCount: 6, // Number of sections/categories
                 itemBuilder: (BuildContext context, int index) {
-                  var achievement = controller.prof.achievements?[index];
-                  return Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(33),
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              AppColors.mainColor,
-                              AppColors.containerColor,
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 7,
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 7,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          title: Text(
-                            "${achievement?.title ?? ''}    2023-08-09T07:18:57.000000Z",
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                            ),
-                          ),
-                          subtitle: Text(
-                            "${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}",
-                            style: TextStyle(
-                              color: AppColors.mainColor,
-                            ),
-                          ),
+                  if (index == 0) {
+                    // Birth section
+                    return ListTile(
+                      leading: Icon(
+                        Icons.date_range_outlined,
+                        color: AppColors.iconColor1,
+                      ),
+                      title: Text("Birth"),
+                      subtitle: Text("${controller.prof.orphan!.birth!}"),
+                    );
+                  } else if (index == 1) {
+                    // Study & School section
+                    return ListTile(
+                      leading: Icon(
+                        Icons.school_outlined,
+                        color: AppColors.iconColor2,
+                      ),
+                      title: Text('Study & School'),
+                      subtitle: Text(
+                          "${controller.prof.orphan!.study!} - ${controller.prof.orphan!.schoolName!} school "),
+                    );
+                  } else if (index == 2) {
+                    // National Number section
+                    return ListTile(
+                      leading: Icon(
+                        Icons.numbers_outlined,
+                        color: AppColors.mainBlackColor,
+                      ),
+                      title: Text('National Number'),
+                      subtitle:
+                          Text("${controller.prof.orphan!.nationalNumber!} "),
+                    );
+                  } else if (index == 3) {
+                    // Address section
+                    return ListTile(
+                      leading: Icon(
+                        Icons.location_city_outlined,
+                        color: AppColors.greyColor,
+                      ),
+                      title: Text('Address'),
+                      subtitle: Text(
+                          "${controller.prof.address!.country!} - ${controller.prof.address!.state!} - ${controller.prof.address!.city!}- ${controller.prof.address!.street!} "),
+                    );
+                  } else if (index == 4) {
+                    // Gender section
+                    return ListTile(
+                      leading: Icon(
+                        Icons.person_2_outlined,
+                        color: AppColors.conColor1,
+                      ),
+                      title: Text('Gender'),
+                      subtitle: Text("${controller.prof.orphan!.gender!} "),
+                    );
+                  } else if (index == 5) {
+                    // Gender section
+                    return SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        itemCount: controller.prof.receipt?.length ?? 0,
+                        itemBuilder: (BuildContext context, int index) {
+                          var rec_amount = controller.prof.receipt?[index];
 
-                          //trailing: Text("${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}"),
-                        ),
+                          return ListTile(
+                            leading: Icon(
+                              Icons.timer_outlined,
+                              color: AppColors.iconColor1,
+                            ),
+                            title: Text(
+                              'My Receipts',
+                            ),
+                            subtitle: Text(
+                                '${rec_amount?.amount ?? ''} / [${rec_amount?.fromDate ?? ''}] - [ ${rec_amount?.toDate ?? ''}]'),
+                          );
+                        },
                       ),
-                      Container(
-                        width: 333,
-                        height: 333,
-                        // ignore: prefer_const_constructors
-                        decoration: BoxDecoration(
-                          // ignore: prefer_const_constructors
-                          image: DecorationImage(
-                            // ignore: prefer_const_constructors
-                            image: AssetImage(
-                                "assets/images/photo_2023-08-10_00-35-19.jpg"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
+                    );
+                  }
+                  return SizedBox
+                      .shrink(); // Return an empty widget if index is out of bounds
                 },
               ),
+              Stack(children: [
+                Container(
+                  width: 333,
+                  height: 333,
+                  padding: EdgeInsets.all(99),
+                  margin: EdgeInsets.all(99),
+                  // ignore: prefer_const_constructors
+                  decoration: BoxDecoration(
+                    // ignore: prefer_const_constructors
+                    image: DecorationImage(
+                      // ignore: prefer_const_constructors
+                      image: AssetImage(
+                          "assets/images/photo_2023-08-10_00-35-19.jpg"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                ListView.builder(
+                  itemCount: controller.prof.achievements?.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    var achievement = controller.prof.achievements?[index];
+                    return Container(
+                      margin: EdgeInsets.all(33),
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            AppColors.mainColor,
+                            AppColors.containerColor,
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7,
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 7,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        title: Text(
+                          "${achievement?.title ?? ''}    2023-08-09T07:18:57.000000Z",
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}",
+                          style: TextStyle(
+                            color: AppColors.mainColor,
+                          ),
+                        ),
+
+                        //trailing: Text("${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}"),
+                      ),
+                    );
+                  },
+                ),
+              ]),
             ],
           ),
         ),

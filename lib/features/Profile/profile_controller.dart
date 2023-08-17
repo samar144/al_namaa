@@ -34,9 +34,7 @@ class ProfileController extends GetxController {
       _prof = ProfileModel.fromJson(res["data"]);
       print(prof.orphan!.firstName);
       print("result got");
-      print(AppConstants.BASE_URL +
-          AppConstants.DATA_PROFILE +
-          _prof.orphan!.photo);
+      print(prof.receipt.toString());
     } else {}
     update();
   }

@@ -1,5 +1,7 @@
 import 'package:alnamaa_charity/features/Profile/main_profile.dart';
 import 'package:alnamaa_charity/features/contact_with_us/view/contact_with_us_screen.dart';
+import 'package:alnamaa_charity/features/courses/my_courses.dart';
+import 'package:alnamaa_charity/features/sponser/view/orphan_home_screen.dart';
 import 'package:alnamaa_charity/pages/dashboared/dashboared_binding.dart';
 import 'package:alnamaa_charity/pages/dashboared/dashboared_page.dart';
 import 'package:get/get.dart';
@@ -35,10 +37,11 @@ class GetRoutes {
   static const String resetpassword = "/resetpassword";
   static const String verifysponser = "/verifysponser";
   static const String verify = "/verify";
-
+  static const String orphanhomepage = "/orphanhomepage";
   static const String profile = "/profile";
   static const String getacceptedsponsororder = "/getacceptedsponsororder";
   static const String getawaitingsponsororder = "/getawaitingsponsororder";
+  static const String courses = "/courses";
 
   static List<GetPage> route = [
     GetPage(
@@ -119,5 +122,15 @@ class GetRoutes {
     GetPage(
         name: GetRoutes.getawaitingsponsororder,
         page: () => GetWaitingSponsorOrders()),
+    GetPage(
+      name: GetRoutes.courses,
+      page: () => MyCourses(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.orphanhomepage,
+      page: () => OrphanHomePage(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

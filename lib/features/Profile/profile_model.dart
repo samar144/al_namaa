@@ -109,6 +109,7 @@ class Orphan {
   String? firstName;
   String? lastName;
   String? birth;
+  String? gender;
   String? study;
   var schoolName;
   var photo;
@@ -128,6 +129,7 @@ class Orphan {
     this.lastName,
     this.birth,
     this.study,
+    this.gender,
     this.schoolName,
     this.photo,
     this.healthStatus,
@@ -147,6 +149,7 @@ class Orphan {
         lastName: json["last_name"],
         birth: json["birth"],
         study: json["study"],
+        gender: json["gender"],
         schoolName: json["school_name"],
         photo: json["photo"],
         healthStatus: json["health_status"],
@@ -166,6 +169,7 @@ class Orphan {
         "last_name": lastName,
         "birth": birth,
         "study": study,
+        "gender": gender,
         "school_name": schoolName,
         "photo": photo,
         "health_status": healthStatus,
