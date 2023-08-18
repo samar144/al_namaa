@@ -11,8 +11,12 @@ import '../../../routes.dart';
 import '../../../utils/shared_pref/getstorage.dart';
 import '../controller/sponser_home_controller.dart';
 
-class OrphanHomePage extends StatelessWidget {
-  OrphanHomePage({key});
+class OrphanHomePage extends StatefulWidget {
+  @override
+  _OrphanHomePageState createState() => _OrphanHomePageState();
+}
+
+class _OrphanHomePageState extends State<OrphanHomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
   final HomeController controller = Get.put(HomeController());
   // UserModel user = GetStorageUtils().getUser();
@@ -298,7 +302,186 @@ class OrphanHomePage extends StatelessWidget {
                               color: Colors.black54),
                         ),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                  useSafeArea: true,
+                                  context: context,
+                                  builder: (context) => Dialog(
+                                        child: SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              100,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              3,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const Text("التسجيل على دورة"),
+                                                const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Icon(Icons
+                                                        .select_all_rounded),
+                                                    Text("الرجاء اختيار حساب "),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 66,
+                                                  child: ListView.builder(
+                                                    itemCount: 3,
+                                                    //controller.activeCourses?.length ?? 0,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      // var active = controller.activeCourses?[index];
+                                                      bool isSelected = false;
+                                                      return Container(
+                                                        width: 200,
+                                                        height: 50,
+                                                        margin: EdgeInsets.only(
+                                                            left: 20,
+                                                            right: 20,
+                                                            bottom: 10,
+                                                            top: 10),
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
+                                                        decoration: BoxDecoration(
+                                                            color: AppColors
+                                                                .whiteColor,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                  color: Color(
+                                                                      0XFFe8e8e8),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  offset:
+                                                                      Offset(0,
+                                                                          5)),
+                                                              BoxShadow(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  offset:
+                                                                      Offset(-5,
+                                                                          0)),
+                                                              BoxShadow(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  offset:
+                                                                      Offset(5,
+                                                                          0)),
+                                                            ]),
+                                                        child: Expanded(
+                                                          child: Container(
+                                                            height: 50,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius: BorderRadius.only(
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          20),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          20)),
+                                                              // color: Colors.white,
+                                                            ),
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 10,
+                                                                      right:
+                                                                          10),
+                                                              child:
+                                                                  Directionality(
+                                                                textDirection:
+                                                                    TextDirection
+                                                                        .rtl,
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                  title: Text(
+                                                                    "samar account",
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    //' الفئة العمرية ${active?.targetGroup ?? ''}',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black45),
+                                                                  ),
+                                                                  value:
+                                                                      isSelected,
+                                                                  onChanged:
+                                                                      (bool?
+                                                                          value) {
+                                                                    setState(
+                                                                        () {
+                                                                      isSelected =
+                                                                          value ??
+                                                                              false;
+                                                                    });
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .cyan),
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                        child:
+                                                            const Text("رجوع")),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        // controller
+                                                        //     .stopsponsorshiporder(
+                                                        //   item[
+                                                        //       "sponsorship_id"],
+                                                        // );
+                                                      },
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              backgroundColor:
+                                                                  Colors.red),
+                                                      child:
+                                                          const Text("تأكيد"),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ));
+                            },
                             child: const Text(
                               "عرض الكل",
                               style: TextStyle(

@@ -14,7 +14,7 @@ class UserRegisterScreen extends StatelessWidget {
   // final UserSignUpController registercontroller = Get.find();
   final UserSignUpController registercontroller =
       Get.put(UserSignUpController());
-  final formKey5 = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey3 = GlobalKey<FormState>();
 
   UserRegisterScreen({key});
 
@@ -35,7 +35,7 @@ class UserRegisterScreen extends StatelessWidget {
                   ),
                   Form(
                     autovalidateMode: AutovalidateMode.always,
-                    key: formKey5,
+                    key: _formKey3,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -137,17 +137,19 @@ class UserRegisterScreen extends StatelessWidget {
                         Row(children: [
                           Expanded(
                             child: Obx(
-                              () => DropdownButtonFormField<String>(
+                              () => DropdownButtonFormField<dynamic>(
                                 value: registercontroller.selectedcountry.value,
-                                items: registercontroller.country
-                                    .map((String value) {
-                                  return DropdownMenuItem<String>(
+                                // value: registercontroller.countreies.first,
+                                items: registercontroller.countreies
+                                    .map((dynamic value) {
+                                  return DropdownMenuItem<dynamic>(
                                     value: value,
                                     child: Text(value),
                                   );
                                 }).toList(),
                                 isExpanded: true,
-                                onChanged: (String? value) {
+                                onChanged: (dynamic value) {
+                                  registercontroller.getstate(country: value);
                                   registercontroller
                                       .countryEditController.text = value!;
                                 },
@@ -171,17 +173,23 @@ class UserRegisterScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Obx(
-                              () => DropdownButtonFormField<String>(
-                                value: registercontroller.selectedstate.value,
-                                items: registercontroller.state
-                                    .map((String value) {
-                                  return DropdownMenuItem<String>(
+                              () => DropdownButtonFormField<dynamic>(
+                                // value:
+                                //     registercontroller.selectedstate.value,
+                                value: registercontroller.statess.firstOrNull,
+                                items: registercontroller.statess
+                                    .map((dynamic value) {
+                                  return DropdownMenuItem<dynamic>(
                                     value: value,
                                     child: Text(value),
                                   );
                                 }).toList(),
                                 isExpanded: true,
-                                onChanged: (String? value) {
+                                onChanged: (dynamic value) {
+                                  registercontroller.getcity(
+                                      contry: registercontroller
+                                          .countryEditController.text,
+                                      state: value);
                                   registercontroller.stateEditController.text =
                                       value!;
                                 },
@@ -208,17 +216,27 @@ class UserRegisterScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Obx(
-                                () => DropdownButtonFormField<String>(
-                                  value: registercontroller.selectedcity.value,
-                                  items: registercontroller.city
-                                      .map((String value) {
-                                    return DropdownMenuItem<String>(
+                                () => DropdownButtonFormField<dynamic>(
+                                  // value:
+                                  //     registercontroller.selectedcity.value,
+                                  value: registercontroller.cities.firstOrNull,
+                                  items: registercontroller.cities
+                                      .map((dynamic value) {
+                                    return DropdownMenuItem<dynamic>(
                                       value: value,
                                       child: Text(value),
                                     );
                                   }).toList(),
                                   isExpanded: true,
-                                  onChanged: (String? value) {
+
+                                  onChanged: (dynamic value) {
+                                    registercontroller.getstreet(
+                                        contry: registercontroller
+                                            .countryEditController.text,
+                                        state: registercontroller
+                                            .stateEditController.text,
+                                        city: value);
+
                                     registercontroller.cityEditController.text =
                                         value!;
                                   },
@@ -243,18 +261,19 @@ class UserRegisterScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: Obx(
-                                () => DropdownButtonFormField<String>(
-                                  value:
-                                      registercontroller.selectedstreet.value,
-                                  items: registercontroller.street
-                                      .map((String value) {
-                                    return DropdownMenuItem<String>(
+                                () => DropdownButtonFormField<dynamic>(
+                                  // value: registercontroller
+                                  //     .selectedstreet.value,
+                                  value: registercontroller.streets.firstOrNull,
+                                  items: registercontroller.streets
+                                      .map((dynamic value) {
+                                    return DropdownMenuItem<dynamic>(
                                       value: value,
                                       child: Text(value),
                                     );
                                   }).toList(),
                                   isExpanded: true,
-                                  onChanged: (String? value) {
+                                  onChanged: (dynamic value) {
                                     registercontroller
                                         .streetEditController.text = value!;
                                   },
@@ -399,7 +418,7 @@ class UserRegisterScreen extends StatelessWidget {
                   CustomButton(
                     name: " إنشاء حساب",
                     onPressed: () {
-                      if (formKey5.currentState!.validate()) {
+                      if (_formKey3.currentState!.validate()) {
                         registercontroller.checksignup();
                       }
                     },

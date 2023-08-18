@@ -26,7 +26,10 @@ class ContactWithUs extends StatelessWidget {
               children: [
                 const Text(
                   " تواصل مع الجمعية  ",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.0),
                 ),
                 TextFormFieldWidget(
                   validator: (val) {

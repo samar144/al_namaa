@@ -13,6 +13,12 @@ class ReplyController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
+
   void fetchReplies(var commentId) {
     // Fetch replies for the given commentId from API or database
     // Add fetched replies to the list using replies.add()

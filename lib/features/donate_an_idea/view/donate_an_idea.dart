@@ -48,7 +48,10 @@ class DonateAnIdea extends StatelessWidget {
                 children: [
                   const Text(
                     "شاركنا بعض الأفكار ",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.0),
                   ),
                   TextFormFieldWidget(
                     hint: "عنوان الفكرة  ",

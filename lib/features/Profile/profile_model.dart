@@ -109,7 +109,6 @@ class Orphan {
   String? firstName;
   String? lastName;
   String? birth;
-  String? gender;
   String? study;
   var schoolName;
   var photo;
@@ -129,7 +128,6 @@ class Orphan {
     this.lastName,
     this.birth,
     this.study,
-    this.gender,
     this.schoolName,
     this.photo,
     this.healthStatus,
@@ -149,16 +147,15 @@ class Orphan {
         lastName: json["last_name"],
         birth: json["birth"],
         study: json["study"],
-        gender: json["gender"],
         schoolName: json["school_name"],
         photo: json["photo"],
         healthStatus: json["health_status"],
         nationalNumber: json["national_number"],
-        affiliationDate: DateTime.parse(json["affiliation_date"]),
+        affiliationDate: json["affiliation_date"],
         status: json["status"],
         deletedAt: json["deleted_at"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
         age: json["age"].toString(),
       );
 
@@ -169,7 +166,6 @@ class Orphan {
         "last_name": lastName,
         "birth": birth,
         "study": study,
-        "gender": gender,
         "school_name": schoolName,
         "photo": photo,
         "health_status": healthStatus,

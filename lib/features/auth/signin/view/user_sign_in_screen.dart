@@ -3,6 +3,7 @@ import 'package:alnamaa_charity/extra/regex.dart';
 import 'package:alnamaa_charity/core/widget/alnamaa_logo.dart';
 import 'package:alnamaa_charity/core/widget/text_form_field.dart';
 import 'package:alnamaa_charity/routes.dart';
+import 'package:alnamaa_charity/service/network_handler/connectivity_service.dart';
 import 'package:alnamaa_charity/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,11 +13,12 @@ import '../../../../core/widget/text_form_field_pass_word.dart';
 
 class UserSignInrScreen extends StatelessWidget {
   //UserSignInrScreen({super.key});
+
   final LoginController loginController =
       Get.put(LoginController(), permanent: true);
 
   // final LoginController loginController = Get.find();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Future<void> fu() async {}
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class UserSignInrScreen extends StatelessWidget {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(top: 25),
+              padding: const EdgeInsets.only(top: 50),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -42,7 +44,7 @@ class UserSignInrScreen extends StatelessWidget {
                       children: [
                         Form(
                           autovalidateMode: AutovalidateMode.always,
-                          key: formKey,
+                          key: _formKey,
                           child: Column(
                             children: [
                               TextFormFieldWidget(
@@ -139,7 +141,7 @@ class UserSignInrScreen extends StatelessWidget {
                         CustomButton(
                           name: " تسجيل الدخول",
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               loginController.checklogin();
                             }
                           },

@@ -36,7 +36,7 @@ class SponserAnOrphaneontroller extends GetxController {
 
   @override
   void onClose() {
-    amountcontroller.dispose();
+    // amountcontroller.dispose();
     // sponserIdcontroller.dispose();
     // orphanIdcontroller.dispose();
     // paymentWaycontroller.dispose();

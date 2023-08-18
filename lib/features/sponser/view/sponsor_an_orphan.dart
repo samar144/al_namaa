@@ -13,7 +13,7 @@ class SponserAnOrphane extends StatelessWidget {
   UserModel? user = GetStorageUtils().getUser();
 
   // SponserAnOrphane({super.key});
-  var formKey7 = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey9 = GlobalKey<FormState>();
   // UserModel user = Get.arguments;
 
   final SponserAnOrphaneontroller controller =
@@ -54,7 +54,7 @@ class SponserAnOrphane extends StatelessWidget {
                 children: [
                   Form(
                       autovalidateMode: AutovalidateMode.always,
-                      key: formKey7,
+                      key: _formKey9,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -280,7 +280,7 @@ class SponserAnOrphane extends StatelessWidget {
                   CustomButton(
                       name: "إرسال",
                       onPressed: () async {
-                        if (formKey7.currentState!.validate()) {
+                        if (_formKey9.currentState!.validate()) {
                           controller.createsponsorshiporder(
                               user!.user_id!.toString(),
                               user!.token.toString());

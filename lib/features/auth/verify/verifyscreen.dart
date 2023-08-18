@@ -10,7 +10,7 @@ import '../../../../core/widget/button.dart';
 class VerifyScreen extends StatelessWidget {
   VerifyScreen({key});
   final UserSignUpController controller = Get.put(UserSignUpController());
-  final formKey2 = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey4 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class VerifyScreen extends StatelessWidget {
                       children: [
                         Form(
                           autovalidateMode: AutovalidateMode.always,
-                          key: formKey2,
+                          key: _formKey4,
                           child: Column(
                             children: [
                               TextFormFieldWidget(
@@ -61,7 +61,7 @@ class VerifyScreen extends StatelessWidget {
                         CustomButton(
                           name: "ارسال",
                           onPressed: () {
-                            if (formKey2.currentState!.validate()) {
+                            if (_formKey4.currentState!.validate()) {
                               controller.verifyemail();
                             }
                           },

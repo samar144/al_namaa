@@ -21,7 +21,7 @@ class ProfileController extends GetxController {
   var token = AppConstants.TOKEN;
   Future<void> getProfileList() async {
     http.Response response = await http.get(
-        Uri.parse('http://192.168.43.112:80/api/app/orphans/profile/1'),
+        Uri.parse('${AppConstants.BASE_URL}/api/app/orphans/profile/2'),
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
@@ -32,9 +32,6 @@ class ProfileController extends GetxController {
 
     if (response.statusCode == 200) {
       _prof = ProfileModel.fromJson(res["data"]);
-      print(prof.orphan!.firstName);
-      print("result got");
-      print(prof.receipt.toString());
     } else {}
     update();
   }

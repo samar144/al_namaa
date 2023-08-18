@@ -1,6 +1,6 @@
 {
-    "name": "alnamaa",
-    "short_name": "alnamaa",
+    "name": "alnamaa_charity",
+    "short_name": "alnamaa_charity",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

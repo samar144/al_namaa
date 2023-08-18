@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:alnamaa_charity/features/courses/course_model.dart';
+import 'package:alnamaa_charity/features/sponser/model/sponserprofilemodel.dart';
+import 'package:alnamaa_charity/utils/app_constants.dart';
 import 'package:alnamaa_charity/utils/custom_snackbar.dart';
 import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,12 @@ class HomeController extends GetxController {
     super.onInit();
     // waitingsponserorders();
     // acceptedsponserorders();
+    // waitingsponserorders();
+    // acceptedsponserorders();
+    getsponserprofile();
+    // getProfileList();
+    // getmyorphanProfile();
+
     token = user.token;
     notecontroller = TextEditingController();
     getCourses();
@@ -212,5 +220,25 @@ class HomeController extends GetxController {
     } else {
       customsnackbar("خطأ", res["message"], "error");
     }
+  }
+
+// بروفايل الكفيل
+  var _prof = SonsorProfileModel();
+
+  SonsorProfileModel get sponsorprof => _prof;
+  Future<void> getsponserprofile() async {
+    http.Response response = await http.get(
+        Uri.parse('${AppConstants.BASE_URL}/api/sponsors/${user.user_id}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer ${user.token}"
+        });
+    var res = await jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      _prof = SonsorProfileModel.fromJson(res["data"]);
+    } else {}
+    update();
   }
 }

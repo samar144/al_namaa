@@ -11,10 +11,10 @@ import '../../../utils/shared_pref/getstorage.dart';
 import '../controller/sponser_home_controller.dart';
 
 class SponserHomePage extends StatelessWidget {
-  SponserHomePage({key});
+  SponserHomePage({super.key});
   final GlobalKey<ScaffoldState> scaffoldKey1 = GlobalKey<ScaffoldState>();
   final HomeController controller = Get.put(HomeController());
-  // UserModel user = GetStorageUtils().getUser();
+  UserModel? user = GetStorageUtils().getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -44,20 +44,19 @@ class SponserHomePage extends StatelessWidget {
             onPressed: () {
               scaffoldKey1.currentState!.openDrawer();
             },
-            icon: CircleAvatar(
-                child: Text(controller.user.name!.substring(0, 1))),
+            icon: CircleAvatar(child: Text(user!.name!.substring(0, 1))),
           ),
         ),
         drawer: MyDrawer(
-            name: controller.user.name!,
+            name: user!.name!,
             image: "images/1.png",
-            email: controller.user!.email!,
+            email: user!.email!,
             listTile: [
               CustomListTile(
                 icon: const Icon(Icons.person),
                 describtion: "الملف الشخصي",
                 onTap: () {
-                  Get.toNamed(GetRoutes.dashboared);
+                  Get.toNamed(GetRoutes.sponsorprofile);
                 },
               ),
               const Divider(),
@@ -66,7 +65,7 @@ class SponserHomePage extends StatelessWidget {
                 describtion: '  طلبات الكفالة المقبولة',
                 onTap: () {
                   Get.toNamed(GetRoutes.getacceptedsponsororder,
-                      arguments: controller.user);
+                      arguments: user);
                 },
               ),
               const Divider(),
@@ -75,7 +74,7 @@ class SponserHomePage extends StatelessWidget {
                 describtion: '  طلبات كفالة قيد المعالجة',
                 onTap: () {
                   Get.toNamed(GetRoutes.getawaitingsponsororder,
-                      arguments: controller.user);
+                      arguments: user);
                 },
               ),
               const Divider(),
@@ -122,14 +121,16 @@ class SponserHomePage extends StatelessWidget {
                                 Color.fromRGBO(113, 212, 218, 1),
                               ])),
                           padding: const EdgeInsets.only(top: 50),
-                          child: const Text(
-                              "لا أحد يصبح فقيراً من التبرع\nبل يصبح أغنى بالرضا والبركة   ",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ))),
+                          child: Center(
+                            child: const Text(
+                                "لا أحد يصبح فقيراً من التبرع\nبل يصبح أغنى بالرضا والبركة   ",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0)),
+                          )),
                       Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(14),
@@ -139,14 +140,16 @@ class SponserHomePage extends StatelessWidget {
                                 Color.fromRGBO(113, 212, 218, 1),
                               ])),
                           padding: const EdgeInsets.only(top: 50),
-                          child: const Text(
-                              "إن التبرع ليس مجرد إعطاء مال \n بل هو إحداث فرق في حياة الأخرين",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ))),
+                          child: Center(
+                            child: const Text(
+                                "إن التبرع ليس مجرد إعطاء مال \n بل هو إحداث فرق في حياة الأخرين",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0)),
+                          )),
                       Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(14),
@@ -156,14 +159,16 @@ class SponserHomePage extends StatelessWidget {
                                 Color.fromRGBO(113, 212, 218, 1),
                               ])),
                           padding: const EdgeInsets.only(top: 50),
-                          child: const Text(
-                              "إن السعادة لا تنتج عما نحصل عليه \n بل بما نعطيه",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ))),
+                          child: Center(
+                            child: const Text(
+                                "إن السعادة لا تنتج عما نحصل عليه \n بل بما نعطيه",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0)),
+                          )),
                     ],
                     options: CarouselOptions(
                       disableCenter: true,
@@ -199,7 +204,8 @@ class SponserHomePage extends StatelessWidget {
                           Column(children: [
                             InkWell(
                               onTap: () {
-                                Get.toNamed(GetRoutes.donateidea);
+                                Get.toNamed(GetRoutes.donateidea,
+                                    arguments: user);
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(3.0),
@@ -208,7 +214,7 @@ class SponserHomePage extends StatelessWidget {
                                     color: const Color.fromARGB(
                                         255, 241, 214, 246)),
                                 child: const CustomIcon(
-                                    image: "assets/icons/hand.png",
+                                    image: "icons/hand.png",
                                     width: 80.0,
                                     height: 80.0),
                               ),
@@ -222,9 +228,8 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(
-                                    GetRoutes.sponseranorphan,
-                                  );
+                                  Get.toNamed(GetRoutes.sponseranorphan,
+                                      arguments: user);
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),
@@ -233,7 +238,7 @@ class SponserHomePage extends StatelessWidget {
                                       color: const Color.fromARGB(
                                           255, 196, 232, 235)),
                                   child: const CustomIcon(
-                                      image: "assets/icons/give-love.png",
+                                      image: "icons/give-love.png",
                                       width: 80.0,
                                       height: 80.0),
                                 ),
@@ -248,9 +253,8 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(
-                                    GetRoutes.myorphanes,
-                                  );
+                                  Get.toNamed(GetRoutes.myorphanes,
+                                      arguments: user);
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),
@@ -259,7 +263,7 @@ class SponserHomePage extends StatelessWidget {
                                       color: const Color.fromARGB(
                                           255, 196, 229, 243)),
                                   child: const CustomIcon(
-                                      image: "assets/icons/adoption.png",
+                                      image: "icons/adoption.png",
                                       width: 80.0,
                                       height: 80.0),
                                 ),
@@ -274,7 +278,8 @@ class SponserHomePage extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(GetRoutes.contactwithus);
+                                  Get.toNamed(GetRoutes.contactwithus,
+                                      arguments: user);
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(3.0),
@@ -283,7 +288,7 @@ class SponserHomePage extends StatelessWidget {
                                       color: const Color.fromARGB(
                                           255, 250, 239, 229)),
                                   child: const CustomIcon(
-                                      image: "assets/icons/chat.png",
+                                      image: "icons/chat.png",
                                       width: 80.0,
                                       height: 80.0),
                                 ),
@@ -296,145 +301,309 @@ class SponserHomePage extends StatelessWidget {
                           ),
                         ])),
                 const SizedBox(
-                  height: 20.0,
+                  height: 30.0,
                 ),
                 Column(
                   children: [
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //       children: [
+                    //         const Text(
+                    //           "  الإعلانات",
+                    //           textAlign: TextAlign.right,
+                    //           style: TextStyle(
+                    //               fontWeight: FontWeight.bold,
+                    //               fontSize: 24,
+                    //               color: Colors.black54),
+                    //         ),
+                    //         // TextButton(
+                    //         //     onPressed: () {},
+                    //         //     child: const Text(
+                    //         //       "عرض الكل",
+                    //         //       style: TextStyle(
+                    //         //           fontSize: 17,
+                    //         //           fontWeight: FontWeight.bold,
+                    //         //           color: Colors.blue,
+                    //         //           decoration: TextDecoration.underline),
+                    //         //     ))
+                    //       ],
+                    //     ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "  الإعلانات",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                              color: Colors.black54),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(GetRoutes.adswithcourse);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(13),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "images/person-holding-light-bulb-with-graduation-cap.jpg"))),
+                            child: const Center(
+                              child: Text(
+                                "دورات تعليمية",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    backgroundColor: Colors.black45,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30),
+                              ),
+                            ),
+                          ),
                         ),
-                        TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              "عرض الكل",
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline),
-                            ))
+                        const SizedBox(
+                          width: 20.0,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(
+                                GetRoutes.entertaimentadvertisementPage);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(13),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image:
+                                        AssetImage("images/sports-tools.jpg"))),
+                            child: const Center(
+                              child: Text(
+                                "ترفيه",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    backgroundColor: Colors.black45,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
+
                     const SizedBox(
-                      height: 30.0,
+                      height: 10.0,
                     ),
-                    CarouselSlider(
-                        items: [
-                          Container(
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(GetRoutes.trainingads);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(13),
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "assets/images/schoolchild-sitting-desk-living-room-holding-school-book.jpg"))),
+                                        "images/schoolchild-sitting-desk-living-room-holding-school-book.jpg"))),
                             child: const Center(
                               child: Text(
-                                "دورة صناعة الصابون",
+                                "تدريب",
                                 style: TextStyle(
                                     color: Colors.white,
                                     backgroundColor: Colors.black45,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20),
+                                    fontSize: 30),
                               ),
                             ),
                           ),
-                          Container(
+                        ),
+                        const SizedBox(
+                          width: 20.0,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(GetRoutes.remmemberAdvertisementPage);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(13),
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "assets/images/classmates-working-together.jpg"))),
+                                        "images/reminder-popup-bell-notification-alert-alarm-icon-sign-symbol-application-website-ui-purple-background-3d-rendering-illustration.jpg"))),
                             child: const Center(
                               child: Text(
-                                "دورة الحاسوب ",
+                                "تذكيرات",
                                 style: TextStyle(
                                     color: Colors.white,
                                     backgroundColor: Colors.black45,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20),
+                                    fontSize: 30),
                               ),
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13),
-                                image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/children-group-drawing.jpg"))),
-                            child: const Center(
-                              child: Text(
-                                "دورة صناعة الشمع ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    backgroundColor: Colors.black45,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13),
-                                image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/little-kids-using-laptops-school.jpg"))),
-                            child: const Center(
-                              child: Text(
-                                "دورة الللغة العربية ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    backgroundColor: Colors.black45,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13),
-                                image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/close-up-classmates-playing-with-laptop.jpg"))),
-                            child: const Center(
-                              child: Text(
-                                "دورة الرياضيات ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    backgroundColor: Colors.black45,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                        ],
-                        options: CarouselOptions(
-                          disableCenter: true,
-                          aspectRatio: 1.5,
-                          viewportFraction: 0.8,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 5),
-                          autoPlayAnimationDuration:
-                              const Duration(milliseconds: 2000),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          enlargeFactor: 0.3,
-                          scrollDirection: Axis.horizontal,
-                        )),
+                        ),
+                      ],
+                    )
+
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width - 30,
+                    //   height: MediaQuery.of(context).size.height / 3,
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(13),
+                    //       image: const DecorationImage(
+                    //           fit: BoxFit.cover,
+                    //           image: AssetImage(
+                    //               "images/reminder-popup-bell-notification-alert-alarm-icon-sign-symbol-application-website-ui-purple-background-3d-rendering-illustration.jpg"))),
+                    //   child: const Center(
+                    //     child: Text(
+                    //       "تذكيرات",
+                    //       style: TextStyle(
+                    //           color: Colors.white,
+                    //           backgroundColor: Colors.black38,
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 20),
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 10.0,
+                    // ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width - 30,
+                    //   height: MediaQuery.of(context).size.height / 3,
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(13),
+                    //       image: const DecorationImage(
+                    //           fit: BoxFit.cover,
+                    //           image: AssetImage(
+                    //               "images/classmates-working-together.jpg"))),
+                    //   child: const Center(
+                    //     child: Text(
+                    //       "تدريب",
+                    //       style: TextStyle(
+                    //           color: Colors.white,
+                    //           backgroundColor: Colors.black38,
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 20),
+                    //     ),
+                    //   ),
+                    // )
+
+                    // CarouselSlider(
+                    //     items: [
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(13),
+                    //             image: const DecorationImage(
+                    //                 fit: BoxFit.cover,
+                    //                 image: AssetImage(
+                    //                     "images/schoolchild-sitting-desk-living-room-holding-school-book.jpg"))),
+                    //         child: const Center(
+                    //           child: Text(
+                    //             "دورة صناعة الصابون",
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 backgroundColor: Colors.black45,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 20),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(13),
+                    //             image: const DecorationImage(
+                    //                 fit: BoxFit.cover,
+                    //                 image: AssetImage(
+                    //                     "images/classmates-working-together.jpg"))),
+                    //         child: const Center(
+                    //           child: Text(
+                    //             "دورة الحاسوب ",
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 backgroundColor: Colors.black45,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 20),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(13),
+                    //             image: const DecorationImage(
+                    //                 fit: BoxFit.cover,
+                    //                 image: AssetImage(
+                    //                     "images/children-group-drawing.jpg"))),
+                    //         child: const Center(
+                    //           child: Text(
+                    //             "دورة صناعة الشمع ",
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 backgroundColor: Colors.black45,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 20),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(13),
+                    //             image: const DecorationImage(
+                    //                 fit: BoxFit.cover,
+                    //                 image: AssetImage(
+                    //                     "images/little-kids-using-laptops-school.jpg"))),
+                    //         child: const Center(
+                    //           child: Text(
+                    //             "دورة الللغة العربية ",
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 backgroundColor: Colors.black45,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 20),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(13),
+                    //             image: const DecorationImage(
+                    //                 fit: BoxFit.cover,
+                    //                 image: AssetImage(
+                    //                     "images/close-up-classmates-playing-with-laptop.jpg"))),
+                    //         child: const Center(
+                    //           child: Text(
+                    //             "دورة الرياضيات ",
+                    //             style: TextStyle(
+                    //                 color: Colors.white,
+                    //                 backgroundColor: Colors.black45,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 20),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //     options: CarouselOptions(
+                    //       disableCenter: true,
+                    //       aspectRatio: 1.5,
+                    //       viewportFraction: 0.8,
+                    //       initialPage: 0,
+                    //       enableInfiniteScroll: true,
+                    //       reverse: false,
+                    //       autoPlay: true,
+                    //       autoPlayInterval: const Duration(seconds: 5),
+                    //       autoPlayAnimationDuration:
+                    //           const Duration(milliseconds: 2000),
+                    //       autoPlayCurve: Curves.fastOutSlowIn,
+                    //       enlargeCenterPage: true,
+                    //       enlargeFactor: 0.3,
+                    //       scrollDirection: Axis.horizontal,
+                    //     )),
                   ],
                 )
               ],

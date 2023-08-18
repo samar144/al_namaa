@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:alnamaa_charity/features/auth/signup/controller/signupcontroller.dart';
 import 'package:alnamaa_charity/core/widget/alnamaa_logo.dart';
 import 'package:alnamaa_charity/core/widget/text_form_field.dart';
@@ -13,9 +15,8 @@ class SponserRegisterScreen extends StatelessWidget {
   final SponsorSignUpController registercontroller =
       Get.put(SponsorSignUpController());
   // final SponsorSignUpController registercontroller = Get.find();
-  final formKey4 = GlobalKey<FormState>();
-
-  SponserRegisterScreen({key});
+  final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
+  SponserRegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class SponserRegisterScreen extends StatelessWidget {
                     ),
                     Form(
                         autovalidateMode: AutovalidateMode.always,
-                        key: formKey4,
+                        key: _formKey2,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -136,18 +137,21 @@ class SponserRegisterScreen extends StatelessWidget {
                             Row(children: [
                               Expanded(
                                 child: Obx(
-                                  () => DropdownButtonFormField<String>(
+                                  () => DropdownButtonFormField<dynamic>(
                                     value: registercontroller
                                         .selectedcountry.value,
-                                    items: registercontroller.country
-                                        .map((String value) {
-                                      return DropdownMenuItem<String>(
+                                    // value: registercontroller.countreies.first,
+                                    items: registercontroller.countreies
+                                        .map((dynamic value) {
+                                      return DropdownMenuItem<dynamic>(
                                         value: value,
                                         child: Text(value),
                                       );
                                     }).toList(),
                                     isExpanded: true,
-                                    onChanged: (String? value) {
+                                    onChanged: (dynamic value) {
+                                      registercontroller.getstate(
+                                          country: value);
                                       registercontroller
                                           .countryEditController.text = value!;
                                     },
@@ -174,18 +178,24 @@ class SponserRegisterScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Obx(
-                                  () => DropdownButtonFormField<String>(
+                                  () => DropdownButtonFormField<dynamic>(
+                                    // value:
+                                    //     registercontroller.selectedstate.value,
                                     value:
-                                        registercontroller.selectedstate.value,
-                                    items: registercontroller.state
-                                        .map((String value) {
-                                      return DropdownMenuItem<String>(
+                                        registercontroller.statess.firstOrNull,
+                                    items: registercontroller.statess
+                                        .map((dynamic value) {
+                                      return DropdownMenuItem<dynamic>(
                                         value: value,
                                         child: Text(value),
                                       );
                                     }).toList(),
                                     isExpanded: true,
-                                    onChanged: (String? value) {
+                                    onChanged: (dynamic value) {
+                                      registercontroller.getcity(
+                                          contry: registercontroller
+                                              .countryEditController.text,
+                                          state: value);
                                       registercontroller
                                           .stateEditController.text = value!;
                                     },
@@ -215,18 +225,28 @@ class SponserRegisterScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Obx(
-                                    () => DropdownButtonFormField<String>(
+                                    () => DropdownButtonFormField<dynamic>(
+                                      // value:
+                                      //     registercontroller.selectedcity.value,
                                       value:
-                                          registercontroller.selectedcity.value,
-                                      items: registercontroller.city
-                                          .map((String value) {
-                                        return DropdownMenuItem<String>(
+                                          registercontroller.cities.firstOrNull,
+                                      items: registercontroller.cities
+                                          .map((dynamic value) {
+                                        return DropdownMenuItem<dynamic>(
                                           value: value,
                                           child: Text(value),
                                         );
                                       }).toList(),
                                       isExpanded: true,
-                                      onChanged: (String? value) {
+
+                                      onChanged: (dynamic value) {
+                                        registercontroller.getstreet(
+                                            contry: registercontroller
+                                                .countryEditController.text,
+                                            state: registercontroller
+                                                .stateEditController.text,
+                                            city: value);
+
                                         registercontroller
                                             .cityEditController.text = value!;
                                       },
@@ -253,18 +273,20 @@ class SponserRegisterScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Obx(
-                                    () => DropdownButtonFormField<String>(
+                                    () => DropdownButtonFormField<dynamic>(
+                                      // value: registercontroller
+                                      //     .selectedstreet.value,
                                       value: registercontroller
-                                          .selectedstreet.value,
-                                      items: registercontroller.street
-                                          .map((String value) {
-                                        return DropdownMenuItem<String>(
+                                          .streets.firstOrNull,
+                                      items: registercontroller.streets
+                                          .map((dynamic value) {
+                                        return DropdownMenuItem<dynamic>(
                                           value: value,
                                           child: Text(value),
                                         );
                                       }).toList(),
                                       isExpanded: true,
-                                      onChanged: (String? value) {
+                                      onChanged: (dynamic value) {
                                         registercontroller
                                             .streetEditController.text = value!;
                                       },
@@ -288,6 +310,162 @@ class SponserRegisterScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+
+                            // Row(children: [
+                            //   Expanded(
+                            //     child: Obx(
+                            //       () => DropdownButtonFormField<String>(
+                            //         value: registercontroller
+                            //             .selectedcountry.value,
+                            //         items: registercontroller.country
+                            //             .map((String value) {
+                            //           return DropdownMenuItem<String>(
+                            //             value: value,
+                            //             child: Text(value),
+                            //           );
+                            //         }).toList(),
+                            //         isExpanded: true,
+                            //         onChanged: (String? value) {
+                            //           registercontroller
+                            //               .countryEditController.text = value!;
+                            //         },
+                            //         decoration: InputDecoration(
+                            //           labelText: 'الدولة ',
+                            //           border: OutlineInputBorder(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(20),
+                            //               borderSide: const BorderSide(
+                            //                   // color: Color(0xff1ea1a7),
+                            //                   width: 1)),
+                            //           enabledBorder: OutlineInputBorder(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(20),
+                            //               borderSide: const BorderSide(
+                            //                   color: Color(0xff1ea1a7),
+                            //                   width: 1)),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            //   const SizedBox(
+                            //     width: 5,
+                            //   ),
+                            //   Expanded(
+                            //     child: Obx(
+                            //       () => DropdownButtonFormField<String>(
+                            //         value:
+                            //             registercontroller.selectedstate.value,
+                            //         items: registercontroller.state
+                            //             .map((String value) {
+                            //           return DropdownMenuItem<String>(
+                            //             value: value,
+                            //             child: Text(value),
+                            //           );
+                            //         }).toList(),
+                            //         isExpanded: true,
+                            //         onChanged: (String? value) {
+                            //           registercontroller
+                            //               .stateEditController.text = value!;
+                            //         },
+                            //         decoration: InputDecoration(
+                            //           labelText: 'المحافظة',
+                            //           border: OutlineInputBorder(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(20),
+                            //               borderSide: const BorderSide(
+                            //                   // color: Color(0xff1ea1a7),
+                            //                   width: 1)),
+                            //           enabledBorder: OutlineInputBorder(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(20),
+                            //               borderSide: const BorderSide(
+                            //                   color: Color(0xff1ea1a7),
+                            //                   width: 1)),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ]),
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
+                            // Row(
+                            //   children: [
+                            //     Expanded(
+                            //       child: Obx(
+                            //         () => DropdownButtonFormField<String>(
+                            //           value:
+                            //               registercontroller.selectedcity.value,
+                            //           items: registercontroller.city
+                            //               .map((String value) {
+                            //             return DropdownMenuItem<String>(
+                            //               value: value,
+                            //               child: Text(value),
+                            //             );
+                            //           }).toList(),
+                            //           isExpanded: true,
+                            //           onChanged: (String? value) {
+                            //             registercontroller
+                            //                 .cityEditController.text = value!;
+                            //           },
+                            //           decoration: InputDecoration(
+                            //             labelText: 'المدينة',
+                            //             border: OutlineInputBorder(
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(20),
+                            //                 borderSide: const BorderSide(
+                            //                     // color: Color(0xff1ea1a7),
+                            //                     width: 1)),
+                            //             enabledBorder: OutlineInputBorder(
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(20),
+                            //                 borderSide: const BorderSide(
+                            //                     color: Color(0xff1ea1a7),
+                            //                     width: 1)),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 5,
+                            //     ),
+                            //     Expanded(
+                            //       child: Obx(
+                            //         () => DropdownButtonFormField<String>(
+                            //           value: registercontroller
+                            //               .selectedstreet.value,
+                            //           items: registercontroller.street
+                            //               .map((String value) {
+                            //             return DropdownMenuItem<String>(
+                            //               value: value,
+                            //               child: Text(value),
+                            //             );
+                            //           }).toList(),
+                            //           isExpanded: true,
+                            //           onChanged: (String? value) {
+                            //             registercontroller
+                            //                 .streetEditController.text = value!;
+                            //           },
+                            //           decoration: InputDecoration(
+                            //             labelText: 'الشارع',
+                            //             border: OutlineInputBorder(
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(20),
+                            //                 borderSide: const BorderSide(
+                            //                     // color: Color(0xff1ea1a7),
+                            //                     width: 1)),
+                            //             enabledBorder: OutlineInputBorder(
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(20),
+                            //                 borderSide: const BorderSide(
+                            //                     color: Color(0xff1ea1a7),
+                            //                     width: 1)),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             SizedBox(
                               height: 20,
                             ),
@@ -413,7 +591,7 @@ class SponserRegisterScreen extends StatelessWidget {
                             CustomButton(
                               name: " إنشاء حساب",
                               onPressed: () {
-                                if (formKey4.currentState!.validate()) {
+                                if (_formKey2.currentState!.validate()) {
                                   registercontroller.checksignup();
                                 }
                               },
