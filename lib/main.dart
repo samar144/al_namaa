@@ -22,6 +22,7 @@ import 'features/sponser/view/sponser_home_screen.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'features/sponser/view/sponsor_an_orphan.dart';
+import 'service/network_handler/connectivity_service.dart';
 
 void main() async {
   await GetStorage.init();
@@ -36,9 +37,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      // initialRoute: GetRoutes.login,
 
       getPages: GetRoutes.route,
-      // initialBinding: Binding(),
+      // initialBinding: BindingsBuilder(() {
+      //   Get.put(ConnectivityService());
+      // }),
       title: 'Al_Namaa Charity',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff1ea1a7)),
@@ -46,6 +50,33 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: UserSignInrScreen(),
+      // home: FutureBuilder<bool>(
+      //   future: shouldShowIntroduction(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return Scaffold(
+      //         body: Center(
+      //           child: CircularProgressIndicator(),
+      //         ),
+      //       );
+      //     } else if (snapshot.hasError) {
+      //       return Scaffold(
+      //         body: Center(
+      //           child: Text('Error loading data'),
+      //         ),
+      //       );
+      //     } else {
+      //       final bool showIntroduction = snapshot.data!;
+      //       return showIntroduction ? const IntroScreen() : MyOrphanes();
+      //     }
+      //   },
+      // ),
     );
   }
+
+  // Future<bool> shouldShowIntroduction() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   bool showedIntroduction = prefs.getBool('showedIntroduction') ?? false;
+  //   return !showedIntroduction;
+  // }
 }

@@ -1,30 +1,30 @@
 // To parse this JSON data, do
 //
-//     final advertismentModel = advertismentModelFromJson(jsonString);
+//     final trainingAdvertismentModel = trainingAdvertismentModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<AdvertismentModel> advertismentModelFromJson(String str) =>
-    List<AdvertismentModel>.from(
-        json.decode(str).map((x) => AdvertismentModel.fromJson(x)));
+List<TrainingAdvertismentModel> trainingAdvertismentModelFromJson(String str) =>
+    List<TrainingAdvertismentModel>.from(
+        json.decode(str).map((x) => TrainingAdvertismentModel.fromJson(x)));
 
-String advertismentModelToJson(List<AdvertismentModel> data) =>
+String trainingAdvertismentModelToJson(List<TrainingAdvertismentModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class AdvertismentModel {
+class TrainingAdvertismentModel {
   int? id;
   String? title;
   String? body;
   String? image;
   String? hint;
-  int? courseId;
+  dynamic courseId;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<Category>? categories;
-  Course? course;
+  dynamic course;
   List<CategoryAdvertisement>? categoryAdvertisements;
 
-  AdvertismentModel({
+  TrainingAdvertismentModel({
     this.id,
     this.title,
     this.body,
@@ -38,8 +38,8 @@ class AdvertismentModel {
     this.categoryAdvertisements,
   });
 
-  factory AdvertismentModel.fromJson(Map<String, dynamic> json) =>
-      AdvertismentModel(
+  factory TrainingAdvertismentModel.fromJson(Map<String, dynamic> json) =>
+      TrainingAdvertismentModel(
         id: json["id"],
         title: json["title"],
         body: json["body"],
@@ -56,7 +56,7 @@ class AdvertismentModel {
             ? []
             : List<Category>.from(
                 json["categories"]!.map((x) => Category.fromJson(x))),
-        course: json["course"] == null ? null : Course.fromJson(json["course"]),
+        course: json["course"],
         categoryAdvertisements: json["category_advertisements"] == null
             ? []
             : List<CategoryAdvertisement>.from(json["category_advertisements"]!
@@ -75,7 +75,7 @@ class AdvertismentModel {
         "categories": categories == null
             ? []
             : List<dynamic>.from(categories!.map((x) => x.toJson())),
-        "course": course?.toJson(),
+        "course": course,
         "category_advertisements": categoryAdvertisements == null
             ? []
             : List<dynamic>.from(
@@ -151,107 +151,5 @@ class CategoryAdvertisement {
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
         "category": category?.toJson(),
-      };
-}
-
-class Course {
-  int? id;
-  String? name;
-  DateTime? startDate;
-  DateTime? endDate;
-  String? sessionNumber;
-  String? sessionDuration;
-  String? trainerName;
-  String? targetGroup;
-  int? premium;
-  String? category;
-  String? status;
-  List<CourseDay>? courseDays;
-
-  Course({
-    this.id,
-    this.name,
-    this.startDate,
-    this.endDate,
-    this.sessionNumber,
-    this.sessionDuration,
-    this.trainerName,
-    this.targetGroup,
-    this.premium,
-    this.category,
-    this.status,
-    this.courseDays,
-  });
-
-  factory Course.fromJson(Map<String, dynamic> json) => Course(
-        id: json["id"],
-        name: json["name"],
-        startDate: json["start_date"] == null
-            ? null
-            : DateTime.parse(json["start_date"]),
-        endDate:
-            json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
-        sessionNumber: json["session_number"],
-        sessionDuration: json["session_duration"],
-        trainerName: json["trainer_name"],
-        targetGroup: json["target_group"],
-        premium: json["premium"],
-        category: json["category"],
-        status: json["status"],
-        courseDays: json["course_days"] == null
-            ? []
-            : List<CourseDay>.from(
-                json["course_days"]!.map((x) => CourseDay.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "start_date":
-            "${startDate!.year.toString().padLeft(4, '0')}-${startDate!.month.toString().padLeft(2, '0')}-${startDate!.day.toString().padLeft(2, '0')}",
-        "end_date":
-            "${endDate!.year.toString().padLeft(4, '0')}-${endDate!.month.toString().padLeft(2, '0')}-${endDate!.day.toString().padLeft(2, '0')}",
-        "session_number": sessionNumber,
-        "session_duration": sessionDuration,
-        "trainer_name": trainerName,
-        "target_group": targetGroup,
-        "premium": premium,
-        "category": category,
-        "status": status,
-        "course_days": courseDays == null
-            ? []
-            : List<dynamic>.from(courseDays!.map((x) => x.toJson())),
-      };
-}
-
-class CourseDay {
-  int? id;
-  int? courseId;
-  String? day;
-  String? startTime;
-  String? endTime;
-
-  CourseDay({
-    this.id,
-    this.courseId,
-    this.day,
-    this.startTime,
-    this.endTime,
-  });
-
-  factory CourseDay.fromJson(Map<String, dynamic> json) => CourseDay(
-        id: json["id"],
-        courseId: json["course_id"],
-        day: json["day"],
-        startTime: json["start_time"],
-        endTime: json["end_time"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "course_id": courseId,
-        "day": day,
-        "start_time": startTime,
-        "end_time": endTime,
       };
 }

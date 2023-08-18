@@ -34,4 +34,16 @@ class GetStorageUtils {
         user_id: json["user_id"],
         token: json["token"]);
   }
+
+  // saveorphanid(String id) {
+  //   _storage.write('orphan_id', id);
+  // }
+
+  // getorphanid() {
+  //   String id = _storage.read('orphan_id');
+  //   if (id != null) {
+  //     return id;
+  //   }
+  //   return null;
+  // }
 }

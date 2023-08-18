@@ -17,7 +17,7 @@ CustomAppBar(dynamic title, List<Widget>? widget) {
             Get.back();
           },
           icon: Icon(
-            Icons.backspace_outlined,
+            Icons.arrow_back,
             color: Colors.cyan[600],
           )));
 }

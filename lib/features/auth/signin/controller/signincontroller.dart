@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'dart:convert';
+import 'package:alnamaa_charity/service/network_handler/connectivity_service.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
@@ -19,6 +20,9 @@ import '../../signup/model/user_register_model.dart';
 import '../model/user_login_model.dart';
 
 class LoginController extends GetxController {
+  // final ConnectivityService _connectivityService =
+  //     Get.put(ConnectivityService());
+
   late TextEditingController emailEditController,
       passwordEditController,
       cpasswordEditController,
@@ -31,6 +35,8 @@ class LoginController extends GetxController {
     verifyEditController = TextEditingController();
     passwordEditController = TextEditingController();
     cpasswordEditController = TextEditingController();
+    // ever(_connectivityService.hasConnection, handleConnectivityChanged);
+
     // checkuser();
     super.onInit();
   }
@@ -45,11 +51,6 @@ class LoginController extends GetxController {
     }
   }
 
-  checklogin() {
-    Get.showOverlay(
-        asyncFunction: () => login(), loadingWidget: const LoadingWidget());
-  }
-
   @override
   void onClose() {
     super.onClose();
@@ -58,6 +59,19 @@ class LoginController extends GetxController {
     // cpasswordEditController.dispose();
     // tokenEditController.dispose();
   }
+
+  checklogin() {
+    Get.showOverlay(
+        asyncFunction: () => login(), loadingWidget: const LoadingWidget());
+  }
+
+  // void handleConnectivityChanged(bool hasConnection) {
+  //   if (hasConnection) {
+
+  //   } else {
+  //     customsnackbar("", "غير متصل بالانترنيت", "error");
+  //   }
+  // }
 
   login() async {
     // UserLoginModel loginModel = UserLoginModel(
@@ -88,9 +102,8 @@ class LoginController extends GetxController {
         Get.offAllNamed(
           GetRoutes.sponserhomepage,
         );
-      } else if (res["data"]["role"][0] == "NormalUser" ||
-          res["data"]["role"][0] == "Orphan") {
-        Get.offAllNamed(GetRoutes.orphanhomepage);
+      } else if (res["data"]["role"][0] == "NormalUser") {
+        // Get.offAllNamed(GetRoutes.sponserhomepage);
       } else {}
     } else {
       customsnackbar("signup Error", res['message'], "error");
@@ -136,3 +149,28 @@ class LoginController extends GetxController {
     }
   }
 }
+
+
+// import 'package:get/get.dart';
+// import 'package:flutter/material.dart';
+// import 'connectivity_service.dart';
+
+// class HomeController extends GetxController {
+//   final ConnectivityService _connectivityService = Get.find<ConnectivityService>();
+
+//   @override
+//   void onInit() {
+//     super.onInit();
+//     ever(_connectivityService.hasConnection, handleConnectivityChanged);
+//   }
+
+//   void handleConnectivityChanged(bool hasConnection) {
+//     if (hasConnection) {
+//       // Internet is available
+//       // Perform your desired actions here
+//     } else {
+//       // Internet is not available
+//       // Perform your desired actions here
+//     }
+//   }
+// }

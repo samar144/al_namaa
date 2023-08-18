@@ -6,7 +6,7 @@ import '../controller/donate_an_idea_controller.dart';
 
 class DonateAnIdea extends StatelessWidget {
   //DonateAnIdea({super.key});
-  final formKey8 = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey8 = GlobalKey<FormState>();
 
   final DonateAnIdeaController cont = Get.put(DonateAnIdeaController());
 
@@ -40,11 +40,11 @@ class DonateAnIdea extends StatelessWidget {
                 ))),
         body: GetBuilder<DonateAnIdeaController>(builder: (controller) {
           return Form(
-            key: formKey8,
+            key: _formKey8,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const Text(
                     "شاركنا بعض الأفكار ",
@@ -67,7 +67,7 @@ class DonateAnIdea extends StatelessWidget {
                     hint: "ادخل الفكرة مع بعض الشرح ... ",
                     label: "",
                     keyboaredtype: TextInputType.multiline,
-                    maxlines: 6,
+                    maxlines: 15,
                   ),
                   TextFormFieldWidget(
                     controller: controller.costEditController,
@@ -87,31 +87,27 @@ class DonateAnIdea extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.cyan[600],
-                          ),
-                          onPressed: () {
-                            if (formKey8.currentState!.validate()) {
-                              controller.donateanidea();
-                            }
-                          },
-                          child: const Text("إرسال"),
-                        ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.cyan[600]),
+                            onPressed: () {
+                              if (_formKey8.currentState!.validate()) {
+                                controller.donateanidea();
+                              }
+                            },
+                            child: const Text("إرسال")),
                         const SizedBox(
                           width: 10.0,
                         ),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                          ),
-                          child: const Text("إلغاء"),
-                          onPressed: () {
-                            Get.back();
-                          },
-                        ),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red),
+                            child: const Text("إلغاء"),
+                            onPressed: () {
+                              Get.back();
+                            }),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

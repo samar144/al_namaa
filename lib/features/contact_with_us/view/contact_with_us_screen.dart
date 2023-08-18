@@ -6,7 +6,7 @@ import '../../../core/widget/text_form_field.dart';
 
 class ContactWithUs extends StatelessWidget {
   ContactWithUs({key});
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey6 = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -18,7 +18,7 @@ class ContactWithUs extends StatelessWidget {
           )
         ]),
         body: Form(
-          key: formKey,
+          key: _formKey6,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -49,7 +49,7 @@ class ContactWithUs extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.cyan[600]),
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {}
+                            if (_formKey6.currentState!.validate()) {}
                           },
                           child: const Text("إرسال")),
                       const SizedBox(

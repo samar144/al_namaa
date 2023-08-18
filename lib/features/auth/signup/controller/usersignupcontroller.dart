@@ -12,35 +12,8 @@ class UserSignUpController extends GetxController {
   final date = DateTime.now().obs;
   // bool isEmailConfirmed = false;
 
-  final List<String> country = ['syria'];
-  final List<String> city = [
-    "mazah",
-    "masaken barzeh",
-    "almojtahed",
-    "abaseen",
-    "dwelaa",
-    "atman",
-    "mesyaf"
-  ];
-  final List<String> state = [
-    "damascus",
-    "damascus countryside",
-    "daraa",
-    "hamah",
-    "tartous"
-  ];
-  final List<String> street = [
-    "shekh",
-    "banorama",
-  ];
-  // dynamic country;
-  // final List<String> city = [];
-  // final List<String> state = [];
-  // final List<String> street = [];
   final RxString selectedcountry = 'syria'.obs;
-  final RxString selectedstate = 'damascus'.obs;
-  final RxString selectedcity = 'mazah'.obs;
-  final RxString selectedstreet = 'shekh'.obs;
+
   late TextEditingController emailEditController,
       passwordEditController,
       cpasswordEditController,
@@ -62,7 +35,6 @@ class UserSignUpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // getcountry();
     emailEditController = TextEditingController();
     cpasswordEditController = TextEditingController();
     stateEditController = TextEditingController();
@@ -80,6 +52,7 @@ class UserSignUpController extends GetxController {
     jobEditController = TextEditingController();
     cityEditController = TextEditingController();
     studyEditController = TextEditingController();
+    getcountry();
   }
 
   @override
@@ -104,44 +77,96 @@ class UserSignUpController extends GetxController {
     // studyEditController.dispose();
   }
 
+  final _countreies = RxList<dynamic>([]);
+  List get countreies => _countreies.toList();
   getcountry() async {
-    http.Response response = await http.get(
-        Uri.parse(AppConstants.BASE_URL + '/api/address/country'),
+    var response = await http.get(
+        Uri.parse('${AppConstants.BASE_URL}/api/address/country'),
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Accept": "application/json",
         });
     var res = await jsonDecode(response.body);
 
-    return res["data"];
+    if (response.statusCode == 200) {
+      final List data = [];
+      for (var item in res["data"]) {
+        data.add(item);
+      }
+      _countreies.value = data;
+    } else {
+      throw Exception("Failed to fetch data");
+    }
   }
-  //  getstate(country) async {
-  //   http.Response response = await http
-  //       .get(Uri.parse('$baseUrl/api/address/city?country=$country'), headers: {
-  //     "Content-Type": "application/json",
-  //     "Accept": "application/json"
-  //   });
-  //   var res = await jsonDecode(response.body);
-  //   state.addAll(res["data"]);
-  // }
-  //  getcity(country,state) async {
-  //   http.Response response = await http
-  //       .get(Uri.parse('$baseUrl/api/address/city?country=$country&state=$state'), headers: {
-  //     "Content-Type": "application/json",
-  //     "Accept": "application/json"
-  //   });
-  //   var res = await jsonDecode(response.body);
-  //   city.addAll(res["data"]);
-  // }
-  //  getstreet() async {
-  //   http.Response response = await http
-  //       .get(Uri.parse('$baseUrl/api/address/street?country=syria&state=damascus&city=mazah&=shekh'), headers: {
-  //     "Content-Type": "application/json",
-  //     "Accept": "application/json"
-  //   });
-  //   var res = await jsonDecode(response.body);
-  //   street.addAll(res["data"]);
-  // }
+
+  final _statess = RxList<dynamic>([]);
+  List get statess => _statess.toList();
+  void getstate({var country}) async {
+    var response = await http.get(
+        Uri.parse(
+            '${AppConstants.BASE_URL}/api/address/state?country=$country'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        });
+    var res = await jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      final List data = [];
+      for (var item in res["data"]) {
+        data.add(item);
+      }
+      _statess.value = data;
+    } else {
+      throw Exception("Failed to fetch data");
+    }
+  }
+
+  final _cities = RxList<dynamic>([]);
+  List get cities => _cities.toList();
+  getcity({var contry, var state}) async {
+    var response = await http.get(
+        Uri.parse(
+            '${AppConstants.BASE_URL}/api/address/city?country=$contry&state=$state'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        });
+    var res = await jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      final List data = [];
+      for (var item in res["data"]) {
+        data.add(item);
+      }
+      _cities.value = data;
+    } else {
+      throw Exception("Failed to fetch data");
+    }
+  }
+
+  final _streets = RxList<dynamic>([]);
+  List get streets => _streets.toList();
+  getstreet({var contry, var state, var city}) async {
+    var response = await http.get(
+        Uri.parse(
+            '${AppConstants.BASE_URL}/api/address/street?country=$contry&state=$state&city=$city'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        });
+    var res = await jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      final List data = [];
+      for (var item in res["data"]) {
+        data.add(item);
+      }
+      _streets.value = data;
+    } else {
+      throw Exception("Failed to fetch data");
+    }
+  }
 
   checksignup() {
     Get.showOverlay(

@@ -1,5 +1,6 @@
-//import 'dart:html';
+import 'dart:html';
 
+import 'package:alnamaa_charity/core/widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,7 @@ import '../model/comment_model.dart';
 import '../model/reply_model.dart';
 
 class ReplyPage extends StatelessWidget {
-  ReplyPage({required this.comment});
+  ReplyPage({Key? key, required this.comment}) : super(key: key);
 
   final Commentmodel comment;
   final ReplyController replyController = Get.find();
@@ -46,12 +47,29 @@ class ReplyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Replies')),
+      appBar: AppBar(
+          toolbarHeight: 80,
+          backgroundColor: Colors.white,
+          elevation: 2,
+          title: Text(
+            "الردود",
+            style:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.cyan[600]),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.backspace_outlined,
+                color: Colors.cyan[600],
+              ))),
       body: Column(
         children: [
           // Display comment content and author
           ListTile(
-            title: Text(comment.adveretismentId.toString()),
+            title: Text(comment.advertisementId!.toString()),
             subtitle: Text(comment.body!),
           ),
           // Display replies

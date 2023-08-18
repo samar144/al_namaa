@@ -11,7 +11,7 @@ import '../../../../core/widget/button.dart';
 class VerifyScreenSponser extends StatelessWidget {
   // VerifyScreenSponser({super.key});
   final SponsorSignUpController controller = Get.put(SponsorSignUpController());
-  final formKey3 = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey5 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class VerifyScreenSponser extends StatelessWidget {
                       children: [
                         Form(
                           autovalidateMode: AutovalidateMode.always,
-                          key: formKey3,
+                          key: _formKey5,
                           child: Column(
                             children: [
                               TextFormFieldWidget(
@@ -63,7 +63,7 @@ class VerifyScreenSponser extends StatelessWidget {
                         CustomButton(
                           name: "ارسال",
                           onPressed: () {
-                            if (formKey3.currentState!.validate()) {
+                            if (_formKey5.currentState!.validate()) {
                               controller.verifyemail();
                             }
                           },

@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
+// old
 import 'dart:convert';
+
 import 'package:alnamaa_charity/features/Profile/profile_controller.dart';
 import 'package:alnamaa_charity/features/Profile/profile_model.dart';
-import 'package:alnamaa_charity/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:alnamaa_charity/utils/colors';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,10 +22,14 @@ class _MainProfileState extends State<MainProfile>
   late TabController _tabController;
   final ProfileController con = Get.put(ProfileController());
 
+  //late String imageUrl;
+  // final ProfileModel userData = ProfileModel.fromJson(json.decode(response.body).toString());
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    // fetchImageUrl();
   }
 
   @override
@@ -35,11 +38,33 @@ class _MainProfileState extends State<MainProfile>
     super.dispose();
   }
 
+  // Future<void> fetchImageUrl() async {
+  //   try {
+  //     final url = await getImageUrlFromApi();
+  //     setState(() {
+  //       imageUrl = url;
+  //     });
+  //   } catch (e) {
+  //     // Handle error
+  //   }
+  // }
+
+  // Future<String> getImageUrlFromApi() async {
+  //   final response = await http.get(
+  //       Uri.parse('http://127.0.0.1:8000/api/app/orphans/profile/5/photo'));
+  //   if (response.statusCode == 200) {
+  //     final imageUrl = response.body;
+  //     return imageUrl;
+  //   } else {
+  //     throw Exception('Failed to load image URL');
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProfileController>(builder: (controller) {
-      var token =
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMWM5NDQ0MTE1Yjc2MDJjNTNlNWJkZDU1YTRmZjkzY2UyYTIwMDBlYjRjYTk5NDJmYmRkNTFhZjA5ZTdlNjJlMDQ4YTQ3ZmNkYWU4ZTk2MzYiLCJpYXQiOjE2OTIwODI5MjguOTczNTcxLCJuYmYiOjE2OTIwODI5MjguOTczNTc1LCJleHAiOjE3MjM3MDUzMjguOTE3OTUzLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KJGP4Vm_qM_VHrn9E9A8MuGpwD4UchkLFWTjsqh4yqhJzCRNOxlZ_-DAStWjZnPw4BbalieN0ebAm4U2pt23LeVFnyp9lMIFYpEu7VQkj5H3rgadUwuYxlcUXHKdp5KbvVyD8MzJgfrg2J21SGTc3HAjbr-LrdvGFeWD6R48Mufcm2k37WjGL8n-oFw6eEnS7gbJBnYKaYjpso4JwyGgh3_DiEbFtFIm-k1M2vzom1oEkqxbQtMYp0VDIazvAWZmfghMfvIWyQ5GJ6cesK3BQ_w1pfSyB5trCaMIjDVRJSP4nWPEvVz-5ZyoVmmGu7IvjlTCxkN8uXVQPKMkySPREZL-yGJbxq89aNFoK_J-Mqzb1cCFsq1F0vKitke124EEuo-Wb906weGEcoeMvn1NPAqebrxFXyOe4pKTzHpZJqVJDmRCpHIZZ4jhPmLBx0HRxG-Oxllqxn-GT0Uvjrnory6x6rM0hokJzGm6jR8LAz-qT33AJU0WKAVtAirPbzBJrmDfN-Z5U-dbAjMG0xbEEjhuo4UdE9pLTIeX6_jrKePSAG0n33oiD0xeIiPrykemx4GT7qfCCk5w-bVHqgwLymXoevw_nV3yqLLaLaZ14QjkrOZ_Ca3ZiHMPcKcznq9Vg9hawIcBEQLhbUcNLs1fthuMhhFeos0RcOZHe7s5DSc";
+    return
+        //  Obx(() =>
+        GetBuilder<ProfileController>(builder: (controller) {
       return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -53,8 +78,11 @@ class _MainProfileState extends State<MainProfile>
                   color: AppColors.whiteColor,
                 ),
                 onPressed: () {
-                  Get.toNamed(GetRoutes.myorphanes);
-                }),
+                  Get.close(0);
+                }
+                // =>
+                // Navigator.of(context).pop(),
+                ),
             title: Align(
               alignment: Alignment.center,
               child: Text(
@@ -68,30 +96,49 @@ class _MainProfileState extends State<MainProfile>
               preferredSize: const Size.fromRadius(133),
               child: Column(
                 children: [
+                  // Container(
+                  //   height: 111,
+                  //   width: 111,
+                  //   decoration: const BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     image: DecorationImage(
+                  //       image: AssetImage("assets/images/33.jpg"),
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  // ),
+
+                  // //   const CachedNetworkImageProvider( " http://127.0.0.1:8000/images/orphans/lA5e5q0MTvPl3bdwQz9HKBlPoR7E98GwLdcZcYX3.jpg"),
+
                   ClipOval(
-                    child: controller.prof.orphan != null
-                        ? CachedNetworkImage(
-                            imageUrl: AppConstants.BASE_URL +
-                                controller.prof.orphan!.photo!,
-                            placeholder: (context, url) =>
-                                CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                            httpHeaders: {
-                              "Content-Type": "application/json",
-                              "Accept": "application/json",
-                              "Authorization": "Bearer $token"
-                            },
-                            fit: BoxFit.fill,
-                            width: 133,
-                            height: 133,
-                          )
-                        : SizedBox(), // Add a fallback widget or an empty SizedBox if orphan is null
+                    child:
+                        //     Image.network(
+                        //   AppConstants.BASE_URL + controller.prof.orphan!.photo!,
+                        //   fit: BoxFit.fill,
+                        //   height: 111,
+                        //   width: 111,
+                        // )
+                        CachedNetworkImage(
+                      imageUrl: AppConstants.BASE_URL +
+                          controller.prof.orphan!.photo!,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      // httpHeaders: {
+                      //   "Content-Type": "application/json",
+                      //   "Accept": "application/json",
+                      //   "Authorization": "Bearer ${AppConstants.TOKEN}"
+                      // },
+                      fit: BoxFit.fill,
+                      width: 133,
+                      height: 133,
+                    ),
                   ),
 
                   Align(
                     child: Text(
-                        "${controller.prof.orphan?.firstName ?? ''} ${controller.prof.orphan?.lastName ?? ''}",
+                        "${controller.prof.orphan?.firstName!} ${controller.prof.orphan?.lastName!}",
                         style: const TextStyle(
                             color: Color.fromRGBO(50, 50, 93, 1),
                             fontSize: 26.0)),
@@ -120,157 +167,162 @@ class _MainProfileState extends State<MainProfile>
           body: TabBarView(
             controller: _tabController,
             children: [
-              ListView.builder(
-                itemCount: 6, // Number of sections/categories
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0) {
-                    // Birth section
-                    return ListTile(
-                      leading: Icon(
-                        Icons.date_range_outlined,
-                        color: AppColors.iconColor1,
-                      ),
-                      title: Text("Birth"),
-                      subtitle: Text("${controller.prof.orphan!.birth!}"),
-                    );
-                  } else if (index == 1) {
-                    // Study & School section
-                    return ListTile(
-                      leading: Icon(
-                        Icons.school_outlined,
-                        color: AppColors.iconColor2,
-                      ),
-                      title: Text('Study & School'),
-                      subtitle: Text(
-                          "${controller.prof.orphan!.study!} - ${controller.prof.orphan!.schoolName!} school "),
-                    );
-                  } else if (index == 2) {
-                    // National Number section
-                    return ListTile(
-                      leading: Icon(
-                        Icons.numbers_outlined,
-                        color: AppColors.mainBlackColor,
-                      ),
-                      title: Text('National Number'),
-                      subtitle:
-                          Text("${controller.prof.orphan!.nationalNumber!} "),
-                    );
-                  } else if (index == 3) {
-                    // Address section
-                    return ListTile(
-                      leading: Icon(
-                        Icons.location_city_outlined,
-                        color: AppColors.greyColor,
-                      ),
-                      title: Text('Address'),
-                      subtitle: Text(
-                          "${controller.prof.address!.country!} - ${controller.prof.address!.state!} - ${controller.prof.address!.city!}- ${controller.prof.address!.street!} "),
-                    );
-                  } else if (index == 4) {
-                    // Gender section
-                    return ListTile(
-                      leading: Icon(
-                        Icons.person_2_outlined,
-                        color: AppColors.conColor1,
-                      ),
-                      title: Text('Gender'),
-                      subtitle: Text("${controller.prof.orphan!.gender!} "),
-                    );
-                  } else if (index == 5) {
-                    // Gender section
-                    return SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        itemCount: controller.prof.receipt?.length ?? 0,
-                        itemBuilder: (BuildContext context, int index) {
-                          var rec_amount = controller.prof.receipt?[index];
+              ListView(
+                children: [
+                  ListTile(
+                    leading: Icon(
+                      Icons.date_range_outlined,
+                      color: AppColors.iconColor1,
+                    ),
+                    title: const Text("Birth"),
+                    subtitle: Text("${controller.prof.orphan!.birth!}"),
+                  ),
 
-                          return ListTile(
-                            leading: Icon(
-                              Icons.timer_outlined,
-                              color: AppColors.iconColor1,
-                            ),
-                            title: Text(
-                              'My Receipts',
-                            ),
-                            subtitle: Text(
-                                '${rec_amount?.amount ?? ''} / [${rec_amount?.fromDate ?? ''}] - [ ${rec_amount?.toDate ?? ''}]'),
-                          );
-                        },
-                      ),
-                    );
-                  }
-                  return SizedBox
-                      .shrink(); // Return an empty widget if index is out of bounds
-                },
-              ),
-              Stack(children: [
-                Container(
-                  width: 333,
-                  height: 333,
-                  padding: EdgeInsets.all(99),
-                  margin: EdgeInsets.all(99),
-                  // ignore: prefer_const_constructors
-                  decoration: BoxDecoration(
-                    // ignore: prefer_const_constructors
-                    image: DecorationImage(
-                      // ignore: prefer_const_constructors
-                      image: AssetImage(
-                          "assets/images/photo_2023-08-10_00-35-19.jpg"),
-                      fit: BoxFit.cover,
+                  ListTile(
+                    leading: Icon(
+                      Icons.school_outlined,
+                      color: AppColors.iconColor2,
+                    ),
+                    title: const Text('Study & Scool'),
+                    subtitle: Text(
+                        "${controller.prof.orphan!.study!} - ${controller.prof.orphan!.schoolName!} school "),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.numbers_outlined,
+                      color: AppColors.mainBlackColor,
+                    ),
+                    title: const Text('National Number'),
+                    subtitle:
+                        Text("${controller.prof.orphan!.nationalNumber!} "),
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.location_city_outlined,
+                      color: AppColors.greyColor,
+                    ),
+                    title: const Text('Adress'),
+                    subtitle: Text(
+                        "${controller.prof.address!.country!} - ${controller.prof.address!.state!} - ${controller.prof.address!.city!}- ${controller.prof.address!.street!} "),
+                  ),
+                  SizedBox(
+                    height: 200, // Set a fixed height here
+                    child: ListView.builder(
+                      itemCount: controller.prof.receipt?.length ?? 0,
+                      itemBuilder: (BuildContext context, int index) {
+                        var rec_amount = controller.prof.receipt?[index];
+                        return ListTile(
+                          leading: Icon(
+                            Icons.timer_outlined,
+                            color: AppColors.iconColor1,
+                          ),
+                          title: const Text(
+                            'my receipts',
+                          ),
+                          subtitle: Text(
+                              '${rec_amount?.amount ?? ''} / [${rec_amount?.fromDate ?? ''}] - [ ${rec_amount?.toDate ?? ''}]'),
+                        );
+                      },
                     ),
                   ),
-                ),
-                ListView.builder(
-                  itemCount: controller.prof.achievements?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    var achievement = controller.prof.achievements?[index];
-                    return Container(
-                      margin: EdgeInsets.all(33),
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            AppColors.mainColor,
-                            AppColors.containerColor,
+
+                  // Add more ListTiles for other sections of your profile
+                ],
+              ),
+
+              // Center(
+              //   child: Padding(
+              //     padding: EdgeInsets.all(16.0),
+              //     child: Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(
+              //           "${controller.prof.address!.country!} ${controller.prof.address!.city!}",
+              //           style: TextStyle(fontSize: 18),
+              //         ),
+              //         SizedBox(height: 10),
+              //         Text(
+              //           "${controller.prof.orphan!.birth!}",
+              //           style: TextStyle(fontSize: 18),
+              //         ),
+              //         SizedBox(height: 10),
+              //         Text(
+              //           "${controller.prof.orphan!.study!}",
+              //           style: TextStyle(fontSize: 18),
+              //         ),
+              //         SizedBox(height: 10),
+              //         Text(
+              //           "${controller.prof.orphan!.status!}",
+              //           style: TextStyle(fontSize: 18),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              ListView.builder(
+                itemCount: controller.prof.achievements?.length ?? 0,
+                itemBuilder: (BuildContext context, int index) {
+                  var achievement = controller.prof.achievements?[index];
+                  return Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(33),
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              AppColors.mainColor,
+                              AppColors.containerColor,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 7,
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 7,
+                              offset: const Offset(0, 3),
+                            ),
                           ],
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7,
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 7,
-                            offset: Offset(0, 3),
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.star,
+                            color: Colors.amber,
                           ),
-                        ],
-                      ),
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        title: Text(
-                          "${achievement?.title ?? ''}    2023-08-09T07:18:57.000000Z",
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
+                          title: Text(
+                            "${achievement?.title ?? ''}    2023-08-09T07:18:57.000000Z",
+                            style: TextStyle(
+                              color: AppColors.whiteColor,
+                            ),
                           ),
-                        ),
-                        subtitle: Text(
-                          "${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}",
-                          style: TextStyle(
-                            color: AppColors.mainColor,
+                          subtitle: Text(
+                            "${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}",
+                            style: TextStyle(
+                              color: AppColors.mainColor,
+                            ),
                           ),
-                        ),
 
-                        //trailing: Text("${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}"),
+                          //trailing: Text("${achievement?.createdAt ?? ''}-${achievement?.body ?? ''}"),
+                        ),
                       ),
-                    );
-                  },
-                ),
-              ]),
+                      Container(
+                        width: 333,
+                        height: 333,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                "assets/images/photo_2023-08-10_00-35-19.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -279,3 +331,108 @@ class _MainProfileState extends State<MainProfile>
     // );
   }
 }
+
+//   Widget _builldProfile(ProfileModel profileModel) {
+//     return DefaultTabController(
+//       length: 2,
+//       child: Scaffold(
+//         backgroundColor: AppColors.whiteColor,
+//         appBar: AppBar(
+//           elevation: 0.0,
+//           leading: IconButton(
+//             icon: Icon(
+//               Icons.arrow_back,
+//               color: AppColors.whiteColor,
+//             ),
+//             onPressed: () {}
+//             // =>
+//             // Navigator.of(context).pop(),
+//           ),
+//           title: Align(
+//             child: Text(
+//               'الملف الشخصي',
+//               style: TextStyle(
+//                 color: AppColors.whiteColor,
+//               ),
+//             ),
+//             alignment: Alignment.center,
+//           ),
+//           bottom: PreferredSize(
+//             preferredSize: const Size.fromRadius(133),
+//             child: Column(
+//               children: [
+//                 Container(
+//                   height: 111,
+//                   width: 111,
+//                   decoration: BoxDecoration(
+//                     shape: BoxShape.circle,
+//                     image: DecorationImage(
+//                       image: AssetImage('assets/images/33.jpg'),
+//                       fit: BoxFit.cover,
+//                     ),
+//                   ),
+//                 ),
+
+//                 //CachedNetworkImageProvider(imageUrl),
+//                 // CachedNetworkImage(
+//                 //     imageUrl:
+//                 //         AppConstants.BASE_URL+'/api/app/orphans/profile/'+Orphan.id,
+//                 //     placeholder: (context, url) =>
+//                 //         CircularProgressIndicator(),
+//                 //     errorWidget: (context, url, error) => Icon(Icons.error),
+//                 //   ),
+//                 Align(
+//                   child: Text(
+//                       con.prof.value.orphan!.firstName! +
+//                           " " +
+//                           con.prof.value.orphan!.age!,
+//                       style: TextStyle(
+//                           color: Color.fromRGBO(50, 50, 93, 1),
+//                           fontSize: 26.0)),
+//                 ),
+//                 SizedBox(height: 10.0),
+//                 Align(
+//                   child: Text(
+//                       con.prof.value.address!.country! +
+//                           " " +
+//                           con.prof.value.address!.city!,
+//                       style: TextStyle(
+//                           color: Color.fromRGBO(50, 50, 93, 1),
+//                           fontSize: 16.0,
+//                           fontWeight: FontWeight.w200)),
+//                 ),
+//                 Divider(
+//                   height: 40.0,
+//                   thickness: 1.5,
+//                   indent: 32.0,
+//                   endIndent: 32.0,
+//                 ),
+
+//                 TabBar(
+//                   controller: _tabController,
+//                   tabs: const [
+//                     Tab(text: 'About'),
+//                     Tab(text: 'Achievements'),
+//                   ],
+//                 ),
+//                 // Profile photo
+//               ],
+//             ),
+//           ),
+//         ),
+//         body: TabBarView(
+//           controller: _tabController,
+//           children: const [
+//             Center(
+//                 child: Column(
+//               children: [
+//                 Text('About'),
+//               ],
+//             )),
+//             Center(child: Text('Achievements')),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
