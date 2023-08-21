@@ -40,7 +40,7 @@ class SponserAnOrphane extends StatelessWidget {
             centerTitle: true,
             leading: IconButton(
                 onPressed: () {
-                  Get.back();
+                  Navigator.pop(context);
                 },
                 icon: Icon(
                   Icons.backspace_outlined,

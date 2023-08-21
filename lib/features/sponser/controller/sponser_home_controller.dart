@@ -30,7 +30,7 @@ class HomeController extends GetxController {
 
     token = user.token;
     notecontroller = TextEditingController();
-    getCourses();
+    // getCourses();
     getorphansponsor();
   }
 
@@ -44,7 +44,8 @@ class HomeController extends GetxController {
 
     // String token = user!.token!;
     var response = await http.get(
-        Uri.parse('$baseUrl/api/app/sponsorships/sponsor/order'),
+        Uri.parse(
+            '${AppConstants.BASE_URL}/api/app/sponsorships/sponsor/order'),
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
@@ -73,7 +74,8 @@ class HomeController extends GetxController {
     // String token = user!.token!;
 
     var response = await http.get(
-        Uri.parse('$baseUrl/api/app/sponsorships/sponsor/order'),
+        Uri.parse(
+            '${AppConstants.BASE_URL}/api/app/sponsorships/sponsor/order'),
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
@@ -102,25 +104,21 @@ class HomeController extends GetxController {
     // String token = user.token!;
     // String token = user!.token!;
 
-    var response = await http
-        .get(Uri.parse('$baseUrl/api/app/sponsorships/orphan'), headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Authorization": "Bearer $token"
-    });
+    var response = await http.get(
+        Uri.parse('${AppConstants.BASE_URL}/api/app/sponsorships/orphan'),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer $token"
+        });
     var res = await jsonDecode(response.body);
-    print("ddddddddddddd");
 
     if (response.statusCode == 200) {
       final List data = [];
       for (var item in res["data"]) {
         data.add(item);
-        print("$baseUrl+${item["orphan"]["photo"].toString()}");
-        print(item["orphan"]["first_name"].toString());
       }
       _orphanforsponser.value = data;
-      print("dddddddddddddrrrrrrrrrrrrrrrrr");
-      print(res);
     } else {
       throw Exception("Failed to fetch data");
     }
@@ -141,7 +139,7 @@ class HomeController extends GetxController {
     print("Got courses");
     try {
       var response = await http.get(
-        Uri.parse('$baseUrl/api/app/students/course'),
+        Uri.parse('${AppConstants.BASE_URL}/api/app/students/course'),
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
@@ -205,7 +203,7 @@ class HomeController extends GetxController {
     // String token = user.token!;
 
     var response = await http.post(
-        Uri.parse('$baseUrl/api/app/sponsorships/stop/$id'),
+        Uri.parse('${AppConstants.BASE_URL}/api/app/sponsorships/stop/$id'),
         body: jsonEncode({"note": notecontroller.text}),
         headers: {
           "Content-Type": "application/json",

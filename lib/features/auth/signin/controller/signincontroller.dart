@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'dart:convert';
-import 'package:alnamaa_charity/service/network_handler/connectivity_service.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:alnamaa_charity/utils/shared_pref/shared_prefs.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:alnamaa_charity/utils/app_constants.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../../../../core/widget/loading_widget.dart';
 import '../../../../routes.dart';
@@ -17,7 +15,6 @@ import '../../../../routes.dart';
 import '../../../../utils/custom_snackbar.dart';
 import '../../../../utils/shared_pref/getstorage.dart';
 import '../../signup/model/user_register_model.dart';
-import '../model/user_login_model.dart';
 
 class LoginController extends GetxController {
   // final ConnectivityService _connectivityService =
@@ -79,7 +76,7 @@ class LoginController extends GetxController {
     UserModel loginModel = UserModel(
         email: emailEditController.text, password: passwordEditController.text);
     var response = await http.post(
-        Uri.parse(AppConstants.BASE_URL + '/api/login'),
+        Uri.parse('${AppConstants.BASE_URL}/api/login'),
         body: jsonEncode(loginModel),
         headers: {
           "Content-Type": "application/json",
@@ -95,17 +92,18 @@ class LoginController extends GetxController {
           name: res['data']['name'],
           token: res['data']['token'],
           user_id: res["data"]["user_id"],
-          email: emailEditController.text!);
+          email: emailEditController.text);
       GetStorageUtils().saveUser(user);
       customsnackbar("sucsses", res['message'], "sucess");
       if (res["data"]["role"][0] == "Sponsor") {
         Get.offAllNamed(
           GetRoutes.sponserhomepage,
         );
-      } else if (res["data"]["role"][0] == "NormalUser" ||
-          res["data"]["role"][0] == "Orphan") {
+      } else if (res["data"]["role"][0] == "Orphan") {
         Get.offAllNamed(GetRoutes.orphanhomepage);
-      } else {}
+      } else {
+        // Get.offAllNamed("userhomepage");
+      }
     } else {
       customsnackbar("signup Error", res['message'], "error");
     }
@@ -114,7 +112,7 @@ class LoginController extends GetxController {
   forgetpassword() async {
     UserModel loginModel = UserModel(email: emailEditController.text);
     var response = await http.post(
-        Uri.parse(AppConstants.BASE_URL + '/api/forget/password'),
+        Uri.parse('${AppConstants.BASE_URL}/api/forget/password'),
         body: jsonEncode(loginModel),
         headers: {
           "Content-Type": "application/json",

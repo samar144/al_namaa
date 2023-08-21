@@ -11,8 +11,9 @@ import '../controller/sponser_home_controller.dart';
 import 'orphanprofileforsponser.dart';
 
 class MyOrphanes extends StatelessWidget {
-  //MyOrphanes({super.key});
+  MyOrphanes({super.key});
   final HomeController controller = Get.put(HomeController());
+
   // final ProfileController controller1 = Get.put(ProfileController());
 
   @override
@@ -22,11 +23,6 @@ class MyOrphanes extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
               toolbarHeight: 80,
-              actions: const [
-                CircleAvatar(
-                  child: Text("H"),
-                ),
-              ],
               backgroundColor: Colors.white,
               elevation: 2,
               title: Text(
@@ -37,7 +33,7 @@ class MyOrphanes extends StatelessWidget {
               centerTitle: true,
               leading: IconButton(
                   onPressed: () {
-                    Get.back();
+                    Navigator.pop(context);
                   },
                   icon: Icon(
                     Icons.backspace_outlined,

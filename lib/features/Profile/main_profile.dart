@@ -78,7 +78,7 @@ class _MainProfileState extends State<MainProfile>
                   color: AppColors.whiteColor,
                 ),
                 onPressed: () {
-                  Get.close(0);
+                  Navigator.pop(context);
                 }
                 // =>
                 // Navigator.of(context).pop(),

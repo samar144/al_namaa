@@ -17,11 +17,6 @@ class DonateAnIdea extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
             toolbarHeight: 80,
-            actions: const [
-              CircleAvatar(
-                child: Text("H"),
-              ),
-            ],
             backgroundColor: Colors.white,
             elevation: 2,
             title: Text(
@@ -32,7 +27,7 @@ class DonateAnIdea extends StatelessWidget {
             centerTitle: true,
             leading: IconButton(
                 onPressed: () {
-                  Get.back();
+                  Navigator.pop(context);
                 },
                 icon: Icon(
                   Icons.backspace_outlined,

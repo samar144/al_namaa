@@ -78,12 +78,12 @@ class GetRoutes {
       name: GetRoutes.replypage,
       page: () => ReplyPage(comment: Commentmodel()),
     ),
-    GetPage(
-      name: GetRoutes.commentpage,
-      page: () => CommentPage(
-        advertisement: AdvertismentModel(),
-      ),
-    ),
+    // GetPage(
+    //   name: GetRoutes.commentpage,
+    //   page: () => CommentPage(
+    //     advertisement: AdvertismentModel(),
+    //   ),
+    // ),
     // GetPage(
     //   name: GetRoutes.entertaimentadvertisementPage,
     //   page: () => EntertaimentAdvertisementPage(),

@@ -24,6 +24,7 @@ class CustomButton extends StatelessWidget {
                 style: const TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 18,
+                  letterSpacing: 0,
                   fontWeight: FontWeight.bold,
                 ))));
   }

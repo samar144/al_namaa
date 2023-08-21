@@ -85,7 +85,7 @@
 //                 color: AppColors.whiteColor,
 //               ),
 //               onPressed: () {
-//                 Get.back();
+                  // Navigator.pop(context);
 //               }
 //               // =>
 //               // Navigator.of(context).pop(),

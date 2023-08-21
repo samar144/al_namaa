@@ -31,7 +31,7 @@ class GetWaitingSponsorOrders extends StatelessWidget {
               centerTitle: true,
               leading: IconButton(
                   onPressed: () {
-                    Get.back(canPop: true);
+                    Navigator.pop(context);
                   },
                   icon: Icon(
                     Icons.backspace_outlined,

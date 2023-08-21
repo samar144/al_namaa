@@ -12,11 +12,7 @@ class ContactWithUs extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: CustomAppBar("تواصل معنا", const [
-          CircleAvatar(
-            child: Text("H"),
-          )
-        ]),
+        appBar: CustomAppBar("تواصل معنا", const []),
         body: Form(
           key: formKey,
           child: Padding(

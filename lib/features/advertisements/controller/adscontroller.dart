@@ -1,25 +1,22 @@
 import 'dart:convert';
-import 'package:alnamaa_charity/utils/app_constants.dart';
-import 'package:alnamaa_charity/features/advertisements/model/advertisement_model.dart';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../utils/baseurl.dart';
-import '../../../utils/custom_snackbar.dart';
 import '../../../utils/shared_pref/getstorage.dart';
 import '../../auth/signup/model/user_register_model.dart';
 
 class AdvertisementController extends GetxController {
   UserModel user = GetStorageUtils().getUser();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+  checkadvertisementsWithCourse() {
+    Get.showOverlay(
+        asyncFunction: () => advertisementsWithCourse(),
+        loadingWidget: const Center(
+          child: CircularProgressIndicator(),
+        ));
   }
 
   final _trainiingadvertisements = RxList<dynamic>([]);
