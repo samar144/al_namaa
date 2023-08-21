@@ -199,11 +199,12 @@ class HomeController extends GetxController {
   }
 
   //تقديم طلب ايقاف كفالة
-  stopsponsorshiporder(var id) async {
+  stopsponsorshiporder(var spnsershipid) async {
     // String token = user.token!;
 
     var response = await http.post(
-        Uri.parse('${AppConstants.BASE_URL}/api/app/sponsorships/stop/$id'),
+        Uri.parse(
+            '${AppConstants.BASE_URL}/api/app/sponsorships/stop/$spnsershipid'),
         body: jsonEncode({"note": notecontroller.text}),
         headers: {
           "Content-Type": "application/json",

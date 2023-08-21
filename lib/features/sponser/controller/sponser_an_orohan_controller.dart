@@ -51,7 +51,7 @@ class SponserAnOrphaneontroller extends GetxController {
   }
 
   final date = DateTime.now().obs;
-  UserModel? user = GetStorageUtils().getUser();
+  UserModel user = GetStorageUtils().getUser();
   final RxString selectedItem = "سنوي".obs;
   final List<String> items = [
     "سنوي",
@@ -137,6 +137,47 @@ class SponserAnOrphaneontroller extends GetxController {
       res['errors'].forEach((field, error) {
         customsnackbar("", '$field: ${error[0]}', "error");
       });
+    }
+  }
+
+  editsponsorship(var sponsershipid) async {
+    http.Response response = await http
+        .post(Uri.parse('$baseUrl/api/app/sponsorships/$sponsershipid'),
+            // body: guaranteesToJson(guarantees),
+            body: jsonEncode({
+              "payment_way": paymentWaycontroller.text,
+              "note": notecontroller.text,
+              "amount": amountcontroller.text,
+              "start_date": startDatecontroller.text,
+              "end_date": endDatecontroller.text,
+              "alternative_name": alternativeNamecontroller.text,
+              "alternative_phone": alternativePhonecontroller.text,
+              "alternative_tele": alternativeTelecontroller.text,
+              "alternative_address": alternativeAddresscontroller.text
+            }),
+            headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer ${user.token}"
+        });
+    var res = await jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      await customsnackbar("", res['message'], "sucess");
+      alternativeAddresscontroller.clear();
+      alternativeNamecontroller.clear();
+      alternativePhonecontroller.clear();
+      alternativeTelecontroller.clear();
+      amountcontroller.clear();
+      paymentWaycontroller.clear();
+      startDatecontroller.clear();
+      endDatecontroller.clear();
+      notecontroller.clear();
+    } else {
+      // res['errors'].forEach((field, error) {
+      // customsnackbar("", '$field: ${error[0]}', "error");
+      customsnackbar("", res["message"], "error");
+      // });
     }
   }
 }

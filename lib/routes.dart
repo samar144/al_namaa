@@ -24,6 +24,7 @@ import 'features/auth/signup/view/user_register_screen.dart';
 import 'features/auth/verify/verifyscreen.dart';
 import 'features/auth/verify/verifysponser.dart';
 import 'features/donate_an_idea/view/donate_an_idea.dart';
+import 'features/sponser/view/editsponsorship.dart';
 import 'features/sponser/view/getacceptedsponsororder.dart';
 import 'features/sponser/view/getwaitingsponsororder.dart';
 import 'features/sponser/view/my_orphanes.dart';
@@ -57,6 +58,7 @@ class GetRoutes {
       "/remmemberAdvertisementPage";
 
   static const String profile = "/profile";
+  static const String editSponsorship = "/editSponsorship";
   static const String courses = "/courses";
   static const String orphanhomepage = "/orphanhomepage";
   static const String commentpage = "/commentpage";
@@ -74,10 +76,10 @@ class GetRoutes {
       name: GetRoutes.adswithcourse,
       page: () => AdvertisementPage(),
     ),
-    GetPage(
-      name: GetRoutes.replypage,
-      page: () => ReplyPage(comment: Commentmodel()),
-    ),
+    // GetPage(
+    //   name: GetRoutes.replypage,
+    //   page: () => ReplyPage(comment: Commentmodel()),
+    // ),
     // GetPage(
     //   name: GetRoutes.commentpage,
     //   page: () => CommentPage(
@@ -110,6 +112,11 @@ class GetRoutes {
     GetPage(
       name: GetRoutes.verify,
       page: () => VerifyScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: GetRoutes.editSponsorship,
+      page: () => EditSponsorship(),
       transition: Transition.fadeIn,
     ),
 

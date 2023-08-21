@@ -1,33 +1,62 @@
+// To parse this JSON data, do
+//
+//     final commentmodel = commentmodelFromJson(jsonString);
+
 import 'dart:convert';
 
-List<Commentmodel> commentModelFromJson(String str) => List<Commentmodel>.from(
-    json.decode(str).map((x) => Commentmodel.fromJson(x)));
+Commentmodel commentmodelFromJson(String str) =>
+    Commentmodel.fromJson(json.decode(str));
 
-String commentModelToJson(List<Commentmodel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String commentmodelToJson(Commentmodel data) => json.encode(data.toJson());
 
 class Commentmodel {
+  bool? success;
+  List<Comment>? comment;
+  String? message;
+
+  Commentmodel({
+    this.success,
+    this.comment,
+    this.message,
+  });
+
+  factory Commentmodel.fromJson(Map<String, dynamic> json) => Commentmodel(
+        success: json["success"],
+        comment: json["data"] == null
+            ? []
+            : List<Comment>.from(json["data"]!.map((x) => Comment.fromJson(x))),
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "data": comment == null
+            ? []
+            : List<dynamic>.from(comment!.map((x) => x.toJson())),
+        "message": message,
+      };
+}
+
+class Comment {
   int? id;
   int? advertisementId;
   int? userId;
   String? body;
   DateTime? createdAt;
   DateTime? updatedAt;
-  String? image;
   User? user;
 
-  Commentmodel({
+  Comment({
     this.id,
     this.advertisementId,
     this.userId,
     this.body,
     this.createdAt,
     this.updatedAt,
-    this.image,
     this.user,
   });
 
-  factory Commentmodel.fromJson(Map<String, dynamic> json) => Commentmodel(
+  factory Comment.fromJson(Map<String, dynamic> json) => Comment(
         id: json["id"],
         advertisementId: json["advertisement_id"],
         userId: json["user_id"],
@@ -38,8 +67,7 @@ class Commentmodel {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        image: json["image"],
-        user: User.fromJson(json["user"]),
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,7 +77,6 @@ class Commentmodel {
         "body": body,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "image": image,
         "user": user?.toJson(),
       };
 }
@@ -58,7 +85,7 @@ class User {
   int? id;
   String? firstName;
   String? lastName;
-  dynamic address;
+  String? address;
 
   User({
     this.id,
@@ -81,6 +108,91 @@ class User {
         "address": address,
       };
 }
+
+
+// import 'dart:convert';
+
+// List<Commentmodel> commentModelFromJson(String str) => List<Commentmodel>.from(
+//     json.decode(str).map((x) => Commentmodel.fromJson(x)));
+
+// String commentModelToJson(List<Commentmodel> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+// class Commentmodel {
+//   int? id;
+//   int? advertisementId;
+//   int? userId;
+//   String? body;
+//   DateTime? createdAt;
+//   DateTime? updatedAt;
+//   String? image;
+//   User? user;
+
+//   Commentmodel({
+//     this.id,
+//     this.advertisementId,
+//     this.userId,
+//     this.body,
+//     this.createdAt,
+//     this.updatedAt,
+//     this.image,
+//     this.user,
+//   });
+
+//   factory Commentmodel.fromJson(Map<String, dynamic> json) => Commentmodel(
+//         id: json["id"],
+//         advertisementId: json["advertisement_id"],
+//         userId: json["user_id"],
+//         body: json["body"],
+//         createdAt: json["created_at"] == null
+//             ? null
+//             : DateTime.parse(json["created_at"]),
+//         updatedAt: json["updated_at"] == null
+//             ? null
+//             : DateTime.parse(json["updated_at"]),
+//         image: json["image"],
+//         user: User.fromJson(json["user"]),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "advertisement_id": advertisementId,
+//         "user_id": userId,
+//         "body": body,
+//         "created_at": createdAt?.toIso8601String(),
+//         "updated_at": updatedAt?.toIso8601String(),
+//         "image": image,
+//         "user": user?.toJson(),
+//       };
+// }
+
+// class User {
+//   int? id;
+//   String? firstName;
+//   String? lastName;
+//   dynamic address;
+
+//   User({
+//     this.id,
+//     this.firstName,
+//     this.lastName,
+//     this.address,
+//   });
+
+//   factory User.fromJson(Map<String, dynamic> json) => User(
+//         id: json["id"],
+//         firstName: json["first_name"],
+//         lastName: json["last_name"],
+//         address: json["address"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "first_name": firstName,
+//         "last_name": lastName,
+//         "address": address,
+//       };
+// }
 // To parse this JSON data, do
 //
 //     final commentModel = commentModelFromJson(jsonString);

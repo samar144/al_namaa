@@ -4,19 +4,19 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../../../utils/baseurl.dart';
+import '../../../utils/custom_snackbar.dart';
 import '../../../utils/shared_pref/getstorage.dart';
 import '../../auth/signup/model/user_register_model.dart';
 import '../model/reply_model.dart';
 
 class ReplyController extends GetxController {
-  late TextEditingController contentController, authorController;
+  late TextEditingController replyeditcontroller;
   // var repliess = <ReplyModel>[].obs;
   UserModel user = GetStorageUtils().getUser();
 
   @override
   void onInit() {
-    contentController = TextEditingController();
-    authorController = TextEditingController();
+    replyeditcontroller = TextEditingController();
     super.onInit();
   }
 
@@ -38,7 +38,7 @@ class ReplyController extends GetxController {
     // Add fetched replies to the list using replies.add()
 
     var response = await http
-        .get(Uri.parse('$baseUrl/api/repliesOfComment/234'), headers: {
+        .get(Uri.parse('$baseUrl/api/repliesOfComment/$commentId'), headers: {
       "Content-Type": "application/json",
       "Accept": "application/json",
       "Authorization": "Bearer ${user.token}"
@@ -47,27 +47,47 @@ class ReplyController extends GetxController {
     var dataa = (res["data"]);
 
     if (response.statusCode == 200) {
+      // var dataa = Commentmodel.fromJson(res["data"]);
+      // final List data = [];
       _replies.clear();
 
-      for (var item in dataa) {
-        ReplyModel reply = ReplyModel.fromJson(item);
-        //   final reply = ReplyModel.fromJson(item);
-        _replies.add(reply);
+      for (var item in res["data"]) {
+        // final comment1 = Commentmodel.fromJson(item);
+        var comment1 = Reply.fromJson(item);
+
+        _replies.add(comment1);
       }
     } else {
       throw Exception("Failed to fetch data");
     }
   }
 
-  void addReply(ReplyModel reply) {
-    replies.add(reply);
-  }
+  Future<void> addReply(Reply reply, var commentid) async {
+    var response = await http.post(Uri.parse('$baseUrl/api/reply'),
+        body: jsonEncode(reply),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer ${user.token}"
+        });
+    var res = await jsonDecode(response.body);
 
-  void updateReply(int index, ReplyModel updatedReply) {
-    replies[index] = updatedReply;
-  }
+    if (response.statusCode == 200) {
+      _replies.add(reply);
 
-  void deleteReply(int index) {
-    replies.removeAt(index);
+      replyeditcontroller.clear();
+      fetchReply(commentid);
+      customsnackbar("", res["message"], "success");
+    } else {
+      customsnackbar("title", res["message"], "error");
+    }
+
+    void updateReply(int index, ReplyModel updatedReply) {
+      replies[index] = updatedReply;
+    }
+
+    void deleteReply(int index) {
+      replies.removeAt(index);
+    }
   }
 }

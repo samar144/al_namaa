@@ -4,13 +4,40 @@
 
 import 'dart:convert';
 
-List<ReplyModel> replyModelFromJson(String str) =>
-    List<ReplyModel>.from(json.decode(str).map((x) => ReplyModel.fromJson(x)));
+ReplyModel replyModelFromJson(String str) =>
+    ReplyModel.fromJson(json.decode(str));
 
-String replyModelToJson(List<ReplyModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String replyModelToJson(ReplyModel data) => json.encode(data.toJson());
 
 class ReplyModel {
+  bool? success;
+  List<Reply>? data;
+  String? message;
+
+  ReplyModel({
+    this.success,
+    this.data,
+    this.message,
+  });
+
+  factory ReplyModel.fromJson(Map<String, dynamic> json) => ReplyModel(
+        success: json["success"],
+        data: json["data"] == null
+            ? []
+            : List<Reply>.from(json["data"]!.map((x) => Reply.fromJson(x))),
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "message": message,
+      };
+}
+
+class Reply {
   int? id;
   int? commentId;
   int? userId;
@@ -19,7 +46,7 @@ class ReplyModel {
   DateTime? updatedAt;
   User? user;
 
-  ReplyModel({
+  Reply({
     this.id,
     this.commentId,
     this.userId,
@@ -29,7 +56,7 @@ class ReplyModel {
     this.user,
   });
 
-  factory ReplyModel.fromJson(Map<String, dynamic> json) => ReplyModel(
+  factory Reply.fromJson(Map<String, dynamic> json) => Reply(
         id: json["id"],
         commentId: json["comment_id"],
         userId: json["user_id"],

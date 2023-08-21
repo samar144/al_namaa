@@ -11,12 +11,11 @@ import '../controller/adscontroller.dart';
 import '../model/advertisement_model.dart';
 
 class AdvertisementPage extends StatelessWidget {
-  AdvertisementPage({Key? key}) : super(key: key);
+  AdvertisementPage({super.key});
 
   final AdvertisementController advertisementController =
       Get.put(AdvertisementController());
   final CommentController commentController = Get.put(CommentController());
-  final ReplyController replyController = Get.put(ReplyController());
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +102,7 @@ class AdvertisementPage extends StatelessWidget {
                                           // Fetch comments for the selected advertisement
 
                                           commentController
-                                              .fetchComments(advertisement.id);
+                                              .fetchcomments(advertisement.id);
 
                                           Navigator.push(
                                               context,
@@ -161,7 +160,7 @@ class AdvertisementPage extends StatelessWidget {
                                           child: const Text('التعليقات '),
                                           onPressed: () {
                                             // Fetch comments for the selected advertisement
-                                            commentController.fetchComments(
+                                            commentController.fetchcomments(
                                                 advertisement.id);
                                             // // Open the comments page
 

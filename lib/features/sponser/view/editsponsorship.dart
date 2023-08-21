@@ -9,15 +9,16 @@ import '../../../core/widget/text_form_field.dart';
 import '../../../utils/shared_pref/getstorage.dart';
 import '../controller/sponser_an_orohan_controller.dart';
 
-class SponserAnOrphane extends StatelessWidget {
-  UserModel? user = GetStorageUtils().getUser();
+class EditSponsorship extends StatelessWidget {
+  EditSponsorship({super.key});
 
-  // SponserAnOrphane({super.key});
-  final GlobalKey<FormState> _formKey9 = GlobalKey<FormState>();
-  // UserModel user = Get.arguments;
+  final UserModel? user = GetStorageUtils().getUser();
+
+  final GlobalKey<FormState> _formKey10 = GlobalKey<FormState>();
 
   final SponserAnOrphaneontroller controller =
       Get.put(SponserAnOrphaneontroller());
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -33,7 +34,7 @@ class SponserAnOrphane extends StatelessWidget {
             backgroundColor: Colors.white,
             elevation: 2,
             title: Text(
-              "اكفل يتيم",
+              "تعديل الكفالة",
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.cyan[600]),
             ),
@@ -54,7 +55,7 @@ class SponserAnOrphane extends StatelessWidget {
                 children: [
                   Form(
                       autovalidateMode: AutovalidateMode.always,
-                      key: _formKey9,
+                      key: _formKey10,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -68,12 +69,13 @@ class SponserAnOrphane extends StatelessWidget {
                                     label: " الاسم الثلاثي للبديل ",
                                     controller:
                                         controller.alternativeNamecontroller,
-                                    validator: (val) {
-                                      if (val!.isEmpty) {
-                                        return "مطلوب";
-                                      }
-                                      return null;
-                                    },
+                                    // validator: (val) {
+                                    //   if (val!.isEmpty) {
+                                    //     return "مطلوب";
+                                    //   }
+                                    //   return null;
+                                    // }
+                                    // ,
                                     keyboaredtype: TextInputType.text,
                                   ),
                                 ),
@@ -83,12 +85,12 @@ class SponserAnOrphane extends StatelessWidget {
                                       label: " عنوان البديل",
                                       controller: controller
                                           .alternativeAddresscontroller,
-                                      validator: (val) {
-                                        if (val!.isEmpty) {
-                                          return "مطلوب";
-                                        }
-                                        return null;
-                                      },
+                                      // validator: (val) {
+                                      //   if (val!.isEmpty) {
+                                      //     return "مطلوب";
+                                      //   }
+                                      //   return null;
+                                      // },
                                       keyboaredtype: TextInputType.text,
                                     )),
                               ],
@@ -104,15 +106,12 @@ class SponserAnOrphane extends StatelessWidget {
                                     label: " رقم الارضي للبديل ",
                                     controller:
                                         controller.alternativeTelecontroller,
-                                    validator: (val) {
-                                      if (val!.isEmpty) {
-                                        return "مطلوب";
-                                      }
-                                      if (val.length != 7) {
-                                        return 'غير صالح  ';
-                                      }
-                                      return null;
-                                    },
+                                    // validator: (val) {
+                                    //   if (val!.isEmpty) {
+                                    //     return "مطلوب";
+                                    //   }
+                                    //   return null;
+                                    // },
                                     keyboaredtype: TextInputType.number,
                                   ),
                                 ),
@@ -122,15 +121,12 @@ class SponserAnOrphane extends StatelessWidget {
                                       label: " رقم الجوال للبديل",
                                       controller:
                                           controller.alternativePhonecontroller,
-                                      validator: (val) {
-                                        if (val!.isEmpty) {
-                                          return "مطلوب";
-                                        }
-                                        if (val.length != 10) {
-                                          return ' غير صالح';
-                                        }
-                                        return null;
-                                      },
+                                      // validator: (val) {
+                                      //   if (val!.isEmpty) {
+                                      //     return "مطلوب";
+                                      //   }
+                                      //   return null;
+                                      // },
                                       keyboaredtype: TextInputType.phone,
                                     )),
                               ],
@@ -145,12 +141,12 @@ class SponserAnOrphane extends StatelessWidget {
                                   label: "المبلغ",
                                   hint: "المبلغ بالليرة السورية",
                                   controller: controller.amountcontroller,
-                                  validator: (val) {
-                                    if (val!.isEmpty) {
-                                      return "مطلوب";
-                                    }
-                                    return null;
-                                  },
+                                  // validator: (val) {
+                                  //   if (val!.isEmpty) {
+                                  //     return "مطلوب";
+                                  //   }
+                                  //   return null;
+                                  // },
                                   keyboaredtype: TextInputType.number,
                                 )),
                               ],
@@ -166,12 +162,12 @@ class SponserAnOrphane extends StatelessWidget {
                                   controller: controller.notecontroller,
                                   maxlines: 6,
                                   hint: "كفالة تحت 5 سنوات او اكثر ",
-                                  validator: (val) {
-                                    if (val!.isEmpty) {
-                                      return "مطلوب";
-                                    }
-                                    return null;
-                                  },
+                                  // validator: (val) {
+                                  //   if (val!.isEmpty) {
+                                  //     return "مطلوب";
+                                  //   }
+                                  //   return null;
+                                  // },
                                   keyboaredtype: TextInputType.text,
                                 )),
                               ],
@@ -215,12 +211,12 @@ class SponserAnOrphane extends StatelessWidget {
                                     flex: 1,
                                     child: TextFormFieldWidget(
                                         label: "تاريخ البدء",
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return "مطلوب";
-                                          }
-                                          return null;
-                                        },
+                                        // validator: (val) {
+                                        //   if (val!.isEmpty) {
+                                        //     return "مطلوب";
+                                        //   }
+                                        //   return null;
+                                        // },
                                         controller:
                                             controller.startDatecontroller,
                                         onTap: () async {
@@ -249,12 +245,12 @@ class SponserAnOrphane extends StatelessWidget {
                                     flex: 1,
                                     child: TextFormFieldWidget(
                                         label: "تاريخ الانتهاء",
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return "مطلوب";
-                                          }
-                                          return null;
-                                        },
+                                        // validator: (val) {
+                                        //   if (val!.isEmpty) {
+                                        //     return "مطلوب";
+                                        //   }
+                                        //   return null;
+                                        // },
                                         controller:
                                             controller.endDatecontroller,
                                         onTap: () async {
@@ -286,12 +282,11 @@ class SponserAnOrphane extends StatelessWidget {
                   CustomButton(
                       name: "إرسال",
                       onPressed: () async {
-                        if (_formKey9.currentState!.validate()) {
-                          controller.createsponsorshiporder(
-                              user!.user_id!.toString(),
-                              user!.token.toString());
-                          // Get.back();
-                        }
+                        // if (_formKey10.currentState!.validate()) {
+                        // controller.editsponsorship(
+                        //     );
+                        // Get.back();
+                        // }
                       })
                 ],
               );
