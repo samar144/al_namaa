@@ -21,6 +21,7 @@ class MyOrphanes extends StatelessWidget {
   final GlobalKey<FormState> _formKey10 = GlobalKey<FormState>();
 
   // final ProfileController controller1 = Get.put(ProfileController());
+  UserModel? user = GetStorageUtils().getUser();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,16 @@ class MyOrphanes extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
               toolbarHeight: 80,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    child: Text(
+                      user!.name!.substring(0, 1),
+                    ),
+                  ),
+                ),
+              ],
               backgroundColor: Colors.white,
               elevation: 2,
               title: Text(
@@ -42,7 +53,7 @@ class MyOrphanes extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   icon: Icon(
-                    Icons.backspace_outlined,
+                    Icons.arrow_back_rounded,
                     color: Colors.cyan[600],
                   ))),
           body: FutureBuilder<void>(
@@ -54,77 +65,64 @@ class MyOrphanes extends StatelessWidget {
                       itemCount: data.length,
                       itemBuilder: ((context, index) {
                         final item = data[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
+                        return Container(
+                          height: 133,
+                          width: 333,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
                                 color: Colors.cyan[600],
                                 borderRadius: const BorderRadius.horizontal(
-                                    left: Radius.circular(12),
-                                    right: Radius.circular(12))),
-                            height: 150,
-                            child: Row(
-                              children: [
-                                Expanded(
+                                  left: Radius.circular(12),
+                                  right: Radius.circular(12),
+                                ),
+                              ),
+                              height: 150,
+                              child: Row(
+                                children: [
+                                  Expanded(
                                     flex: 3,
                                     child: InkWell(
                                       onTap: () {
-                                        // GetStorageUtils().saveorphanid(
-                                        //     item["orphan"]["id"].toString());
-                                        Get.toNamed(
-                                          GetRoutes.orphanprofileforsponser,
-                                        );
+                                        // GetStorageUtils().saveorphanid(item["orphan"]["id"].toString());
+                                        Get.toNamed(GetRoutes.profile);
                                       },
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          ClipOval(
-                                            //     child: Image.network(
-                                            //   "$baseUrl${item["orphan"]["photo"]}",
-                                            //   fit: BoxFit.fill,
-                                            //   height: 111,
-                                            //   width: 111,
-                                            // )
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                                  "$baseUrl${item["orphan"]["photo"]}",
-                                              placeholder: (context, url) =>
-                                                  CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      Icon(Icons.error),
-                                              fit: BoxFit.fill,
-                                              height: 111,
-                                              width: 111,
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ClipOval(
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    "$baseUrl${item["orphan"]["photo"]}",
+                                                placeholder: (context, url) =>
+                                                    CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
+                                                fit: BoxFit.fill,
+                                                height: 80,
+                                                width: 80,
+                                              ),
                                             ),
                                           ),
-                                          // const CircleAvatar(
-                                          //     // child: Text(user.name!.substring(0, 1))
-                                          //     child: Text("")),
-                                          // CircleAvatar(
-
-                                          //   backgroundImage: AssetImage(baseUrl +
-                                          //       controller.orphanforsponser[i]["photo"]),
-                                          //   radius: 50,
-                                          // ),
-                                          // Image.network(baseUrl +
-                                          //     controller.orphanforsponser[i]["photo"]),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
+                                          SizedBox(width: 10),
                                           Text(item["orphan"]["first_name"]
                                                   .toString() +
                                               " " +
                                               item["orphan"]["last_name"]
-                                                  .toString())
+                                                  .toString()),
                                         ],
                                       ),
-                                    )),
-                                Expanded(
+                                    ),
+                                  ),
+                                  Expanded(
                                     flex: 1,
-                                    child: Row(
+                                    child: Wrap(
                                       children: [
                                         IconButton(
                                           onPressed: () {
@@ -239,7 +237,7 @@ class MyOrphanes extends StatelessWidget {
                                                               child: Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .all(
+                                                                        .all(
                                                                         8.0),
                                                                 child: Column(
                                                                   mainAxisAlignment:
@@ -510,10 +508,12 @@ class MyOrphanes extends StatelessWidget {
                                           },
                                           icon: const Icon(Icons.edit),
                                           tooltip: "تعديل",
-                                        )
+                                        ),
                                       ],
-                                    ))
-                              ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "110235706432",
+    "project_id": "charity-69019",
+    "storage_bucket": "charity-69019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110235706432:android:c9a2101cc01fb7c9a8aba5",
+        "android_client_info": {
+          "package_name": "com.example.alnamaa_charity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110235706432-i8tu7l5hk994esahd1pssqsptvjjpkv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdjFbw18CvTUOBea3HniMJ_s67ahMTYOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110235706432-i8tu7l5hk994esahd1pssqsptvjjpkv8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

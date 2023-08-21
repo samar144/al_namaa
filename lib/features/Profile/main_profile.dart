@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:alnamaa_charity/features/Profile/profile_controller.dart';
 import 'package:alnamaa_charity/features/Profile/profile_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:alnamaa_charity/utils/colors';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -120,16 +121,17 @@ class _MainProfileState extends State<MainProfile>
                         // )
                         CachedNetworkImage(
                       imageUrl: AppConstants.BASE_URL +
-                          controller.prof.orphan!.photo!,
+                              controller.prof.orphan?.photo ??
+                          '',
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
-                      // httpHeaders: {
-                      //   "Content-Type": "application/json",
-                      //   "Accept": "application/json",
-                      //   "Authorization": "Bearer ${AppConstants.TOKEN}"
-                      // },
+                      httpHeaders: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                        "Authorization": "Bearer ${AppConstants.TOKEN}"
+                      },
                       fit: BoxFit.fill,
                       width: 133,
                       height: 133,
@@ -138,7 +140,7 @@ class _MainProfileState extends State<MainProfile>
 
                   Align(
                     child: Text(
-                        "${controller.prof.orphan?.firstName!} ${controller.prof.orphan?.lastName!}",
+                        "${controller.prof.orphan?.firstName ?? ''} ${controller.prof.orphan?.lastName ?? ''}",
                         style: const TextStyle(
                             color: Color.fromRGBO(50, 50, 93, 1),
                             fontSize: 26.0)),
@@ -175,7 +177,7 @@ class _MainProfileState extends State<MainProfile>
                       color: AppColors.iconColor1,
                     ),
                     title: const Text("Birth"),
-                    subtitle: Text("${controller.prof.orphan!.birth!}"),
+                    subtitle: Text("${controller.prof.orphan?.birth ?? ''}"),
                   ),
 
                   ListTile(
@@ -185,7 +187,7 @@ class _MainProfileState extends State<MainProfile>
                     ),
                     title: const Text('Study & Scool'),
                     subtitle: Text(
-                        "${controller.prof.orphan!.study!} - ${controller.prof.orphan!.schoolName!} school "),
+                        "${controller.prof.orphan?.study ?? ''} - ${controller.prof.orphan?.schoolName ?? ''} school "),
                   ),
                   ListTile(
                     leading: Icon(
@@ -193,8 +195,8 @@ class _MainProfileState extends State<MainProfile>
                       color: AppColors.mainBlackColor,
                     ),
                     title: const Text('National Number'),
-                    subtitle:
-                        Text("${controller.prof.orphan!.nationalNumber!} "),
+                    subtitle: Text(
+                        "${controller.prof.orphan?.nationalNumber ?? ''} "),
                   ),
                   ListTile(
                     leading: Icon(
@@ -203,7 +205,7 @@ class _MainProfileState extends State<MainProfile>
                     ),
                     title: const Text('Adress'),
                     subtitle: Text(
-                        "${controller.prof.address!.country!} - ${controller.prof.address!.state!} - ${controller.prof.address!.city!}- ${controller.prof.address!.street!} "),
+                        "${controller.prof.address?.country ?? ''} - ${controller.prof.address?.state ?? ''} - ${controller.prof.address?.city ?? ''}- ${controller.prof.address?.street ?? ''} "),
                   ),
                   SizedBox(
                     height: 200, // Set a fixed height here

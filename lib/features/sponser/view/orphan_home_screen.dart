@@ -126,7 +126,7 @@ class _OrphanHomePageState extends State<OrphanHomePage> {
                                 Color.fromRGBO(27, 162, 169, 1),
                                 Color.fromRGBO(113, 212, 218, 1),
                               ])),
-                          padding: const EdgeInsets.all(19),
+                          padding: const EdgeInsets.all(11),
                           child: const Text(
                               "مرحبًا بك في تطبيق جمعية النماء! انضم إلينا لتحقيق التطور والنماء الشخصي من خلال دوراتنا التعليمية الممتعة والمفيدة.",
                               textAlign: TextAlign.center,
@@ -148,9 +148,9 @@ class _OrphanHomePageState extends State<OrphanHomePage> {
                               Color.fromRGBO(113, 212, 218, 1),
                             ]),
                           ),
-                          padding: const EdgeInsets.all(19),
+                          padding: const EdgeInsets.all(11),
                           child: Text(
-                            "نحن سعداء بوجودك في تطبيق جمعية النماء!\n اكتشف فرص التعلم والتطور المستمر معنا واستفد من محتوى \nذو جودة عالية يساعدك على بناء مستقبل مشرق.",
+                            "\n اكتشف فرص التعلم والتطور المستمر معنا واستفد من محتوى \nذو جودة عالية يساعدك على بناء مستقبل مشرق.",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
@@ -169,9 +169,9 @@ class _OrphanHomePageState extends State<OrphanHomePage> {
                                 Color.fromRGBO(27, 162, 169, 1),
                                 Color.fromRGBO(113, 212, 218, 1),
                               ])),
-                          padding: const EdgeInsets.all(19),
+                          padding: const EdgeInsets.all(11),
                           child: const Text(
-                              "أهلاً بك في تطبيق جمعية النماء! انضم إلينا لتحصل على فرصة لاستكشاف العلم وتطوير مهاراتك وتحقيق أهدافك الشخصية والمهنية.",
+                              "نحن سعداء بوجودك في تطبيق جمعية النماء! انضم إلينا لتحصل على فرصة لاستكشاف العلم وتطوير مهاراتك وتحقيق أهدافك الشخصية والمهنية.",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Color.fromARGB(255, 255, 255, 255),
@@ -208,6 +208,7 @@ class _OrphanHomePageState extends State<OrphanHomePage> {
                 const SizedBox(height: 20.0),
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
+                    //اختصارات الشاشة الرئيسية الثلاثة
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -293,317 +294,137 @@ class _OrphanHomePageState extends State<OrphanHomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "  الإعلانات",
                           textAlign: TextAlign.right,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
-                              color: Colors.black54),
+                              color: AppColors.mainColor),
                         ),
-                        TextButton(
-                            onPressed: () {
-                              showDialog(
-                                  useSafeArea: true,
-                                  context: context,
-                                  builder: (context) => Dialog(
-                                        child: SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              100,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              3,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                const Text("التسجيل على دورة"),
-                                                const Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Icon(Icons
-                                                        .select_all_rounded),
-                                                    Text("الرجاء اختيار حساب "),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 66,
-                                                  child: ListView.builder(
-                                                    itemCount: 3,
-                                                    //controller.activeCourses?.length ?? 0,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      // var active = controller.activeCourses?[index];
-                                                      bool isSelected = false;
-                                                      return Container(
-                                                        width: 200,
-                                                        height: 50,
-                                                        margin: EdgeInsets.only(
-                                                            left: 20,
-                                                            right: 20,
-                                                            bottom: 10,
-                                                            top: 10),
-                                                        padding:
-                                                            EdgeInsets.all(8.0),
-                                                        decoration: BoxDecoration(
-                                                            color: AppColors
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                  color: Color(
-                                                                      0XFFe8e8e8),
-                                                                  blurRadius:
-                                                                      5.0,
-                                                                  offset:
-                                                                      Offset(0,
-                                                                          5)),
-                                                              BoxShadow(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  offset:
-                                                                      Offset(-5,
-                                                                          0)),
-                                                              BoxShadow(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  offset:
-                                                                      Offset(5,
-                                                                          0)),
-                                                            ]),
-                                                        child: Expanded(
-                                                          child: Container(
-                                                            height: 50,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius: BorderRadius.only(
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          20),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          20)),
-                                                              // color: Colors.white,
-                                                            ),
-                                                            child: Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left: 10,
-                                                                      right:
-                                                                          10),
-                                                              child:
-                                                                  Directionality(
-                                                                textDirection:
-                                                                    TextDirection
-                                                                        .rtl,
-                                                                child:
-                                                                    CheckboxListTile(
-                                                                  title: Text(
-                                                                    "samar account",
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    //' الفئة العمرية ${active?.targetGroup ?? ''}',
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black45),
-                                                                  ),
-                                                                  value:
-                                                                      isSelected,
-                                                                  onChanged:
-                                                                      (bool?
-                                                                          value) {
-                                                                    setState(
-                                                                        () {
-                                                                      isSelected =
-                                                                          value ??
-                                                                              false;
-                                                                    });
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .cyan),
-                                                        onPressed: () {
-                                                          Get.back();
-                                                        },
-                                                        child:
-                                                            const Text("رجوع")),
-                                                    const SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    ElevatedButton(
-                                                      onPressed: () {
-                                                        // controller
-                                                        //     .stopsponsorshiporder(
-                                                        //   item[
-                                                        //       "sponsorship_id"],
-                                                        // );
-                                                      },
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              backgroundColor:
-                                                                  Colors.red),
-                                                      child:
-                                                          const Text("تأكيد"),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ));
-                            },
-                            child: const Text(
-                              "عرض الكل",
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline),
-                            ))
                       ],
                     ),
                     const SizedBox(
-                      height: 30.0,
+                      height: 10.0,
                     ),
-                    CarouselSlider(
-                        items: [
-                          Container(
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(GetRoutes.adswithcourse);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(13),
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "assets/images/schoolchild-sitting-desk-living-room-holding-school-book.jpg"))),
+                                        "images/person-holding-light-bulb-with-graduation-cap.jpg"))),
                             child: const Center(
                               child: Text(
-                                "دورة صناعة الصابون",
+                                "دورات تعليمية",
                                 style: TextStyle(
                                     color: Colors.white,
                                     backgroundColor: Colors.black45,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20),
+                                    fontSize: 30),
                               ),
                             ),
                           ),
-                          Container(
+                        ),
+                        const SizedBox(
+                          width: 20.0,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(
+                                GetRoutes.entertaimentadvertisementPage);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(13),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image:
+                                        AssetImage("images/sports-tools.jpg"))),
+                            child: const Center(
+                              child: Text(
+                                "ترفيه",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    backgroundColor: Colors.black45,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(GetRoutes.trainingads);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(13),
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "assets/images/classmates-working-together.jpg"))),
+                                        "images/schoolchild-sitting-desk-living-room-holding-school-book.jpg"))),
                             child: const Center(
                               child: Text(
-                                "دورة الحاسوب ",
+                                "تدريب",
                                 style: TextStyle(
                                     color: Colors.white,
                                     backgroundColor: Colors.black45,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20),
+                                    fontSize: 30),
                               ),
                             ),
                           ),
-                          Container(
+                        ),
+                        const SizedBox(
+                          width: 20.0,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(GetRoutes.remmemberAdvertisementPage);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: MediaQuery.of(context).size.height / 4.5,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(13),
                                 image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "assets/images/children-group-drawing.jpg"))),
+                                        "images/reminder-popup-bell-notification-alert-alarm-icon-sign-symbol-application-website-ui-purple-background-3d-rendering-illustration.jpg"))),
                             child: const Center(
                               child: Text(
-                                "دورة صناعة الشمع ",
+                                "تذكيرات",
                                 style: TextStyle(
                                     color: Colors.white,
                                     backgroundColor: Colors.black45,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20),
+                                    fontSize: 30),
                               ),
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13),
-                                image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/little-kids-using-laptops-school.jpg"))),
-                            child: const Center(
-                              child: Text(
-                                "دورة الللغة العربية ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    backgroundColor: Colors.black45,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(13),
-                                image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/close-up-classmates-playing-with-laptop.jpg"))),
-                            child: const Center(
-                              child: Text(
-                                "دورة الرياضيات ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    backgroundColor: Colors.black45,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                        ],
-                        options: CarouselOptions(
-                          disableCenter: true,
-                          aspectRatio: 1.5,
-                          viewportFraction: 0.8,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 5),
-                          autoPlayAnimationDuration:
-                              const Duration(milliseconds: 2000),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          enlargeFactor: 0.3,
-                          scrollDirection: Axis.horizontal,
-                        )),
+                        ),
+                      ],
+                    )
                   ],
                 )
               ],

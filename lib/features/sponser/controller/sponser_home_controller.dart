@@ -30,7 +30,7 @@ class HomeController extends GetxController {
 
     token = user.token;
     notecontroller = TextEditingController();
-    // getCourses();
+    getCourses();
     getorphansponsor();
   }
 
@@ -117,6 +117,8 @@ class HomeController extends GetxController {
       final List data = [];
       for (var item in res["data"]) {
         data.add(item);
+        print("$baseUrl${item["orphan"]["photo"].toString()}");
+        print(item["orphan"]["first_name"].toString());
       }
       _orphanforsponser.value = data;
     } else {
